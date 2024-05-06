@@ -10,9 +10,9 @@
     </li>
     <li class="menu-title">Apps</li>
     <li>
-        <a href="/apps/calendar">
-            <i data-feather="calendar"></i>
-            <span> Calendar </span>
+        <a href=" {{route('media.index')}} ">
+            <i data-feather="file-text"></i>
+            <span> Media </span>
         </a>
     </li>
     <li>
