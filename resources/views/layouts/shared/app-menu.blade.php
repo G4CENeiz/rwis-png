@@ -1,5 +1,5 @@
 <ul class="metismenu" id="menu-bar">
-    <li class="menu-title">Navigation</li>
+    {{-- <li class="menu-title">Navigation</li> --}}
 
     <li>
         <a href="/">
@@ -8,11 +8,11 @@
             <span> Dashboard </span>
         </a>
     </li>
-    <li class="menu-title">Apps</li>
+    {{-- <li class="menu-title">Apps</li> --}}
     <li>
         <a href=" {{route('media.index')}} ">
             <i data-feather="file-text"></i>
-            <span> Media </span>
+            <span> Publication </span>
         </a>
     </li>
     <li>

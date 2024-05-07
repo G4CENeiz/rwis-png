@@ -4,12 +4,12 @@
         <!-- LOGO -->
         <a href="/" class="navbar-brand mr-0 mr-md-2 logo">
             <span class="logo-lg">
-                <img src="{{ URL::asset('assets/images/logo.png') }}" alt="" height="24" />
-                <span class="d-inline h5 ml-1 text-logo">Shreyu</span>
+                <img src="{{ URL::asset('assets/images/RWIS-PNG.png') }}" alt="" height="40" />
+                {{-- <span class="d-inline h5 ml-1 text-logo"></span> --}}
             </span>
-            <span class="logo-sm">
+            {{-- <span class="logo-sm">
                 <img src="{{ URL::asset('assets/images/logo.png') }}" alt="" height="24">
-            </span>
+            </span> --}}
         </a>
 
         <ul class="navbar-nav bd-navbar-nav flex-row list-unstyled menu-left mb-0">
@@ -33,7 +33,7 @@
                 </div>
             </li>
 
-            <li class="dropdown d-none d-lg-block" data-toggle="tooltip" data-placement="left" title="Change language">
+            {{-- <li class="dropdown d-none d-lg-block" data-toggle="tooltip" data-placement="left" title="Change language">
                 <a class="nav-link dropdown-toggle mr-0" data-toggle="dropdown" href="#" role="button"
                     aria-haspopup="false" aria-expanded="false">
                     <i data-feather="globe"></i>
@@ -63,7 +63,7 @@
                             class="align-middle">Russian</span>
                     </a>
                 </div>
-            </li>
+            </li> --}}
 
 
             <li class="dropdown notification-list" data-toggle="tooltip" data-placement="left"
@@ -91,7 +91,7 @@
                         <!-- item-->
                         <a href="javascript:void(0);" class="dropdown-item notify-item border-bottom">
                             <div class="notify-icon bg-primary"><i class="uil uil-user-plus"></i></div>
-                            <p class="notify-details">New user registered.<small class="text-muted">5 hours ago</small>
+                            <p class="notify-details">New citizen registered.<small class="text-muted">5 hours ago</small>
                             </p>
                         </a>
 
