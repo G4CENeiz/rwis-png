@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\MediaController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -19,3 +20,7 @@ Route::get('/', function () {
 
 
 Route::resource('media', \App\Http\Controllers\MediaController::class);
+
+Route::group(['prefix' => 'media'], function(){
+    Route::get('/create', [MediaController::class, 'create']);   //menampilkan halaman form tambah user
+});

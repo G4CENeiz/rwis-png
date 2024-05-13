@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
+
 class MediaController extends Controller
 {
     /**
@@ -19,7 +20,7 @@ class MediaController extends Controller
      */
     public function create()
     {
-        //
+        return view('rw.media.create');
     }
 
     /**

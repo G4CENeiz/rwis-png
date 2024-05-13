@@ -5,8 +5,8 @@
         <img src="{{ URL::asset('assets//images/users/avatar-7.jpg') }}" class="avatar-xs rounded-circle mr-2" alt="Shreyu" />
 
         <div class="media-body">
-            <h6 class="pro-user-name mt-0 mb-0">Shreyu N</h6>
-            <span class="pro-user-desc">Administrator</span>
+            <h6 class="pro-user-name mt-0 mb-0">Firman</h6>
+            <span class="pro-user-desc">RW/Administrator</span>
         </div>
         <div class="dropdown align-self-center profile-dropdown-menu">
             <a class="dropdown-toggle mr-0" data-toggle="dropdown" href="#" role="button" aria-haspopup="false"
