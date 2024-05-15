@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\MediaController;
+use App\Http\Controllers\UMKMController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -18,9 +19,10 @@ Route::get('/', function () {
     return view('rw.index');
 });
 
-
 Route::resource('media', \App\Http\Controllers\MediaController::class);
+Route::resource('umkm', \App\Http\Controllers\UMKMController::class);
 
 Route::group(['prefix' => 'media'], function(){
     Route::get('/create', [MediaController::class, 'create']);   //menampilkan halaman form tambah user
 });
+

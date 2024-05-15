@@ -3,6 +3,17 @@
 @section('css')
 <!-- plugin css -->
 <link href="{{ URL::asset('assets/libs/datatables/datatables.min.css') }}" rel="stylesheet" type="text/css" />
+<link href="{{ URL::asset('./assets/libs/summernote/summernote-bs4.css') }}" rel="stylesheet" />
+<link href="{{ URL::asset('assets/css/bootstrap.min.css') }}" rel="stylesheet" type="text/css" />
+<link href="{{ URL::asset('assets/css/icons.min.css') }}" rel="stylesheet" type="text/css" />
+<link href="{{ URL::asset('assets/css/app.min.css') }}" rel="stylesheet" type="text/css" />
+@endsection
+
+@section('js')
+<script src="{{ URL::asset('assets/js/vendor.min.js') }}"></script>
+<script src="{{ URL::asset('./assets/libs/summernote/summernote-bs4.min.js') }}"></script>
+<script src="{{ URL::asset('assets/js/pages/form-editor.init.js') }}"></script>  
+<script src="{{ URL::asset('assets/js/app.min.js') }}"></script>
 @endsection
 
 @section('breadcrumb')
@@ -22,81 +33,105 @@
 
 @section('content')
 <div class="row">
-        <div class="col-12">
-            <div class="card">
-                <div class="card-body">
-                    <h4 class="header-title mt-0 mb-1">Article</h4>
-                    <p class="sub-header">
-                            <div class="card-tools">
-                                <a class="btn btn-sm btn-primary mt-1" href="{{ url('/media/create') }}">Tambah</a>
-                            </div>
-                        {{-- DataTables has most features enabled by default, so all you need to do to use it with your own tables is to call the construction
-                        function:
-                        <code>$().DataTable();</code>. --}}
-                    </p>
-{{-- Basic data table --}}
-                    <table id="basic-datatable" class="table dt-responsive nowrap">
-                        <thead>
-                            <tr>
-                                <th>No</th>
-                                <th>Title</th>
-                                <th>Category</th>
-                                <th>Create date</th>
-                                <th>Update date</th>
-                                <th>Detail</th>
-                            </tr>
-                        </thead>
-                    
-                    
-                        <tbody>
-                            <tr>
-                                <td>Tiger Nixon</td>
-                                <td>System Architect</td>
-                                <td>Edinburgh</td>
-                                <td>61</td>
-                                <td>2011/04/25</td>
-                                <td>$320,800</td>
-                            </tr>
-                            <tr>
-                                <td>Garrett Winters</td>
-                                <td>Accountant</td>
-                                <td>Tokyo</td>
-                                <td>63</td>
-                                <td>2011/07/25</td>
-                                <td>$170,750</td>
-                            </tr>
-                            <tr>
-                                <td>Ashton Cox</td>
-                                <td>Junior Technical Author</td>
-                                <td>San Francisco</td>
-                                <td>66</td>
-                                <td>2009/01/12</td>
-                                <td>$86,000</td>
-                            </tr>
-                            <tr>
-                                <td>Cedric Kelly</td>
-                                <td>Senior Javascript Developer</td>
-                                <td>Edinburgh</td>
-                                <td>22</td>
-                                <td>2012/03/29</td>
-                                <td>$433,060</td>
-                            </tr>
-                            <tr>
-                                <td>Airi Satou</td>
-                                <td>Accountant</td>
-                                <td>Tokyo</td>
-                                <td>33</td>
-                                <td>2008/11/28</td>
-                                <td>$162,700</td>
-                            </tr>
-                        </tbody>
-                    </table>
+    <div class="col-lg-12">
+        <div class="card">
+            <div class="card-body">
+                <h4 class="header-title mt-0 mb-1">Artikel</h4>
 
-                </div> <!-- end card body-->
-            </div> <!-- end card -->
-        </div><!-- end col-->
+                <form action="#" class="parsley-examples">
+                    <div class="form-group">
+                        <label>Judul</label>
+                        <input type="text" class="form-control" required
+                                placeholder="Tulis judul disini"/>
+                    </div>
+                    <div class="form-group">
+                        <label>Penulis</label>
+                        <div>
+                            <input type="text" class="form-control" required
+                                    placeholder="Nama"/>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="Date"></label>
+                        <label class="col-lg-2 col-form-label"
+                            for="example-date">Date</label>
+                        <div class="col-lg-12">
+                            <input class="form-control" id="example-date" type="date"
+                                name="date">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label>Deskripsi</label>
+                        <div>
+                            <textarea required class="form-control"></textarea>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Upload dokumentasi</label>
+                        <form action="/" method="post" class="dropzone" id="myAwesomeDropzone">
+                            <div class="fallback">
+                                <input name="file" type="file" multiple />
+                            </div>
+                        </form>
+                    </div>
+                </form>
+
+
+                    <div class="form-group mb-0">
+                        <div>
+                            <button type="submit" class="btn btn-success mr-1">
+                                Submit
+                            </button>
+                            <button type="reset" class="btn btn-secondary">
+                                Cancel
+                            </button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div> <!-- end card -->
+    </div> <!-- end col-->
+</div>
+<!-- end row -->
+
+<!-- Right Sidebar -->
+<div class="right-bar">
+    <div class="rightbar-title">
+        <a href="javascript:void(0);" class="right-bar-toggle float-right">
+            <i data-feather="x-circle"></i>
+        </a>
+        <h5 class="m-0">Customization</h5>
     </div>
-    <!-- end row-->
+
+    <div class="slimscroll-menu">
+
+        <h5 class="font-size-16 pl-3 mt-4">Choose Variation</h5>
+        <div class="p-3">
+            <h6>Default</h6>
+            <a href="index.html"><img src="assets/images/layouts/vertical.jpg" alt="vertical" class="img-thumbnail demo-img" /></a>
+        </div>
+        <div class="px-3 py-1">
+            <h6>Top Nav</h6>
+            <a href="layouts-horizontal.html"><img src="assets/images/layouts/horizontal.jpg" alt="horizontal" class="img-thumbnail demo-img" /></a>
+        </div>
+        <div class="px-3 py-1">
+            <h6>Dark Side Nav</h6>
+            <a href="layouts-dark-sidebar.html"><img src="assets/images/layouts/vertical-dark-sidebar.jpg" alt="dark sidenav" class="img-thumbnail demo-img" /></a>
+        </div>
+        <div class="px-3 py-1">
+            <h6>Condensed Side Nav</h6>
+            <a href="layouts-dark-sidebar.html"><img src="assets/images/layouts/vertical-condensed.jpg" alt="condensed" class="img-thumbnail demo-img" /></a>
+        </div>
+        <div class="px-3 py-1">
+            <h6>Fixed Width (Boxed)</h6>
+            <a href="layouts-boxed.html"><img src="assets/images/layouts/boxed.jpg" alt="boxed"
+                    class="img-thumbnail demo-img" /></a>
+        </div>
+    </div> <!-- end slimscroll-menu-->
+</div>
+<!-- /Right-bar -->       
+
 @endsection
 
 @section('script')
