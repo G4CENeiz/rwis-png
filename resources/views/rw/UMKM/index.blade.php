@@ -10,12 +10,12 @@
     <div class="col-md-12">
         <nav aria-label="breadcrumb" class="float-right mt-1">
             <ol class="breadcrumb">
-                <li class="breadcrumb-item"><a href="/">Publication</a></li>
+                <li class="breadcrumb-item"><a href="/">UMKM</a></li>
                 {{-- <li class="breadcrumb-item"><a href="">Article</a></li> --}}
                 {{-- <li class="breadcrumb-item active" aria-current="page">Advanced</li> --}}
             </ol>
         </nav>
-        <h4 class="mb-1 mt-0">Publication</h4>
+        <h4 class="mb-1 mt-0">UMKM</h4>
     </div>
 </div>
 @endsection
@@ -25,7 +25,7 @@
         <div class="col-12">
             <div class="card">
                 <div class="card-body">
-                    <h4 class="header-title mt-0 mb-1">Article</h4>
+                    <h4 class="header-title mt-0 mb-1">Daftar UMKM RW 1</h4>
                     <p class="sub-header">
                             <div class="card-tools">
                                 <a class="btn btn-sm btn-primary mt-1" href="{{ url('/media/create') }}">Tambah</a>
@@ -39,8 +39,8 @@
                         <thead>
                             <tr>
                                 <th>No</th>
-                                <th>Title</th>
-                                <th>Content</th>
+                                <th>Nama UMKM</th>
+                                <th>Jenis</th>
                                 <th>User_id</th>
                                 <th>Create date</th>
                                 <th>Update date</th>

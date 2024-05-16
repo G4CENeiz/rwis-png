@@ -21,12 +21,12 @@
     <div class="col-md-12">
         <nav aria-label="breadcrumb" class="float-right mt-1">
             <ol class="breadcrumb">
-                <li class="breadcrumb-item"><a href="/">Publication</a></li>
-                <li class="breadcrumb-item"><a href="">Article</a></li>
+                <li class="breadcrumb-item"><a href="/media">Publication</a></li>
+                <li class="breadcrumb-item"><a href="/create">Create</a></li>
                 {{-- <li class="breadcrumb-item active" aria-current="page">Advanced</li> --}}
             </ol>
         </nav>
-        <h4 class="mb-1 mt-0">Media</h4>
+        <h4 class="mb-1 mt-0">Publication</h4>
     </div>
 </div>
 @endsection
@@ -36,7 +36,7 @@
     <div class="col-lg-12">
         <div class="card">
             <div class="card-body">
-                <h4 class="header-title mt-0 mb-1">Artikel</h4>
+                <h4 class="header-title mt-0 mb-3">Artikel</h4>
 
                 <form action="#" class="parsley-examples">
                     <div class="form-group">
@@ -68,7 +68,7 @@
                     </div>
 
                     <div class="form-group">
-                        <label>Upload dokumentasi</label>
+                        <label>Upload foto</label>
                         <form action="/" method="post" class="dropzone" id="myAwesomeDropzone">
                             <div class="fallback">
                                 <input name="file" type="file" multiple />

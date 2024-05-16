@@ -8,32 +8,59 @@
             <span> Dashboard </span>
         </a>
     </li>
-    {{-- <li class="menu-title">Apps</li> --}}
     <li>
         <a href="javascript: void(0);">
             <i data-feather="inbox"></i>
             <span> Administrator </span>
             <span class="menu-arrow"></span>
         </a>
+
+        {{-- <ul class="nav-second-level" aria-expanded="false">
+            <li>
+                <a href="/apps/email/inbox">Inbox</a>
+            </li>
+            <li>
+                <a href="/apps/email/read">Read</a>
+            </li>
+            <li>
+                <a href="/apps/email/compose">Compose</a>
+            </li>
+        </ul> --}}
     </li>
     <li>
         <a href="javascript: void(0);">
-            <i data-feather="briefcase"></i>
+            <i class='uil uil-books'></i>
             <span> Residential Information </span>
             <span class="menu-arrow"></span>
         </a>
     </li>
     <li>
         <a href="javascript: void(0);">
-            <i data-feather="bookmark"></i>
+            <i class='uil uil-globe'></i> 
             <span> Social Service </span>
             <span class="menu-arrow"></span>
+        </a>
+    </li>
+    <li>
+        <a href=" {{route('umkm.index')}} ">
+            <i class='uil uil-store'></i>
+            <span> UMKM </span>
+            {{-- <span class="menu-arrow"></span> --}}
         </a>
     </li>
     <li>
         <a href=" {{route('media.index')}} ">
             <i data-feather="grid"></i>
             <span> Publication </span>
+            {{-- <span class="menu-arrow"></span>
+            <ul class="nav-second-level" aria-expanded="false">
+                <li>
+                    <a href="/apps/email/inbox">Artikel</a>
+                </li>
+                <li>
+                    <a href="/apps/email/read">Galery</a>
+                </li>
+            </ul> --}}
         </a>
     </li>
 </ul>
