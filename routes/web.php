@@ -3,6 +3,11 @@
 use App\Http\Controllers\MediaController;
 use App\Http\Controllers\UMKMController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\AuthController;
+use App\Http\Controllers\RwController;
+
+
+
 
 /*
 |--------------------------------------------------------------------------
@@ -26,3 +31,17 @@ Route::group(['prefix' => 'media'], function(){
     Route::get('/create', [MediaController::class, 'create']);   //menampilkan halaman form tambah user
 });
 
+Route::get('login', [AuthController::class, 'index'])->name('login');
+Route::post('proses_login', [AuthController::class, 'proses_login'])->name('proses_login');
+
+
+
+
+
+
+Route::group(['middleware' => ['auth']], function () {
+
+    Route::group(['middleware' => ['cek_login:1']], function () {
+        Route::resource('rw', RwController::class);
+    });
+});
