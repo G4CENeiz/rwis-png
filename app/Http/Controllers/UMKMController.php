@@ -8,6 +8,6 @@ class UMKMController extends Controller
 {
     public function index()
     {
-        return view('rw.umkm.index');
+        return view('media.umkm');
     }
 }

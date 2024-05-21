@@ -4,6 +4,7 @@ use App\Http\Controllers\MediaController;
 use App\Http\Controllers\UMKMController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\HomeController;
 use App\Http\Controllers\RwController;
 
 
@@ -21,7 +22,7 @@ use App\Http\Controllers\RwController;
 */
 
 Route::get('/', function () {
-    return view('rw.index');
+    return view('home.index');
 });
 
 Route::resource('media', \App\Http\Controllers\MediaController::class);
@@ -42,6 +43,6 @@ Route::post('proses_login', [AuthController::class, 'proses_login'])->name('pros
 Route::group(['middleware' => ['auth']], function () {
 
     Route::group(['middleware' => ['cek_login:1']], function () {
-        Route::resource('rw', RwController::class);
+        Route::get('rw', [HomeController::class, 'index']);
     });
 });

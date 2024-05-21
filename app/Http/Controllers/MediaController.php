@@ -12,7 +12,7 @@ class MediaController extends Controller
      */
     public function index()
     {
-        return view('rw.media.index');
+        return view('media.index');
     }
 
     /**
@@ -20,7 +20,7 @@ class MediaController extends Controller
      */
     public function create()
     {
-        return view('rw.media.create');
+        return view('media.create');
     }
 
     /**

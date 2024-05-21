@@ -20,7 +20,7 @@ class AuthController extends Controller
         //         return redirect()->intended('rt');
         //     }
         // }
-        return view('login');
+        return view('auth.login');
     }
 
     public function proses_login(Request $request)
