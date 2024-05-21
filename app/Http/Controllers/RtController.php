@@ -4,15 +4,14 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
-
-class MediaController extends Controller
+class RtController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        return view('rw.media.index');
+        return view('rt');
     }
 
     /**
@@ -20,7 +19,7 @@ class MediaController extends Controller
      */
     public function create()
     {
-        return view('rw.media.create');
+        //
     }
 
     /**
