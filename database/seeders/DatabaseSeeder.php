@@ -21,7 +21,13 @@ class DatabaseSeeder extends Seeder
         // ]);
 
         \App\Models\Media::factory(10)->create();
-        $this->call(UserSeeder::class);
+        $this->call([
+            UserSeeder::class,
+            ProvinceSeeder::class,
+            CitySeeder::class,
+            DistrictSeeder::class,
+            VillageSeeder::class
+        ]);
 
 
 
