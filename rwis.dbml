@@ -1,0 +1,238 @@
+Table Residents {
+    id                      int                 [pk, increment, Not Null]
+    
+    nik                     int(16)             [Not Null, unique]
+    name                    varchar(100)        [Not Null]
+    birth_place             varchar(50)         [Not Null]
+    birth_date              date                [Not Null]
+    gender                  gender              [Not Null]
+    religion                religion            [Not Null]
+    citizenship             citizenship         [Not Null]
+    education_level         education_level     [Not Null]
+    blood_type              blood_type          [Not Null]
+    
+    profession_name         varchar(50)         [Not Null]
+    goverment_employees     bool                [Not Null]
+    id_income_range         int                 [Not Null]
+
+    id_family               int                 [Not Null]
+    fm_status               fm_status           [Not Null]
+    marital_status          marital_status      [Not Null]
+    marriage_date           date                [Null]
+
+    is_archived             bool                [Not Null, Default: false]
+
+    created_at              timestamp           []
+    updated_at              timestamp           []
+}
+
+Table Family {
+    id                      int         [pk, increment, Not Null]
+    nkk                     int(16)     [Not Null, unique]
+    
+    id_house                int         [Not Null]
+    address_street          varchar(50) [Not Null]
+    address_rt              int(3)      [Not Null]
+    address_rw              int(3)      [Not Null]
+    address_id_village      int         [Not Null]
+    zip_code                int(5)      [Not Null]
+    
+    created_at              timestamp   []
+    updated_at              timestamp   []
+}
+
+Table House {
+    id              int [pk, increment]
+    
+    land_area       int
+    building_are    int
+    
+    domicile_street varchar(50)
+    domicile_rt     int(3)
+    domicile_rw     int(3)
+    zip_code        int(5)
+    
+    created_at      timestamp
+    updated_at      timestamp
+}
+
+Table User {
+    id                  int                 [pk, increment]
+    id_level            int                 [Not Null]
+    email               varchar(50)         [Not Null]
+    phone_number        int(13)             [Not Null]
+    id_resident         int                 [Null]
+    created_at          timestamp
+    updated_at          timestamp
+}
+
+Table Province {
+    id              int(2)          [pk, Not Null]
+    province_name   varchar(100)    [Not Null]
+    created_at      timestamp       [Not Null]
+    updated_at      timestamp       [Not Null]
+}
+
+Table City {
+    id          int(4) [pk]
+    id_province int(2)
+    city_name   varchar(100)
+    created_at  timestamp
+    updated_at  timestamp
+}
+
+Table District {
+    id              int(6) [pk]
+    id_city         int(4)
+    district_name   varchar(100)
+    created_at      timestamp
+    updated_at      timestamp
+}
+
+Table Village {
+    id              int(9) [pk]
+    id_district     int(6)
+    village_name    varchar(100)
+    created_at      timestamp
+    updated_at      timestamp
+}
+
+Table IncomeRange {
+    id          int [pk, increment]
+    lowerbound  int
+    upperbound  int
+    created_at  timestamp
+    updated_at  timestamp
+}
+
+Table UserLevel {
+    id          int [pk, increment]
+    level_name      level
+    created_at  timestamp
+    updated_at  timestamp
+}
+
+Table HouseholdAccount {
+    id int [pk, increment]
+}
+
+Table NeighborhoodAssociationAccount {
+    id int [pk, increment]
+}
+
+Table CitizenAssociationAccount {
+    id int [pk, increment]
+}
+
+Table Ledger {
+    id int [pk, increment]
+}
+
+Table Transaction {
+    id int [pk, increment]
+}
+
+TableGroup ResidentialInformation {
+    Residents
+    Family
+    House
+}
+
+TableGroup Auth {
+    User
+    UserLevel
+}
+
+TableGroup Gov {
+    Village
+    District
+    City
+    Province
+}
+
+TableGroup Contribution {
+    HouseholdAccount
+    NeighborhoodAssociationAccount
+    CitizenAssociationAccount
+    Ledger
+    Transaction
+}
+
+Enum level {
+    Admin
+    RW
+    RT
+} // TODO Turn to table
+
+Enum gender {
+    L
+    P
+}
+
+Enum religion {
+    Islam
+    Protestan
+    Katolik
+    Hindu
+    Budha
+    Khonghucu
+} //TODO turn into table
+
+Enum marital_status {
+    Belum_Kawin
+    Kawin
+    Duda_Janda
+    Cerai
+} //TODO turn into table
+
+Enum citizenship {
+    WNI
+    WNA
+}
+
+Enum education_level {
+    tidak_belum_sekolah
+    belum_tamat_sd_sederajat
+    tamat_sd_sederajat
+    sltp_sederajat
+    slta_sederajat
+    diploma_i_ii
+    akademi_diploma_iii_s_muda
+    diploma_iv_strata_i
+    strata_ii
+    strata_iii
+} //TODO turn into table
+
+Enum blood_type {
+    A
+    B
+    AB
+    O
+}
+
+Enum fm_status {
+    Kepala_Keluarga
+    Istri
+    Anak
+} //TODO turn into table
+
+//* Resident Infomation
+Ref: Residents.id_income_range - IncomeRange.id
+
+Ref: Family.id < Residents.id_family
+
+Ref: House.id < Family.id_house
+
+//* Auth
+Ref: User.id_resident - Residents.id
+
+Ref: User.id_level - UserLevel.id
+
+//* Government
+Ref: City.id_province > Province.id
+
+Ref: District.id_city > City.id
+
+Ref: Village.id_district > District.id
+
+Ref: Village.id < Family.address_id_village
