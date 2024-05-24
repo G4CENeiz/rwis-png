@@ -21,7 +21,6 @@ Table Residents {
     marriage_date           date                [Null]
 
     is_archived             bool                [Not Null, Default: false]
-
     created_at              timestamp           []
     updated_at              timestamp           []
 }
@@ -37,6 +36,7 @@ Table Family {
     address_id_village      int         [Not Null]
     zip_code                int(5)      [Not Null]
     
+    is_archived             bool        [Not Null, Default: false]
     created_at              timestamp   []
     updated_at              timestamp   []
 }
@@ -52,6 +52,7 @@ Table House {
     domicile_rw     int(3)
     zip_code        int(5)
     
+    is_archived     bool
     created_at      timestamp
     updated_at      timestamp
 }
@@ -62,6 +63,7 @@ Table User {
     email               varchar(50)         [Not Null]
     phone_number        int(13)             [Not Null]
     id_resident         int                 [Null]
+    is_archived         bool
     created_at          timestamp
     updated_at          timestamp
 }
@@ -101,6 +103,7 @@ Table IncomeRange {
     id          int [pk, increment]
     lowerbound  int
     upperbound  int
+    is_archived bool
     created_at  timestamp
     updated_at  timestamp
 }
