@@ -115,24 +115,70 @@ Table UserLevel {
     updated_at  timestamp
 }
 
-Table HouseholdAccount {
+Table ContributionTypes {
     id int [pk, increment]
+    contribution_name varchar(100)
+    description text
+    is_archived bool
+    created_at timestamp
+    updated_at timestamp
 }
 
-Table NeighborhoodAssociationAccount {
+Table ContributionDetails {
     id int [pk, increment]
+    id_contribution int
+    id_contribution_type int
+    contribution_amount int
+    is_archived bool
+    created_at timestamp
+    updated_at timestamp
 }
 
-Table CitizenAssociationAccount {
+Table Contributions {
     id int [pk, increment]
+    id_recipient int
+    recipient_type recipient_type
+    is_archived bool
+    created_at timestamp
+    updated_at timestamp
 }
 
-Table Ledger {
+Table Payments {
     id int [pk, increment]
+    id_contribution int
+    id_payment_method int
+    id_payment_status int
+    payment_amount bigint
+    description text
+    is_archived bool
+    created_at timestamp
+    updated_at timestamp
 }
 
-Table Transaction {
+Table PaymentProves {
     id int [pk, increment]
+    id_payment int
+    is_archived bool
+    created_at timestamp
+    updated_at timestamp
+}
+
+Table PaymentMethods {
+    id int [pk, increment]
+    method_name varchar(100)
+    description text
+    is_archived bool
+    created_at timestamp
+    updated_at timestamp
+}
+
+Table PaymentStatus {
+    id int [pk, increment]
+    status_name varchar(100)
+    description text
+    is_archived bool
+    created_at timestamp
+    updated_at timestamp
 }
 
 TableGroup ResidentialInformation {
@@ -151,14 +197,6 @@ TableGroup Gov {
     District
     City
     Province
-}
-
-TableGroup Contribution {
-    HouseholdAccount
-    NeighborhoodAssociationAccount
-    CitizenAssociationAccount
-    Ledger
-    Transaction
 }
 
 Enum level {
@@ -219,6 +257,12 @@ Enum fm_status {
     Anak
 } //TODO turn into table
 
+Enum recipient_type {
+    Family
+    House
+    HouseGroup
+}
+
 //* Resident Infomation
 Ref: Residents.id_income_range - IncomeRange.id
 
@@ -239,3 +283,16 @@ Ref: District.id_city > City.id
 Ref: Village.id_district > District.id
 
 Ref: Village.id < Family.address_id_village
+
+//* Contribution
+Ref: PaymentProves.id_payment > Payments.id
+
+Ref: PaymentStatus.id < Payments.id_payment_status
+
+Ref: PaymentMethods.id < Payments.id_payment_method
+
+Ref: Payments.id_contribution < Contributions.id
+
+Ref: ContributionDetails.id_contribution < Contributions.id
+
+Ref: ContributionDetails.id_contribution_type > ContributionTypes.id
