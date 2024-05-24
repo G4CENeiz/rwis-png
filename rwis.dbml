@@ -43,6 +43,7 @@ Table Family {
 
 Table House {
     id              int [pk, increment]
+    id_house_group  int
     
     land_area       int
     building_are    int
@@ -52,6 +53,14 @@ Table House {
     domicile_rw     int(3)
     zip_code        int(5)
     
+    is_archived     bool
+    created_at      timestamp
+    updated_at      timestamp
+}
+
+Table HouseGroup {
+    id int [pk, increment]
+
     is_archived     bool
     created_at      timestamp
     updated_at      timestamp
@@ -185,6 +194,7 @@ TableGroup ResidentialInformation {
     Residents
     Family
     House
+    HouseGroup
 }
 
 TableGroup Auth {
@@ -269,6 +279,8 @@ Ref: Residents.id_income_range - IncomeRange.id
 Ref: Family.id < Residents.id_family
 
 Ref: House.id < Family.id_house
+
+Ref: HouseGroup.id < House.id_house_group
 
 //* Auth
 Ref: User.id_resident - Residents.id
