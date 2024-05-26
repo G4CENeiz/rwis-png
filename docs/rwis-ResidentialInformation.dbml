@@ -1,12 +1,12 @@
 //* Resident Infomation
 TableGroup ResidentialInformation {
-    Residents
+    Resident
     Family
     House
     HouseGroup
 }
 
-Table Residents {
+Table Resident {
     id                      int                 [pk, increment, Not Null]
     nik                     int(16)             [Not Null, unique]
     name                    varchar(100)        [Not Null]
@@ -125,9 +125,9 @@ Enum fm_status {
     Anak
 } //TODO turn into table
 
-Ref: Residents.income_range_id - IncomeRange.id
+Ref: Resident.income_range_id - IncomeRange.id
 
-Ref: Family.id < Residents.family_id
+Ref: Family.id < Resident.family_id
 
 Ref: House.id < Family.house_id
 
