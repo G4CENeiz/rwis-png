@@ -109,3 +109,14 @@ Ref: PostCategory.category_id > Category.id
 Ref: Post.id < PostTag.post_id
 
 Ref: PostTag.tag_id > Tag.id
+
+Table User {
+    id                  int                 [pk, increment]
+    level_id            int                 [Not Null]
+    email               varchar(50)         [Not Null]
+    phone_number        int(13)             [Not Null]
+    resident_id         int                 [Null]
+    is_archived         bool
+    created_at          timestamp
+    updated_at          timestamp
+}
