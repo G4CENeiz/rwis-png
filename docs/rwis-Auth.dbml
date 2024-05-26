@@ -1,0 +1,56 @@
+//* Auth
+TableGroup Auth {
+    User
+    UserLevel
+}
+
+Table User {
+    id                  int                 [pk, increment]
+    level_id            int                 [Not Null]
+    email               varchar(50)         [Not Null]
+    phone_number        int(13)             [Not Null]
+    resident_id         int                 [Null]
+    is_archived         bool
+    created_at          timestamp
+    updated_at          timestamp
+}
+
+Table UserLevel {
+    id          int [pk, increment]
+    level_name      level
+    created_at  timestamp
+    updated_at  timestamp
+}
+
+Enum level {
+    Admin
+    RW
+    RT
+} // TODO Turn to table
+
+Ref: User.resident_id - Residents.id
+
+Ref: User.level_id - UserLevel.id
+
+Table Residents {
+    id                      int                 [pk, increment, Not Null]
+    nik                     int(16)             [Not Null, unique]
+    name                    varchar(100)        [Not Null]
+    birth_place             varchar(50)         [Not Null]
+    birth_date              date                [Not Null]
+    gender                  gender              [Not Null]
+    religion                religion            [Not Null]
+    citizenship             citizenship         [Not Null]
+    education_level         education_level     [Not Null]
+    blood_type              blood_type          [Not Null]
+    profession_name         varchar(50)         [Not Null]
+    goverment_employees     bool                [Not Null]
+    id_income_range         int                 [Not Null]
+    id_family               int                 [Not Null]
+    fm_status               fm_status           [Not Null]
+    marital_status          marital_status      [Not Null]
+    marriage_date           date                [Null]
+    is_archived             bool                [Not Null, Default: false]
+    created_at              timestamp           []
+    updated_at              timestamp           []
+}

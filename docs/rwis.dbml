@@ -1,0 +1,437 @@
+//* Government
+TableGroup Gov {
+    Province
+    City
+    District
+    Village
+}
+
+Table Province {
+    id              int(2)          [pk, Not Null]
+    province_name   varchar(100)    [Not Null]
+    created_at      timestamp       [Not Null]
+    updated_at      timestamp       [Not Null]
+}
+
+Table City {
+    id          int(4) [pk]
+    province_id int(2)
+    city_name   varchar(100)
+    created_at  timestamp
+    updated_at  timestamp
+}
+
+Table District {
+    id              int(6) [pk]
+    city_id         int(4)
+    district_name   varchar(100)
+    created_at      timestamp
+    updated_at      timestamp
+}
+
+Table Village {
+    id              int(9) [pk]
+    district_id     int(6)
+    village_name    varchar(100)
+    created_at      timestamp
+    updated_at      timestamp
+}
+
+Ref: City.province_id > Province.id
+
+Ref: City.id < District.city_id
+
+Ref: District.id < Village.district_id
+
+//* Resident Infomation
+TableGroup ResidentialInformation {
+    Residents
+    Family
+    House
+    HouseGroup
+}
+
+Table Residents {
+    id                      int                 [pk, increment, Not Null]
+    nik                     int(16)             [Not Null, unique]
+    name                    varchar(100)        [Not Null]
+    birth_place             varchar(50)         [Not Null]
+    birth_date              date                [Not Null]
+    gender                  gender              [Not Null]
+    religion                religion            [Not Null]
+    citizenship             citizenship         [Not Null]
+    education_level         education_level     [Not Null]
+    blood_type              blood_type          [Not Null]
+    profession_name         varchar(50)         [Not Null]
+    goverment_employees     bool                [Not Null]
+    income_range_id         int                 [Not Null]
+    family_id               int                 [Not Null]
+    fm_status               fm_status           [Not Null]
+    marital_status          marital_status      [Not Null]
+    marriage_date           date                [Null]
+    is_archived             bool                [Not Null, Default: false]
+    created_at              timestamp           []
+    updated_at              timestamp           []
+}
+
+Table Family {
+    id                      int         [pk, increment, Not Null]
+    nkk                     int(16)     [Not Null, unique]
+    house_id                int         [Not Null]
+    address_street          varchar(50) [Not Null]
+    address_rt              int(3)      [Not Null]
+    address_rw              int(3)      [Not Null]
+    village_id              int         [Not Null]
+    zip_code                int(5)      [Not Null]
+    is_archived             bool        [Not Null, Default: false]
+    created_at              timestamp   []
+    updated_at              timestamp   []
+}
+
+Table House {
+    id              int [pk, increment]
+    house_group_id  int
+    land_area       int
+    building_are    int
+    domicile_street varchar(50)
+    domicile_rt     int(3)
+    domicile_rw     int(3)
+    zip_code        int(5)
+    is_archived     bool
+    created_at      timestamp
+    updated_at      timestamp
+}
+
+Table HouseGroup {
+    id int [pk, increment]
+    is_archived     bool
+    created_at      timestamp
+    updated_at      timestamp
+}
+
+Table IncomeRange {
+    id          int [pk, increment]
+    lowerbound  int
+    upperbound  int
+    is_archived bool
+    created_at  timestamp
+    updated_at  timestamp
+}
+
+Enum gender {
+    L
+    P
+}
+
+Enum religion {
+    Islam
+    Protestan
+    Katolik
+    Hindu
+    Budha
+    Khonghucu
+} //TODO turn into Table
+
+Enum marital_status {
+    Belum_Kawin
+    Kawin
+    Duda_Janda
+    Cerai
+} //TODO turn into Table
+
+Enum citizenship {
+    WNI
+    WNA
+}
+
+Enum education_level {
+    tidak_belum_sekolah
+    belum_tamat_sd_sederajat
+    tamat_sd_sederajat
+    sltp_sederajat
+    slta_sederajat
+    diploma_i_ii
+    akademi_diploma_iii_s_muda
+    diploma_iv_strata_i
+    strata_ii
+    strata_iii
+} //TODO turn into Table
+
+Enum blood_type {
+    A
+    B
+    AB
+    O
+}
+
+Enum fm_status {
+    Kepala_Keluarga
+    Istri
+    Anak
+} //TODO turn into Table
+
+Ref: Residents.income_range_id - IncomeRange.id
+
+Ref: Family.id < Residents.family_id
+
+Ref: Family.village_id > Village.id
+
+Ref: House.id < Family.house_id
+
+Ref: House.house_group_id > HouseGroup.id
+
+//* Auth
+TableGroup Auth {
+    User
+    UserLevel
+}
+
+Table User {
+    id                  int                 [pk, increment]
+    level_id            int                 [Not Null]
+    email               varchar(50)         [Not Null]
+    phone_number        int(13)             [Not Null]
+    resident_id         int                 [Null]
+    is_archived         bool
+    created_at          timestamp
+    updated_at          timestamp
+}
+
+Table UserLevel {
+    id          int [pk, increment]
+    level_name      level
+    created_at  timestamp
+    updated_at  timestamp
+}
+
+Enum level {
+    Admin
+    RW
+    RT
+} // TODO Turn to Table
+
+Ref: User.resident_id - Residents.id
+
+Ref: User.level_id - UserLevel.id
+
+//* Contribution
+TableGroup Contribution {
+    Contributions
+    ContributionDetails
+    ContributionTypes
+    Payments
+    PaymentMethods
+    PaymentStatus
+    PaymentProves
+    GeneralLedger
+}
+
+Table Contributions {
+    id int [pk, increment]
+    id_recipient int
+    general_ledger_id int
+    recipient_type recipient_type
+    is_archived bool
+    created_at timestamp
+    updated_at timestamp
+}
+
+Table ContributionDetails {
+    id int [pk, increment]
+    contribution_id int
+    contribution_type_id int
+    contribution_amount int
+    is_archived bool
+    created_at timestamp
+    updated_at timestamp
+}
+
+Table ContributionTypes {
+    id int [pk, increment]
+    contribution_name varchar(100)
+    description text
+    is_archived bool
+    created_at timestamp
+    updated_at timestamp
+}
+
+Table Payments {
+    id int [pk, increment]
+    contribution_id int
+    payment_method_id int
+    payment_status_id int
+    payment_amount bigint
+    description text
+    is_archived bool
+    created_at timestamp
+    updated_at timestamp
+}
+
+Table PaymentMethods {
+    id int [pk, increment]
+    method_name varchar(100)
+    description text
+    is_archived bool
+    created_at timestamp
+    updated_at timestamp
+}
+
+Table PaymentStatus {
+    id int [pk, increment]
+    status_name varchar(100)
+    description text
+    is_archived bool
+    created_at timestamp
+    updated_at timestamp
+}
+
+Table PaymentProves {
+    id int [pk, increment]
+    payment_id int
+    is_archived bool
+    created_at timestamp
+    updated_at timestamp
+}
+
+Table GeneralLedger {
+    id int [pk, increment]
+    issuer_id int
+    issuer_type enum
+    is_archived bool
+    created_at timestamp
+    updated_at timestamp
+}
+
+Enum recipient_type {
+    Family
+    House
+    HouseGroup
+}
+
+Ref: PaymentProves.payment_id > Payments.id
+
+Ref: PaymentStatus.id < Payments.payment_status_id
+
+Ref: PaymentMethods.id < Payments.payment_method_id
+
+Ref: Payments.contribution_id < Contributions.id
+
+Ref: ContributionDetails.contribution_id < Contributions.id
+
+Ref: ContributionDetails.contribution_type_id > ContributionTypes.id
+
+Ref: GeneralLedger.id > Contributions.general_ledger_id
+
+Ref: GeneralLedger.issuer_id > User.id
+
+//* Media
+TableGroup Media {
+    Post
+    PostComment
+    PostMeta
+    PostCategory
+    Category
+    PostTag
+    Tag
+}
+
+Table Post {
+    id int [pk, increment]
+    author_id int
+    parent_post_id int
+    title varchar(75)
+    meta_title varchar(100)
+    slug varchar(100)
+    summary tinytext
+    is_archived bool
+    created_at timestamp
+    updated_at timestamp
+    published_at timestamp
+    content text
+}
+
+Table PostComment {
+    id int [pk, increment]
+    post_id int
+    parent_comment_id int
+    title varchar(100)
+    is_archived bool
+    created_at timestamp
+    updated_at timestamp
+    published_at timestamp
+    content text
+}
+
+Table PostMeta {
+    id int [pk, increment]
+    post_id int
+    key varchar(50)
+    is_archived bool
+    created_at timestamp
+    updated_at timestamp
+    published_at timestamp
+    content text
+}
+
+Table PostCategory {
+    id int [pk, increment]
+    post_id int
+    category_id int
+    is_archived bool
+    created_at timestamp
+    updated_at timestamp
+    published_at timestamp
+}
+
+Table Category {
+    id int [pk, increment]
+    parent_category_id int
+    title varchar(75)
+    meta_title varchar(100)
+    slug varchar(100)
+    is_archived bool
+    created_at timestamp
+    updated_at timestamp
+    published_at timestamp
+    content text
+}
+
+Table PostTag {
+    id int [pk, increment]
+    post_id int
+    tag_id int
+    is_archived bool
+    created_at timestamp
+    updated_at timestamp
+    published_at timestamp
+}
+
+Table Tag {
+    id int [pk, increment]
+    title varchar(75)
+    meta_title varchar(100)
+    slug varchar(100)
+    is_archived bool
+    created_at timestamp
+    updated_at timestamp
+    published_at timestamp
+    content text
+}
+
+Ref: Post.id < Post.parent_post_id
+
+Ref: Post.author_id > User.id
+
+Ref: PostComment.id < PostComment.parent_comment_id
+
+Ref: PostComment.post_id > Post.id
+
+Ref: PostMeta.post_id > Post.id
+
+Ref: Post.id < PostCategory.post_id
+
+Ref: PostCategory.category_id > Category.id
+
+Ref: Post.id < PostTag.post_id
+
+Ref: PostTag.tag_id > Tag.id

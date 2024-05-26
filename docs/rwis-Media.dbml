@@ -1,0 +1,122 @@
+//* Media
+TableGroup Media {
+    Post
+    PostComment
+    PostMeta
+    PostCategory
+    Category
+    PostTag
+    Tag
+}
+
+Table Post {
+    id int [pk, increment]
+    author_id int
+    parent_post_id int
+    title varchar(75)
+    meta_title varchar(100)
+    slug varchar(100)
+    summary tinytext
+    is_archived bool
+    created_at timestamp
+    updated_at timestamp
+    published_at timestamp
+    content text
+}
+
+Table PostComment {
+    id int [pk, increment]
+    post_id int
+    parent_comment_id int
+    title varchar(100)
+    is_archived bool
+    created_at timestamp
+    updated_at timestamp
+    published_at timestamp
+    content text
+}
+
+Table PostMeta {
+    id int [pk, increment]
+    post_id int
+    key varchar(50)
+    is_archived bool
+    created_at timestamp
+    updated_at timestamp
+    published_at timestamp
+    content text
+}
+
+Table PostCategory {
+    id int [pk, increment]
+    post_id int
+    category_id int
+    is_archived bool
+    created_at timestamp
+    updated_at timestamp
+    published_at timestamp
+}
+
+Table Category {
+    id int [pk, increment]
+    parent_category_id int
+    title varchar(75)
+    meta_title varchar(100)
+    slug varchar(100)
+    is_archived bool
+    created_at timestamp
+    updated_at timestamp
+    published_at timestamp
+    content text
+}
+
+Table PostTag {
+    id int [pk, increment]
+    post_id int
+    tag_id int
+    is_archived bool
+    created_at timestamp
+    updated_at timestamp
+    published_at timestamp
+}
+
+Table Tag {
+    id int [pk, increment]
+    title varchar(75)
+    meta_title varchar(100)
+    slug varchar(100)
+    is_archived bool
+    created_at timestamp
+    updated_at timestamp
+    published_at timestamp
+    content text
+}
+
+Ref: Post.id < Post.parent_post_id
+
+Ref: Post.author_id > User.id
+
+Ref: PostComment.id < PostComment.parent_comment_id
+
+Ref: PostComment.post_id > Post.id
+
+Ref: PostMeta.post_id > Post.id
+
+Ref: Post.id < PostCategory.post_id
+
+Ref: PostCategory.category_id > Category.id
+
+Ref: Post.id < PostTag.post_id
+
+Ref: PostTag.tag_id > Tag.id
+
+Table User {
+    id                  int                 [pk, increment]
+    level_id            int                 [Not Null]
+    email               varchar(50)         [Not Null]
+    phone_number        int(13)             [Not Null]
+    resident_id         int                 [Null]
+    is_archived         bool
+    created_at          timestamp
+    updated_at          timestamp
+}
