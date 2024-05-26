@@ -108,6 +108,15 @@ Table Village {
     updated_at      timestamp
 }
 
+Table GeneralLedger {
+    id int [pk, increment]
+    id_issuer int
+    issuer_type enum
+    is_archived bool
+    created_at timestamp
+    updated_at timestamp
+}
+
 Table IncomeRange {
     id          int [pk, increment]
     lowerbound  int
@@ -146,6 +155,7 @@ Table ContributionDetails {
 Table Contributions {
     id int [pk, increment]
     id_recipient int
+    id_general_ledger int
     recipient_type recipient_type
     is_archived bool
     created_at timestamp
@@ -207,6 +217,17 @@ TableGroup Gov {
     District
     City
     Province
+}
+
+TableGroup Contribution {
+    Contributions
+    ContributionDetails
+    ContributionTypes
+    Payments
+    PaymentMethods
+    PaymentStatus
+    PaymentProves
+    GeneralLedger
 }
 
 Enum level {
@@ -308,3 +329,7 @@ Ref: Payments.id_contribution < Contributions.id
 Ref: ContributionDetails.id_contribution < Contributions.id
 
 Ref: ContributionDetails.id_contribution_type > ContributionTypes.id
+
+Ref: Contributions.id_general_ledger < GeneralLedger.id
+
+Ref: GeneralLedger.id_issuer > User.id
