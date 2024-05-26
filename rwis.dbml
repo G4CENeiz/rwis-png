@@ -1,6 +1,5 @@
 Table Residents {
     id                      int                 [pk, increment, Not Null]
-    
     nik                     int(16)             [Not Null, unique]
     name                    varchar(100)        [Not Null]
     birth_place             varchar(50)         [Not Null]
@@ -10,16 +9,13 @@ Table Residents {
     citizenship             citizenship         [Not Null]
     education_level         education_level     [Not Null]
     blood_type              blood_type          [Not Null]
-    
     profession_name         varchar(50)         [Not Null]
     goverment_employees     bool                [Not Null]
     id_income_range         int                 [Not Null]
-
     id_family               int                 [Not Null]
     fm_status               fm_status           [Not Null]
     marital_status          marital_status      [Not Null]
     marriage_date           date                [Null]
-
     is_archived             bool                [Not Null, Default: false]
     created_at              timestamp           []
     updated_at              timestamp           []
@@ -28,14 +24,12 @@ Table Residents {
 Table Family {
     id                      int         [pk, increment, Not Null]
     nkk                     int(16)     [Not Null, unique]
-    
     id_house                int         [Not Null]
     address_street          varchar(50) [Not Null]
     address_rt              int(3)      [Not Null]
     address_rw              int(3)      [Not Null]
     address_id_village      int         [Not Null]
     zip_code                int(5)      [Not Null]
-    
     is_archived             bool        [Not Null, Default: false]
     created_at              timestamp   []
     updated_at              timestamp   []
@@ -44,15 +38,12 @@ Table Family {
 Table House {
     id              int [pk, increment]
     id_house_group  int
-    
     land_area       int
     building_are    int
-    
     domicile_street varchar(50)
     domicile_rt     int(3)
     domicile_rw     int(3)
     zip_code        int(5)
-    
     is_archived     bool
     created_at      timestamp
     updated_at      timestamp
@@ -60,7 +51,6 @@ Table House {
 
 Table HouseGroup {
     id int [pk, increment]
-
     is_archived     bool
     created_at      timestamp
     updated_at      timestamp
