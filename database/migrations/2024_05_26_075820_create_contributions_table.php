@@ -12,8 +12,20 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('contributions', function (Blueprint $table) {
-            $table->id();
+            $table->id('contribution_id');
+            $table->unsignedBigInteger('recipient_id')->index();
+            $table->unsignedBigInteger('general_ledger_id')->index();
+            $table->enum('recipient_type', [
+                'Family',
+                'House',
+                'HouseGroup',
+                'NeighborhoodAssociation',
+            ]);
+            $table->boolean('is_archived');
             $table->timestamps();
+            
+            $table->foreign('recipient_id')->references('family_id')->on('families');
+            $table->foreign('general_ledger_id')->references('general_ledger_id')->on('general_ledgers');
         });
     }
 

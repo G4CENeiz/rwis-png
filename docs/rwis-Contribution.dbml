@@ -90,6 +90,7 @@ Enum recipient_type {
     Family
     House
     HouseGroup
+    NeighborhoodAssociation
 }
 
 Ref: PaymentProve.payment_id > Payment.id

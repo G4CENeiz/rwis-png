@@ -12,8 +12,16 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('general_ledgers', function (Blueprint $table) {
-            $table->id();
+            $table->id('general_ledger_id');
+            $table->unsignedBigInteger('issuer_id')->index();
+            $table->enum('issuer_type', [
+                'RW',
+                'RT'
+            ]);
+            $table->boolean('is_archived');
             $table->timestamps();
+
+            $table->foreign('issuer_id')->references('resident_id')->on('residents');
         });
     }
 
