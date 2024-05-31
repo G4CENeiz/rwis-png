@@ -21,7 +21,15 @@
 @endsection
 
 @section('content')
-<div class="content">   
+<div class="content">
+    <div class="row">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-body">
+                    <h4 class="header-title mt-0 mb-1">Article</h4>
+                    <p class="sub-header">
+                            <div class="card-tools">
+                                <a class="btn btn-sm btn-primary mt-1" href="{{ url('/media/create') }}">Tambah</a>   
     <!-- Start Content-->
     <div class="container-fluid">
         <div class="row page-title align-items-center">
