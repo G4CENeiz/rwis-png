@@ -23,4 +23,7 @@ Route::resource('media', \App\Http\Controllers\MediaController::class);
 
 Route::group(['prefix' => 'media'], function(){
     Route::get('/create', [MediaController::class, 'create']);   //menampilkan halaman form tambah user
+    Route::get('/edit', [MediaController::class, 'edit']);
+    Route::get('/delete', [MediaController::class, 'delete']);
+    Route::get('/media/show', [MediaController::class, 'show']);
 });
