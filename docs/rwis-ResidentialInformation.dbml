@@ -1,0 +1,144 @@
+//* Resident Infomation
+TableGroup ResidentialInformation {
+    Resident
+    Family
+    House
+    HouseGroup
+}
+
+Table Resident {
+    id                      int                 [pk, increment, Not Null]
+    nik                     int(16)             [Not Null, unique]
+    name                    varchar(100)        [Not Null]
+    birth_place             varchar(50)         [Not Null]
+    birth_date              date                [Not Null]
+    gender                  gender              [Not Null]
+    religion                religion            [Not Null]
+    citizenship             citizenship         [Not Null]
+    education_level         education_level     [Not Null]
+    blood_type              blood_type          [Not Null]
+    profession_name         varchar(50)         [Not Null]
+    goverment_employees     bool                [Not Null]
+    income_range_id         int                 [Not Null]
+    family_id               int                 [Not Null]
+    fm_status               fm_status           [Not Null]
+    marital_status          marital_status      [Not Null]
+    marriage_date           date                [Null]
+    is_archived             bool                [Not Null, Default: false]
+    created_at              timestamp           []
+    updated_at              timestamp           []
+}
+
+Table Family {
+    id                      int         [pk, increment, Not Null]
+    nkk                     int(16)     [Not Null, unique]
+    house_id                int         [Not Null]
+    address_street          varchar(50) [Not Null]
+    address_rt              int(3)      [Not Null]
+    address_rw              int(3)      [Not Null]
+    village_id              int         [Not Null]
+    zip_code                int(5)      [Not Null]
+    is_archived             bool        [Not Null, Default: false]
+    created_at              timestamp   []
+    updated_at              timestamp   []
+}
+
+Table House {
+    id              int [pk, increment]
+    house_group_id  int
+    land_area       int
+    building_are    int
+    domicile_street varchar(50)
+    domicile_rt     int(3)
+    domicile_rw     int(3)
+    zip_code        int(5)
+    is_archived     bool
+    created_at      timestamp
+    updated_at      timestamp
+}
+
+Table HouseGroup {
+    id int [pk, increment]
+    is_archived     bool
+    created_at      timestamp
+    updated_at      timestamp
+}
+
+Table IncomeRange {
+    id          int [pk, increment]
+    lowerbound  int
+    upperbound  int
+    is_archived bool
+    created_at  timestamp
+    updated_at  timestamp
+}
+
+Enum gender {
+    L
+    P
+}
+
+Enum religion {
+    Islam
+    Protestan
+    Katolik
+    Hindu
+    Budha
+    Khonghucu
+} //TODO turn into table
+
+Enum marital_status {
+    Belum_Kawin
+    Kawin
+    Duda_Janda
+    Cerai
+} //TODO turn into table
+
+Enum citizenship {
+    WNI
+    WNA
+}
+
+Enum education_level {
+    tidak_belum_sekolah
+    belum_tamat_sd_sederajat
+    tamat_sd_sederajat
+    sltp_sederajat
+    slta_sederajat
+    diploma_i_ii
+    akademi_diploma_iii_s_muda
+    diploma_iv_strata_i
+    strata_ii
+    strata_iii
+} //TODO turn into table
+
+Enum blood_type {
+    A
+    B
+    AB
+    O
+}
+
+Enum fm_status {
+    Kepala_Keluarga
+    Istri
+    Anak
+} //TODO turn into table
+
+Ref: Resident.income_range_id - IncomeRange.id
+
+Ref: Family.id < Resident.family_id
+
+Ref: House.id < Family.house_id
+
+Ref: HouseGroup.id < House.house_group_id
+
+Ref: Family.village_id > Village.id
+
+Table Village {
+    id              int(9) [pk]
+    id_district     int(6)
+    village_name    varchar(100)
+    created_at      timestamp
+    updated_at      timestamp
+}

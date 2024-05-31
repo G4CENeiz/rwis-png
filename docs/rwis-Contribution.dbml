@@ -1,0 +1,145 @@
+//* Contribution
+TableGroup Contribution {
+    Contribution
+    ContributionDetail
+    ContributionType
+    Payment
+    PaymentMethod
+    PaymentStatus
+    PaymentProve
+    GeneralLedger
+}
+
+Table Contribution {
+    id int [pk, increment]
+    id_recipient int
+    general_ledger_id int
+    recipient_type recipient_type
+    is_archived bool
+    created_at timestamp
+    updated_at timestamp
+}
+
+Table ContributionDetail {
+    id int [pk, increment]
+    contribution_id int
+    contribution_type_id int
+    contribution_amount int
+    is_archived bool
+    created_at timestamp
+    updated_at timestamp
+}
+
+Table ContributionType {
+    id int [pk, increment]
+    contribution_name varchar(100)
+    description text
+    is_archived bool
+    created_at timestamp
+    updated_at timestamp
+}
+
+Table Payment {
+    id int [pk, increment]
+    contribution_id int
+    payment_method_id int
+    payment_status_id int
+    payment_amount bigint
+    description text
+    is_archived bool
+    created_at timestamp
+    updated_at timestamp
+}
+
+Table PaymentMethod {
+    id int [pk, increment]
+    method_name varchar(100)
+    description text
+    is_archived bool
+    created_at timestamp
+    updated_at timestamp
+}
+
+Table PaymentStatus {
+    id int [pk, increment]
+    status_name varchar(100)
+    description text
+    is_archived bool
+    created_at timestamp
+    updated_at timestamp
+}
+
+Table PaymentProve {
+    id int [pk, increment]
+    payment_id int
+    is_archived bool
+    created_at timestamp
+    updated_at timestamp
+}
+
+Table GeneralLedger {
+    id int [pk, increment]
+    issuer_id int
+    issuer_type enum
+    is_archived bool
+    created_at timestamp
+    updated_at timestamp
+}
+
+Enum recipient_type {
+    Family
+    House
+    HouseGroup
+}
+
+Ref: PaymentProve.payment_id > Payment.id
+
+Ref: PaymentStatus.id < Payment.payment_status_id
+
+Ref: PaymentMethod.id < Payment.payment_method_id
+
+Ref: Payment.contribution_id < Contribution.id
+
+Ref: ContributionDetail.contribution_id < Contribution.id
+
+Ref: ContributionDetail.contribution_type_id > ContributionType.id
+
+Ref: GeneralLedger.id > Contribution.general_ledger_id
+
+Ref: GeneralLedger.issuer_id > User.id
+
+Ref: Contribution.id_recipient > Resident.id
+
+Table User {
+    id                  int                 [pk, increment]
+    id_level            int                 [Not Null]
+    email               varchar(50)         [Not Null]
+    phone_number        int(13)             [Not Null]
+    id_resident         int                 [Null]
+    is_archived         bool
+    created_at          timestamp
+    updated_at          timestamp
+}
+
+Table Resident {
+    id                      int                 [pk, increment, Not Null]
+    nik                     int(16)             [Not Null, unique]
+    name                    varchar(100)        [Not Null]
+    birth_place             varchar(50)         [Not Null]
+    birth_date              date                [Not Null]
+    gender                  gender              [Not Null]
+    religion                religion            [Not Null]
+    citizenship             citizenship         [Not Null]
+    education_level         education_level     [Not Null]
+    blood_type              blood_type          [Not Null]
+    profession_name         varchar(50)         [Not Null]
+    goverment_employees     bool                [Not Null]
+    income_range_id         int                 [Not Null]
+    family_id               int                 [Not Null]
+    fm_status               fm_status           [Not Null]
+    marital_status          marital_status      [Not Null]
+    marriage_date           date                [Null]
+    is_archived             bool                [Not Null, Default: false]
+    created_at              timestamp           []
+    updated_at              timestamp           []
+}

@@ -1,0 +1,44 @@
+//* Government
+TableGroup Gov {
+    Province
+    City
+    District
+    Village
+}
+
+Table Province {
+    id              int(2)          [pk, Not Null]
+    province_name   varchar(100)    [Not Null]
+    created_at      timestamp       [Not Null]
+    updated_at      timestamp       [Not Null]
+}
+
+Table City {
+    id          int(4) [pk]
+    province_id int(2)
+    city_name   varchar(100)
+    created_at  timestamp
+    updated_at  timestamp
+}
+
+Table District {
+    id              int(6) [pk]
+    city_id         int(4)
+    district_name   varchar(100)
+    created_at      timestamp
+    updated_at      timestamp
+}
+
+Table Village {
+    id              int(9) [pk]
+    district_id     int(6)
+    village_name    varchar(100)
+    created_at      timestamp
+    updated_at      timestamp
+}
+
+Ref: City.province_id > Province.id
+
+Ref: District.city_id > City.id
+
+Ref: Village.district_id > District.id
