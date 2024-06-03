@@ -34,6 +34,7 @@ use App\Http\Controllers\ReligionController;
 use App\Http\Controllers\ResidentController;
 use App\Http\Controllers\RwController;
 use App\Http\Controllers\BansosController;
+use App\Http\Controllers\GovAidController;
 use App\Http\Controllers\TagController;
 use App\Http\Controllers\VillageController;
 /*
@@ -61,6 +62,11 @@ Route::prefix('umkm')->name('umkm')->controller(UMKMController::class)->group(fu
 
 Route::resource('bansos', BansosController::class);
 Route::prefix('bansos')->name('bansos')->controller(BansosController::class)->group(function () {
+    Route::get('/extraRoute', 'extraFun')->name('extraName');
+});
+
+Route::resource('govassist', GovAidController::class);
+Route::prefix('govassist')->name('govassist')->controller(GovAidController::class)->group(function () {
     Route::get('/extraRoute', 'extraFun')->name('extraName');
 });
 
