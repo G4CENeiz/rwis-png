@@ -60,19 +60,6 @@
                         <a class="btn btn-warning font-size-14 mr-2" href="{{ url('/media/edit') }}">Edit</a>
                         <a class="btn btn-danger font-size-14 mr-2" href="{{ url('/media/delete') }}">Delete</a>
                     </div>
-                </div>
-            </div><!-- end col -->
-            {{-- 2 --}}
-            <div class="col-lg-6 col-xl-3">
-                <!-- Simple card -->
-                <div class="card mb-4 mb-xl-0">
-                    <img class="card-img-top img-fluid" src="{{ URL::asset('assets/images/meng.png')}}" alt="Card image cap">
-                    <div class="card-body">
-                        <h5 class="card-title font-size-20">Kerja Bakti Warga 02</h5>
-                        <p class="card-text text-muted">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Quisquam tenetur voluptas eum porro nesciunt iure, velit nisi, reprehenderit nostrum eligendi officia cumque impedit vel ipsum sunt aut mollitia id quam.</p>
-                        <a class="btn btn-primary font-size-14 mr-2" href="{{ url('/media/show') }}">Detail</a>
-                        <a class="btn btn-warning font-size-14 mr-2" href="{{ url('/media/edit') }}">Edit</a>
-                        <a class="btn btn-danger font-size-14 mr-2" href="{{ url('/media/delete') }}">Delete</a>
                     </div>
                 </div>
             </div><!-- end col -->  

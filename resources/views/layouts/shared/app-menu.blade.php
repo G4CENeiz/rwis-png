@@ -35,9 +35,9 @@
         </a>
     </li>
     <li>
-        <a href="javascript: void(0);">
+        <a href=" {{route('bansos.index')}} ">
             <i class='uil uil-globe'></i> 
-            <span> Social Service </span>
+            <span> Bantuan Sosial </span>
             <span class="menu-arrow"></span>
         </a>
     </li>

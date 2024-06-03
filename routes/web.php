@@ -6,7 +6,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\RwController;
-
+use App\Http\Controllers\BansosController;
 
 
 
@@ -27,6 +27,7 @@ Route::get('/', function () {
 
 Route::resource('media', \App\Http\Controllers\MediaController::class);
 Route::resource('umkm', \App\Http\Controllers\UMKMController::class);
+Route::resource('bansos', \App\Http\Controllers\BansosController::class);
 
 Route::group(['prefix' => 'media'], function(){
     Route::get('/create', [MediaController::class, 'create']);   //menampilkan halaman form tambah user
