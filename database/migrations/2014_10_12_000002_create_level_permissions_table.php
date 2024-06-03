@@ -16,6 +16,9 @@ return new class extends Migration
             $table->unsignedBigInteger('permission_id')->index();
             $table->boolean('is_archived');
             $table->timestamps();
+
+            $table->foreign('user_level_id')->references('user_level_id')->on('user_levels');
+            $table->foreign('permission_id')->references('permission_id')->on('permissions');
         });
     }
 

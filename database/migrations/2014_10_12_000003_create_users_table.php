@@ -21,6 +21,8 @@ return new class extends Migration
             $table->rememberToken();
             $table->boolean('is_archived');
             $table->timestamps();
+
+            $table->foreign('level_id')->references('user_level_id')->on('user_levels');
         });
     }
 
