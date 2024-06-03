@@ -12,7 +12,8 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('house_groups', function (Blueprint $table) {
-            $table->id();
+            $table->id('house_group_id');
+            $table->boolean('is_archived')->default(false);
             $table->timestamps();
         });
     }

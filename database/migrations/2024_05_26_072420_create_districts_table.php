@@ -12,8 +12,13 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('districts', function (Blueprint $table) {
-            $table->id();
+            $table->id('district_id');
+            $table->unsignedBigInteger('city_id')->index();
+            $table->string('district_name', 100);
+            $table->boolean('is_archived')->default(false);
             $table->timestamps();
+
+            $table->foreign('city_id')->references('city_id')->on('cities');
         });
     }
 

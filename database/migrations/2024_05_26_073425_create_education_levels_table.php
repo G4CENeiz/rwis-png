@@ -12,7 +12,9 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('education_levels', function (Blueprint $table) {
-            $table->id();
+            $table->id('education_level_id');
+            $table->string('education_level_name', 50);
+            $table->boolean('is_archived')->default(false);
             $table->timestamps();
         });
     }

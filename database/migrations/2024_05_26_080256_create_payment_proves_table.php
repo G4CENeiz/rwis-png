@@ -12,8 +12,12 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('payment_proves', function (Blueprint $table) {
-            $table->id();
+            $table->id('payment_prove_id');
+            $table->unsignedBigInteger('payment_id')->index();
+            $table->boolean('is_archived');
             $table->timestamps();
+
+            $table;
         });
     }
 
