@@ -260,10 +260,3 @@ Route::prefix('media')->name('media')->group(function () {
         });
     });
 });
-
-Route::prefix('aid')->name('aid')->group(function () {
-    Route::resource('category', CategoryController::class);
-    Route::prefix('category')->name('category')->controller(CategoryController::class)->group(function () {
-        Route::get('/extraRoute', 'extraFun')->name('extraName');
-    });
-});
