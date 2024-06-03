@@ -4,6 +4,7 @@ namespace Database\Seeders;
 
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\DB;
 
 class EducationLevelSeeder extends Seeder
 {
@@ -12,6 +13,25 @@ class EducationLevelSeeder extends Seeder
      */
     public function run(): void
     {
-        //
+        $list = [
+            'Tidak/Belum Sekolah',
+            'Belum Tamat SD/Sederajat',
+            'Tamat SD/Sederajat',
+            'SLTP/Sederajat',
+            'SLTA/Sederajat',
+            'Diploma I/II',
+            'Akademi/Diploma III/S.Muda',
+            'Diploma IV/Strata I',
+            'Strata II',
+            'Strata III',
+        ];
+        $data = [];
+        for ($i=0; $i < count($list); $i++) {
+            $data[] = [
+                'education_level_id'   => $i+1,
+                'education_level_name' => $list[$i],
+            ];
+        }
+        DB::table('education_levels')->insert($data);
     }
 }

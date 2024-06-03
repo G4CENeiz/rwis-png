@@ -8,4 +8,14 @@ use Illuminate\Database\Eloquent\Model;
 class Religion extends Model
 {
     use HasFactory;
+
+    protected $table = 'religions';
+    
+    protected $primaryKey = 'religion_id';
+
+    protected $fillable = [
+        'religion_id',
+        'religion_name',
+        'is_archived',
+    ];
 }

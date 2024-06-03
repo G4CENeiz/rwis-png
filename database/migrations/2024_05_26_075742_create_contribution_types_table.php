@@ -12,7 +12,10 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('contribution_types', function (Blueprint $table) {
-            $table->id();
+            $table->id('contribution_type_id');
+            $table->string('contribution_name', 100)->unique();
+            $table->text('description');
+            $table->boolean('is_archived');
             $table->timestamps();
         });
     }

@@ -2,24 +2,44 @@
 TableGroup Auth {
     User
     UserLevel
+    LevelPermission
+    Permission
 }
 
 Table User {
-    id                  int                 [pk, increment]
-    level_id            int                 [Not Null]
-    email               varchar(50)         [Not Null]
-    phone_number        int(13)             [Not Null]
-    resident_id         int                 [Null]
-    is_archived         bool
-    created_at          timestamp
-    updated_at          timestamp
+    id              int                 [pk, increment]
+    level_id        int                 [Not Null]
+    email           varchar(50)         [Not Null]
+    phone_number    int(13)             [Not Null]
+    resident_id     int                 [Null]
+    is_archived     bool
+    created_at      timestamp
+    updated_at      timestamp
 }
 
 Table UserLevel {
-    id          int [pk, increment]
+    id              int [pk, increment]
     level_name      level
-    created_at  timestamp
-    updated_at  timestamp
+    is_archived     bool
+    created_at      timestamp
+    updated_at      timestamp
+}
+
+Table LevelPermission {
+    id              int [pk, increment]
+    user_level_id   int
+    permission_id   int
+    is_archived     bool
+    created_at      timestamp
+    updated_at      timestamp
+}
+
+Table Permission {
+    id              int [pk, increment]
+    permission_name varchar(50)
+    is_archived     bool
+    created_at      timestamp
+    updated_at      timestamp
 }
 
 Enum level {
@@ -31,6 +51,10 @@ Enum level {
 Ref: User.resident_id - Residents.id
 
 Ref: User.level_id - UserLevel.id
+
+Ref: LevelPermission.permission_id > Permission.id
+
+Ref: UserLevel.id < LevelPermission.user_level_id
 
 Table Residents {
     id                      int                 [pk, increment, Not Null]

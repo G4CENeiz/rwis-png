@@ -4,6 +4,7 @@ namespace Database\Seeders;
 
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\DB;
 
 class HouseGroupSeeder extends Seeder
 {
@@ -12,6 +13,11 @@ class HouseGroupSeeder extends Seeder
      */
     public function run(): void
     {
-        //
+        $data = [
+            [
+                'house_group_id'    => 1,
+            ],
+        ];
+        DB::table('house_groups')->insert($data);
     }
 }
