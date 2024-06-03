@@ -12,7 +12,10 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('income_ranges', function (Blueprint $table) {
-            $table->id();
+            $table->id('income_range_id');
+            $table->bigInteger('lowerbound');
+            $table->bigInteger('upperbound');
+            $table->boolean('is_archived')->default(false);
             $table->timestamps();
         });
     }

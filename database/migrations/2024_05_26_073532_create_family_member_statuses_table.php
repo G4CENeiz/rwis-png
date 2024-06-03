@@ -12,7 +12,9 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('family_member_statuses', function (Blueprint $table) {
-            $table->id();
+            $table->id('family_member_status_id');
+            $table->string('family_member_status', 50);
+            $table->boolean('is_archived')->default(false);
             $table->timestamps();
         });
     }
