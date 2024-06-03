@@ -36,7 +36,7 @@ class MediaController extends Controller
      */
     public function show(string $id)
     {
-        //
+        return view('media.show');
     }
 
     /**

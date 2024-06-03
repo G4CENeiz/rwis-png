@@ -22,7 +22,7 @@
         <nav aria-label="breadcrumb" class="float-right mt-1">
             <ol class="breadcrumb">
                 <li class="breadcrumb-item"><a href="/media">Publication</a></li>
-                <li class="breadcrumb-item"><a href="/create">Create</a></li>
+                <li class="breadcrumb-item"><a href="/create">Tambah</a></li>
                 {{-- <li class="breadcrumb-item active" aria-current="page">Advanced</li> --}}
             </ol>
         </nav>
@@ -54,7 +54,7 @@
                     <div class="form-group row">
                         <label for="Date"></label>
                         <label class="col-lg-2 col-form-label"
-                            for="example-date">Date</label>
+                            for="example-date">Tanggal</label>
                         <div class="col-lg-12">
                             <input class="form-control" id="example-date" type="date"
                                 name="date">
