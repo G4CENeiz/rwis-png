@@ -21,7 +21,7 @@ return new class extends Migration
                 'HouseGroup',
                 'NeighborhoodAssociation',
             ]);
-            $table->boolean('is_archived');
+            $table->boolean('is_archived')->default(false);
             $table->timestamps();
             
             $table->foreign('recipient_id')->references('family_id')->on('families');

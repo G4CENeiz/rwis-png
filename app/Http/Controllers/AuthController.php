@@ -9,22 +9,20 @@ use App\Models\User;
 
 class AuthController extends Controller
 {
-    public function index()
-    {
+    public function index() {
         $user = Auth::user();
 
-        // if ($user) {
-        //     if ($user->roles == '1') {
-        //         return redirect()->intended('rw');
-        //     } else if ($user->roles == '2') {
-        //         return redirect()->intended('rt');
-        //     }
-        // }
-        return view('auth.login');
+        if ($user) {
+            if ($user->roles == '1') {
+                return redirect()->intended('rw');
+            } else if ($user->roles == '2') {
+                return redirect()->intended('rt');
+            }
+        }
+        return view('auth.login', ['title' => 'Login']);
     }
 
-    public function proses_login(Request $request)
-    {
+    public function proses_login(Request $request) {
         $request->validate([
             'username' => 'required|string',
             'password' => 'required|string',
@@ -48,14 +46,20 @@ class AuthController extends Controller
         // return redirect('login')->withErrors(['username' => 'Invalid credentials provided.']);
     }
 
-    public function register()
-    {
-        return view('register');
+    public function register() {
+        return view('auth.register', ['title' => 'Register']);
     }
 
-    public function logout(Request $request)
-    {
+    public function proccessRegister(Request $request) {
+        // 
+    }
+
+    public function logout(Request $request) {
         Auth::logout();
         return redirect('login');
+    }
+
+    public function request() {
+        return view('auth.passwords.email', ['title' => 'Passwords Reset']);
     }
 }

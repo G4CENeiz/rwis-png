@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('payment_proves', function (Blueprint $table) {
             $table->id('payment_prove_id');
             $table->unsignedBigInteger('payment_id')->index();
-            $table->boolean('is_archived');
+            $table->boolean('is_archived')->default(false);
             $table->timestamps();
 
             $table;

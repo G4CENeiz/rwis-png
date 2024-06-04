@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('residents', function (Blueprint $table) {
             $table->id('resident_id');
-            $table->integer('nik', 16);
+            $table->unsignedBigInteger('nik');
             $table->string('name', 100);
             $table->string('birth_place', 50);
             $table->date('birth_date');
@@ -39,7 +39,7 @@ return new class extends Migration
             $table->unsignedBigInteger('family_id')->index();
             $table->unsignedBigInteger('family_member_status_id')->index();
             $table->unsignedBigInteger('marital_status_id')->index();
-            $table->date('marriage_date');
+            $table->date('marriage_date')->nullable();
             $table->boolean('is_archived')->default(false);
             $table->timestamps();
             

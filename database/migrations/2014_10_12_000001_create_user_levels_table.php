@@ -13,8 +13,8 @@ return new class extends Migration
     {
         Schema::create('user_levels', function (Blueprint $table) {
             $table->id('user_level_id');
-        $table->string('user_level_name');
-            $table->boolean('is_archived');
+            $table->string('user_level_name');
+            $table->boolean('is_archived')->default(false);
             $table->timestamps();
         });
     }

@@ -19,8 +19,10 @@ return new class extends Migration
             $table->unsignedBigInteger('level_id')->index();
             $table->string('email', 100);
             $table->rememberToken();
-            $table->boolean('is_archived');
+            $table->boolean('is_archived')->default(false);
             $table->timestamps();
+
+            $table->foreign('level_id')->references('user_level_id')->on('user_levels');
         });
     }
 

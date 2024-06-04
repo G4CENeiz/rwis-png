@@ -17,13 +17,13 @@ return new class extends Migration
             $table->integer('land_area');
             $table->integer('building_area');
             $table->string('domicile_street', 50);
-            $table->integer('domicile_rt', 3);
-            $table->integer('domicile_rw', 3);
-            $table->integer('zip_code', 5);
+            $table->integer('domicile_rt');
+            $table->integer('domicile_rw');
+            $table->integer('zip_code');
             $table->boolean('is_archived')->default(false);
             $table->timestamps();
 
-            $table->foreign('house_group_id')->references('house_group_id')->on('house_groups');
+            $table->foreign('house_group_id')->references('house_group_id')->on('house_groups')->onDelete('cascade');
         });
     }
 
