@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use Carbon\Carbon;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
@@ -22,6 +23,8 @@ class IncomeRangeSeeder extends Seeder
                 'income_range_id'   => $i+1,
                 'lowerbound'        => $lowerbound,
                 'upperbound'        => $upperbound,
+                'created_at' => Carbon::now(),
+                'updated_at' => Carbon::now(),
             ];
             $lowerbound = $upperbound;
             $upperbound += 1_500_000;
@@ -30,6 +33,8 @@ class IncomeRangeSeeder extends Seeder
             'income_range_id'   => 11,
             'lowerbound'        => $upperbound,
             'upperbound'        => 9_223_372_036_854_775_807,
+            'created_at' => Carbon::now(),
+            'updated_at' => Carbon::now(),
         ];
         DB::table('income_ranges')->insert($data);
     }

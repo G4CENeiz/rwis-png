@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use Carbon\Carbon;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
@@ -26,6 +27,8 @@ class ReligionSeeder extends Seeder
             $data[] = [
                 'religion_id'   => $i+1,
                 'religion_name' => $list[$i],
+                'created_at' => Carbon::now(),
+                'updated_at' => Carbon::now(),
             ];
         }
         DB::table('religions')->insert($data);

@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use Carbon\Carbon;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
@@ -24,6 +25,8 @@ class MaritalStatusSeeder extends Seeder
             $data[] = [
                 'marital_status_id'   => $i+1,
                 'marital_status' => $list[$i],
+                'created_at' => Carbon::now(),
+                'updated_at' => Carbon::now(),
             ];
         }
         DB::table('marital_statuses')->insert($data);

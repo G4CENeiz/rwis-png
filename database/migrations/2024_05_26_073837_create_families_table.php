@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('families', function (Blueprint $table) {
             $table->id('family_id');
-            $table->integer('nkk');
+            $table->unsignedBigInteger('nkk');
             $table->unsignedBigInteger('house_id')->index();
             $table->string('address_street', 50);
             $table->integer('address_rt');

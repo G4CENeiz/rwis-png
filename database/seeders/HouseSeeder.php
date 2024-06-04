@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use Carbon\Carbon;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
@@ -24,6 +25,8 @@ class HouseSeeder extends Seeder
                 'domicile_rt'       => 1,
                 'domicile_rw'       => 1,
                 'zip_code'          => 65100,
+                'created_at' => Carbon::now(),
+                'updated_at' => Carbon::now(),
             ];
         }
         DB::table('houses')->insert($data);
