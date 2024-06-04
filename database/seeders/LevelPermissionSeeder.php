@@ -4,6 +4,7 @@ namespace Database\Seeders;
 
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\DB;
 
 class LevelPermissionSeeder extends Seeder
 {
@@ -26,5 +27,6 @@ class LevelPermissionSeeder extends Seeder
                 ];
             }
         }
+        DB::table('level_permissions')->insert($data);
     }
 }

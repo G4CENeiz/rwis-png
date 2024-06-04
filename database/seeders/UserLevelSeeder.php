@@ -4,6 +4,7 @@ namespace Database\Seeders;
 
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\DB;
 
 class UserLevelSeeder extends Seeder
 {
@@ -24,5 +25,6 @@ class UserLevelSeeder extends Seeder
                 'user_level_name'   => $list[$i],
             ];
         }
+        DB::table('user_levels')->insert($data);
     }
 }
