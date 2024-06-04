@@ -18,7 +18,7 @@ return new class extends Migration
             $table->unsignedBigInteger('payment_status_id')->index();
             $table->bigInteger('payment_amount');
             $table->text('description');
-            $table->boolean('is_archived');
+            $table->boolean('is_archived')->default(false);
             $table->timestamps();
         });
     }

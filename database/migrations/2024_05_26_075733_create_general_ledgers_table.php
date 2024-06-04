@@ -18,7 +18,7 @@ return new class extends Migration
                 'RW',
                 'RT'
             ]);
-            $table->boolean('is_archived');
+            $table->boolean('is_archived')->default(false);
             $table->timestamps();
 
             $table->foreign('issuer_id')->references('resident_id')->on('residents');

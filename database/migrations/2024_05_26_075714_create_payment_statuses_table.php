@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id('payment_status_id');
             $table->string('status_name', 100)->unique();
             $table->text('description');
-            $table->boolean('is_archived');
+            $table->boolean('is_archived')->default(false);
             $table->timestamps();
         });
     }

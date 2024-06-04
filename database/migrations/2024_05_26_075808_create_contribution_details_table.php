@@ -16,7 +16,7 @@ return new class extends Migration
             $table->unsignedBigInteger('contribution_id')->index();
             $table->unsignedBigInteger('contribution_type_id')->index();
             $table->bigInteger('contribution_amount');
-            $table->boolean('is_archived');
+            $table->boolean('is_archived')->default(false);
             $table->timestamps();
 
             $table->foreign('contribution_id')->references('contribution_id')->on('contributions');
