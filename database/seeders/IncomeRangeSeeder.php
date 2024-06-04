@@ -29,7 +29,7 @@ class IncomeRangeSeeder extends Seeder
         $data[] = [
             'income_range_id'   => 11,
             'lowerbound'        => $upperbound,
-            'upperbound'        => null,
+            'upperbound'        => 9_223_372_036_854_775_807,
         ];
         DB::table('income_ranges')->insert($data);
     }

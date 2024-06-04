@@ -22,14 +22,24 @@ class DatabaseSeeder extends Seeder
 
         \App\Models\Media::factory(10)->create();
         $this->call([
+            PermissionSeeder::class,
+            UserLevelSeeder::class,
+            LevelPermissionSeeder::class,
             UserSeeder::class,
             ProvinceSeeder::class,
             CitySeeder::class,
             DistrictSeeder::class,
-            VillageSeeder::class
+            VillageSeeder::class,
+            ReligionSeeder::class,
+            IncomeRangeSeeder::class,
+            EducationLevelSeeder::class,
+            ProfessionSeeder::class,
+            FamilyMemberStatusSeeder::class,
+            MaritalStatusSeeder::class,
+            HouseGroupSeeder::class,
+            HouseSeeder::class,
+            FamilySeeder::class,
+            ResidentSeeder::class,
         ]);
-
-
-
     }
 }

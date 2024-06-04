@@ -13,13 +13,13 @@ return new class extends Migration
     {
         Schema::create('families', function (Blueprint $table) {
             $table->id('family_id');
-            $table->integer('nkk', 16);
+            $table->integer('nkk');
             $table->unsignedBigInteger('house_id')->index();
             $table->string('address_street', 50);
-            $table->integer('address_rt', 3);
-            $table->integer('address_rw', 3);
+            $table->integer('address_rt');
+            $table->integer('address_rw');
             $table->unsignedBigInteger('village_id')->index();
-            $table->integer('zip_code', 5);
+            $table->integer('zip_code');
             $table->boolean('is_archived')->default(false);
             $table->timestamps();
             
