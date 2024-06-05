@@ -17,12 +17,14 @@ return new class extends Migration
             $table->string('username', 20)->unique();
             $table->string('password', 255);
             $table->unsignedBigInteger('level_id')->index();
+            $table->unsignedBigInteger('resident_id')->index()->nullable();
             $table->string('email', 100);
             $table->rememberToken();
             $table->boolean('is_archived')->default(false);
             $table->timestamps();
 
             $table->foreign('level_id')->references('user_level_id')->on('user_levels');
+            $table->foreign('resident_id')->references('resident_id')->on('residents');
         });
     }
 
