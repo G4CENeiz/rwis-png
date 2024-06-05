@@ -12,8 +12,14 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('tags', function (Blueprint $table) {
-            $table->id();
+            $table->id('tag_id');
+            $table->string('title', 75);
+            $table->string('meta_title', 100);
+            $table->string('slug', 100);
+            $table->text('content');
+            $table->boolean('is_archived')->default(false);
             $table->timestamps();
+            $table->timestamp('published_at')->nullable();
         });
     }
 

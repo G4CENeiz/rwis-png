@@ -6,5 +6,12 @@ use Illuminate\Database\Eloquent\Relations\Pivot;
 
 class PostTag extends Pivot
 {
-    //
+    protected $table = 'post_tags';
+
+    protected $fillable = [
+        'post_id',
+        'tag_id',
+        'is_archived',
+        'published_at',
+    ];
 }

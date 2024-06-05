@@ -12,8 +12,17 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('post_comments', function (Blueprint $table) {
-            $table->id();
+            $table->id('comment_id');
+            $table->unsignedBigInteger('post_id')->index();
+            $table->unsignedBigInteger('parent_id')->index()->nullable();
+            $table->string('title');
+            $table->text('content');
+            $table->boolean('is_archived')->default(false);
             $table->timestamps();
+            $table->timestamp('published_at')->nullable();
+
+            $table->foreign('post_id')->references('post_id')->on('posts');
+            $table->foreign('parent_id')->references('comment_id')->on('post_comments');
         });
     }
 
