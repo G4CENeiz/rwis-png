@@ -24,7 +24,7 @@ return new class extends Migration
             $table->timestamps();
 
             $table->foreign('level_id')->references('user_level_id')->on('user_levels');
-            $table->foreign('resident_id')->references('resident_id')->on('residents');
+            // $table->foreign('resident_id')->references('resident_id')->on('residents');
         });
     }
 
