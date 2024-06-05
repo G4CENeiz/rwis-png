@@ -15,20 +15,30 @@ class HouseSeeder extends Seeder
     public function run(): void
     {
         $data = [];
-        for ($i=0; $i < 10; $i++) {
-            $data[] = [
-                'house_id'          => $i+1,
-                'house_group_id'    => 1,
-                'land_area'         => fake()->randomNumber(3, false),
-                'building_area'     => fake()->randomNumber(3, false),
-                'domicile_street'   => fake()->words(3, true),
-                'domicile_rt'       => 1,
-                'domicile_rw'       => 1,
-                'zip_code'          => 65100,
-                'created_at' => Carbon::now(),
-                'updated_at' => Carbon::now(),
-            ];
+        $zipCode = fake()->postcode();
+        for ($jumlahRt=0; $jumlahRt < 10; $jumlahRt++) { 
+            for ($houseGroup=0; $houseGroup < 5; $houseGroup++) {
+                $streetAddress = \Faker\Provider\id_ID\Address::streetPrefix() ;
+                $streetAddress .= ' ' . \Faker\Provider\id_ID\Address::street();
+                for ($jumlahRumah=0; $jumlahRumah < 12; $jumlahRumah++) {
+                    $data[] = [
+                        'house_group_id'    => ($houseGroup+1)*($jumlahRt+1),
+                        // 'land_area'         => fake()->biasedNumberBetween(60, 300, '\Faker\Provider\Biased::linearLow'),
+                        // 'building_area'     => fake()->biasedNumberBetween(45, 400, '\Faker\Provider\Biased::linearLow'),
+                        'land_area'         => fake()->biasedNumberBetween(70, 100, 'sqrt'),
+                        'building_area'     => fake()->biasedNumberBetween(54, 120, 'sqrt'),
+                        'domicile_street'   => $streetAddress . ' No. ' . \Faker\Provider\id_ID\Address::buildingNumber(),
+                        'domicile_rt'       => $jumlahRt+1,
+                        'domicile_rw'       => 1,
+                        'zip_code'          => $zipCode,
+                        'created_at' => Carbon::now(),
+                        'updated_at' => Carbon::now(),
+                    ];
+                }
+            }
         }
-        DB::table('houses')->insert($data);
+        foreach (array_chunk($data,1000) as $in) {
+            DB::table('houses')->insert($in);
+        }
     }
 }

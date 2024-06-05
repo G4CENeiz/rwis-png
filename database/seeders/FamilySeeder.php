@@ -16,42 +16,44 @@ class FamilySeeder extends Seeder
      */
     public function run(): void
     {
-        $data = [];
-        for ($i=0; $i < 10; $i++) {
-            $isMale = true;
-            $birthDate  = fake()->dateTimeAD();
-
-            $districts = \App\Models\District::all();
-            $districtIds = [];
-            foreach ($districts as $district) {
-                $districtIds[] = $district->district_id;
-            }
-            $districtId = fake()->randomElement($districtIds);
-
-            $nkk = intval($districtId.$birthDate->format('dmy').fake()->numerify('####'));
-            $nkk = (string) $districtId;
-            $nkk .= ($isMale) ? $birthDate->format('d') : $birthDate->format('d') + 40;
-            $nkk .= $birthDate->format('my');
-            $nkk .= fake()->numerify('####');
-            $nkk = intval($nkk);
-
-            $villageId = Village::where('district_id', (int) $districtId)->first();
-
-            $data[] = [
-                'family_id'         => $i+1,
-                'nkk'               => $nkk,
-                'house_id'          => $i+1,
-                'address_street'    => fake()->words(3, true),
-                'address_rt'        => fake()->numberBetween(1, 10),
-                'address_rw'        => fake()->numberBetween(1, 10),
-                'village_id'        => $villageId->village_id,
-                // ->first()->getKey(),
-                // value('village_id'),
-                'zip_code'          => fake()->randomNumber(5, true),
-                'created_at' => Carbon::now(),
-                'updated_at' => Carbon::now(),
-            ];
+        $districts = \App\Models\District::all();
+        $districtIds = [];
+        foreach ($districts as $district) {
+            $districtIds[] = $district->district_id;
         }
-        DB::table('families')->insert($data);
+
+        $data = [];
+        for ($jumlahRt = 0; $jumlahRt < 10; $jumlahRt++) {
+            for ($houseGroup = 0; $houseGroup < 5; $houseGroup++) {
+                for ($jumlahRumah = 0; $jumlahRumah < 12; $jumlahRumah++) {
+                    $isMale = true;
+                    $birthDate  = fake()->dateTimeAD();
+                    $districtId = fake()->randomElement($districtIds);
+                    $nkk = intval($districtId . $birthDate->format('dmy') . fake()->numerify('####'));
+                    $nkk = (string) $districtId;
+                    $nkk .= ($isMale) ? $birthDate->format('d') : $birthDate->format('d') + 40;
+                    $nkk .= $birthDate->format('my');
+                    $nkk .= fake()->numerify('####');
+                    $nkk = intval($nkk);
+
+                    $villageId = Village::where('district_id', (int) $districtId)->first();
+
+                    $data[] = [
+                        'nkk'               => $nkk,
+                        'house_id'          => ($houseGroup + 1) * ($jumlahRt + 1) * ($jumlahRumah + 1),
+                        'address_street'    => fake()->streetAddress(),
+                        'address_rt'        => $jumlahRt + 1,
+                        'address_rw'        => 1,
+                        'village_id'        => $villageId->village_id,
+                        'zip_code'          => fake()->postcode(),
+                        'created_at' => Carbon::now(),
+                        'updated_at' => Carbon::now(),
+                    ];
+                }
+            }
+        }
+        foreach (array_chunk($data, 1000) as $in) {
+            DB::table('families')->insert($in);
+        }
     }
 }

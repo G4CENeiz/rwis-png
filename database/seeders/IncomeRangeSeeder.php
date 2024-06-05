@@ -27,15 +27,17 @@ class IncomeRangeSeeder extends Seeder
                 'updated_at' => Carbon::now(),
             ];
             $lowerbound = $upperbound;
-            $upperbound += 1_500_000;
+            $upperbound += 1_300_000;
         }
         $data[] = [
-            'income_range_id'   => 11,
+            'income_range_id'   => count($data)+1,
             'lowerbound'        => $upperbound,
             'upperbound'        => 9_223_372_036_854_775_807,
             'created_at' => Carbon::now(),
             'updated_at' => Carbon::now(),
         ];
-        DB::table('income_ranges')->insert($data);
+        foreach (array_chunk($data, 100) as $in) {
+            DB::table('income_ranges')->insert($in);
+        }
     }
 }
