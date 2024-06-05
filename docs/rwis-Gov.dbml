@@ -7,14 +7,14 @@ TableGroup Gov {
 }
 
 Table Province {
-    id              int(2)          [pk, Not Null]
-    province_name   varchar(100)    [Not Null]
-    created_at      timestamp       [Not Null]
-    updated_at      timestamp       [Not Null]
+    id              int(2) [pk, Not Null]
+    province_name   varchar(100)
+    created_at      timestamp
+    updated_at      timestamp
 }
 
 Table City {
-    id          int(4) [pk]
+    id          int(4) [pk, Not Null]
     province_id int(2)
     city_name   varchar(100)
     created_at  timestamp
@@ -22,7 +22,7 @@ Table City {
 }
 
 Table District {
-    id              int(6) [pk]
+    id              int(6) [pk, Not Null]
     city_id         int(4)
     district_name   varchar(100)
     created_at      timestamp
@@ -30,7 +30,7 @@ Table District {
 }
 
 Table Village {
-    id              int(9) [pk]
+    id              int(9) [pk, Not Null]
     district_id     int(6)
     village_name    varchar(100)
     created_at      timestamp
@@ -39,6 +39,6 @@ Table Village {
 
 Ref: City.province_id > Province.id
 
-Ref: District.city_id > City.id
+Ref: City.id < District.city_id
 
-Ref: Village.district_id > District.id
+Ref: District.id < Village.district_id
