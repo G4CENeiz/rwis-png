@@ -23,9 +23,12 @@ class FamilySeeder extends Seeder
         }
 
         $data = [];
-        for ($jumlahRt = 0; $jumlahRt < 10; $jumlahRt++) {
-            for ($houseGroup = 0; $houseGroup < 5; $houseGroup++) {
-                for ($jumlahRumah = 0; $jumlahRumah < 12; $jumlahRumah++) {
+        $rtLim = 10;
+        $hgLim = 5;
+        $rmhLim = 12;
+        for ($rt = 0; $rt < $rtLim; $rt++) {
+            for ($hg = 0; $hg < $hgLim; $hg++) {
+                for ($rmh = 0; $rmh < $rmhLim; $rmh++) {
                     $isMale = true;
                     $birthDate  = fake()->dateTimeAD();
                     $districtId = fake()->randomElement($districtIds);
@@ -35,17 +38,15 @@ class FamilySeeder extends Seeder
                     $nkk .= $birthDate->format('my');
                     $nkk .= fake()->numerify('####');
                     $nkk = intval($nkk);
-
                     $villageId = Village::where('district_id', (int) $districtId)->first();
-
                     $data[] = [
                         'nkk'               => $nkk,
-                        'house_id'          => ($houseGroup + 1) * ($jumlahRt + 1) * ($jumlahRumah + 1),
+                        'house_id'          => ($hg*$rmhLim)+($rt*$rmhLim*$hgLim)+($rmh*1)+1,
                         'address_street'    => fake()->streetAddress(),
-                        'address_rt'        => $jumlahRt + 1,
+                        'address_rt'        => $rt + 1,
                         'address_rw'        => 1,
                         'village_id'        => $villageId->village_id,
-                        'zip_code'          => fake()->postcode(),
+                        'zip_code'          => fake('id_ID')->postcode(),
                         'created_at' => Carbon::now(),
                         'updated_at' => Carbon::now(),
                     ];

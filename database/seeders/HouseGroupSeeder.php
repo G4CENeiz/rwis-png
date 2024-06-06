@@ -15,10 +15,13 @@ class HouseGroupSeeder extends Seeder
     public function run(): void
     {
         $data = [];
-        for ($jumlahRt=0; $jumlahRt < 10; $jumlahRt++) { 
-            for ($houseGroup=0; $houseGroup < 5; $houseGroup++) { 
+        $rtLim = 10;
+        $hgLim = 5;
+        $rmhLim = 12;
+        for ($rt=0; $rt < $rtLim; $rt++) { 
+            for ($hg=0; $hg < $hgLim; $hg++) { 
                 $data[] = [
-                    // 'house_group_id'    => ($houseGroup+1)*($jumlahRt+1),
+                    // 'house_group_id'    => ($hg+1)*($rt+1),
                     'created_at'        => Carbon::now(),
                     'updated_at'        => Carbon::now(),
                 ];

@@ -23,9 +23,12 @@ class ResidentSeeder extends Seeder
         }
 
         $data = [];
-        for ($jumlahRt = 0; $jumlahRt < 10; $jumlahRt++) {
-            for ($houseGroup = 0; $houseGroup < 5; $houseGroup++) {
-                for ($jumlahRumah = 0; $jumlahRumah < 12; $jumlahRumah++) {
+        $rtLim = 10;
+        $hgLim = 5;
+        $rmhLim = 12;
+        for ($rt = 0; $rt < $rtLim; $rt++) {
+            for ($hg = 0; $hg < $hgLim; $hg++) {
+                for ($rmh = 0; $rmh < $rmhLim; $rmh++) {
                     // head of family data
                     $isMale     = true;
                     $birthDate  = fake()->dateTimeBetween('-80 years', '-35 years');
@@ -53,7 +56,7 @@ class ResidentSeeder extends Seeder
                         'profession_id'             => fake()->numberBetween(1, 14),
                         'goverment_employees'       => fake()->boolean(),
                         'income_range_id'           => fake()->numberBetween(1, 11),
-                        'family_id'                 => ($houseGroup + 1) * ($jumlahRt + 1) * ($jumlahRumah + 1),
+                        'family_id'                 => ($hg*$rmhLim)+($rt*$rmhLim*$hgLim)+($rmh*1)+1,
                         'family_member_status_id'   => 1,
                         'marital_status_id'         => 2,
                         'marriage_date'             => $marriageDate,
@@ -86,7 +89,7 @@ class ResidentSeeder extends Seeder
                         'profession_id'             => fake()->numberBetween(1, 14),
                         'goverment_employees'       => fake()->boolean(),
                         'income_range_id'           => fake()->numberBetween(1, 11),
-                        'family_id'                 => ($houseGroup + 1) * ($jumlahRt + 1) * ($jumlahRumah + 1),
+                        'family_id'                 => ($hg*$rmhLim)+($rt*$rmhLim*$hgLim)+($rmh*1)+1,
                         'family_member_status_id'   => 2,
                         'marital_status_id'         => 2,
                         'marriage_date'             => $marriageDate,
@@ -120,7 +123,7 @@ class ResidentSeeder extends Seeder
                             'profession_id'             => fake()->numberBetween(1, 14),
                             'goverment_employees'       => fake()->boolean(),
                             'income_range_id'           => fake()->numberBetween(1, 11),
-                            'family_id'                 => ($houseGroup + 1) * ($jumlahRt + 1) * fake()->numberBetween(1, 8),
+                            'family_id'                 => ($hg*$rmhLim)+($rt*$rmhLim*$hgLim)+1+fake()->numberBetween(1, 12),
                             'family_member_status_id'   => 3,
                             'marital_status_id'         => 1,
                             'marriage_date'             => null,
