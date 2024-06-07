@@ -17,7 +17,7 @@ return new class extends Migration
             $table->boolean('is_archived')->default(false);
             $table->timestamps();
 
-            $table;
+            $table->foreign('payment_id')->references('payment_id')->on('payments');
         });
     }
 

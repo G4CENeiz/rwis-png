@@ -14,13 +14,21 @@ class HouseGroupSeeder extends Seeder
      */
     public function run(): void
     {
-        $data = [
-            [
-                'house_group_id'    => 1,
-                'created_at' => Carbon::now(),
-                'updated_at' => Carbon::now(),
-            ],
-        ];
-        DB::table('house_groups')->insert($data);
+        $data = [];
+        $rtLim = 10;
+        $hgLim = 5;
+        $rmhLim = 12;
+        for ($rt=0; $rt < $rtLim; $rt++) { 
+            for ($hg=0; $hg < $hgLim; $hg++) { 
+                $data[] = [
+                    // 'house_group_id'    => ($hg+1)*($rt+1),
+                    'created_at'        => Carbon::now(),
+                    'updated_at'        => Carbon::now(),
+                ];
+            }
+        }
+        foreach (array_chunk($data,1000) as $in) {
+            DB::table('house_groups')->insert($in);
+        }
     }
 }

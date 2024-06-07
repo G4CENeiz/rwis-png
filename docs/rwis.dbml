@@ -7,14 +7,14 @@ TableGroup Gov {
 }
 
 Table Province {
-    id              int(2)          [pk, Not Null]
-    province_name   varchar(100)    [Not Null]
-    created_at      timestamp       [Not Null]
-    updated_at      timestamp       [Not Null]
+    id              int(2) [pk, Not Null]
+    province_name   varchar(100)
+    created_at      timestamp
+    updated_at      timestamp
 }
 
 Table City {
-    id          int(4) [pk]
+    id          int(4) [pk, Not Null]
     province_id int(2)
     city_name   varchar(100)
     created_at  timestamp
@@ -22,7 +22,7 @@ Table City {
 }
 
 Table District {
-    id              int(6) [pk]
+    id              int(6) [pk, Not Null]
     city_id         int(4)
     district_name   varchar(100)
     created_at      timestamp
@@ -30,7 +30,7 @@ Table District {
 }
 
 Table Village {
-    id              int(9) [pk]
+    id              int(9) [pk, Not Null]
     district_id     int(6)
     village_name    varchar(100)
     created_at      timestamp
@@ -45,47 +45,47 @@ Ref: District.id < Village.district_id
 
 //* Resident Infomation
 TableGroup ResidentialInformation {
-    Residents
+    Resident
     Family
     House
     HouseGroup
 }
 
-Table Residents {
-    id                      int                 [pk, increment, Not Null]
-    nik                     int(16)             [Not Null, unique]
-    name                    varchar(100)        [Not Null]
-    birth_place             varchar(50)         [Not Null]
-    birth_date              date                [Not Null]
-    gender                  gender              [Not Null]
-    religion                religion            [Not Null]
-    citizenship             citizenship         [Not Null]
-    education_level         education_level     [Not Null]
-    blood_type              blood_type          [Not Null]
-    profession_name         varchar(50)         [Not Null]
-    goverment_employees     bool                [Not Null]
-    income_range_id         int                 [Not Null]
-    family_id               int                 [Not Null]
-    fm_status               fm_status           [Not Null]
-    marital_status          marital_status      [Not Null]
-    marriage_date           date                [Null]
-    is_archived             bool                [Not Null, Default: false]
-    created_at              timestamp           []
-    updated_at              timestamp           []
+Table Resident {
+    id                      int [pk, increment]
+    nik                     int(16)
+    name                    varchar(100)
+    birth_place             varchar(50)
+    birth_date              date
+    gender                  gender
+    religion_id             int
+    citizenship             citizenship
+    education_level_id      int
+    blood_type              blood_type
+    profession_name         varchar(50)
+    goverment_employees     bool
+    income_range_id         int
+    family_id               int
+    fm_status_id            int
+    marital_status_id       int
+    marriage_date           date
+    is_archived             bool [Not Null, Default: false]
+    created_at              timestamp
+    updated_at              timestamp
 }
 
 Table Family {
-    id                      int         [pk, increment, Not Null]
-    nkk                     int(16)     [Not Null, unique]
-    house_id                int         [Not Null]
-    address_street          varchar(50) [Not Null]
-    address_rt              int(3)      [Not Null]
-    address_rw              int(3)      [Not Null]
-    village_id              int         [Not Null]
-    zip_code                int(5)      [Not Null]
-    is_archived             bool        [Not Null, Default: false]
-    created_at              timestamp   []
-    updated_at              timestamp   []
+    id                      int [pk, increment, Not Null]
+    nkk                     int(16)
+    house_id                int
+    address_street          varchar(50)
+    address_rt              int(3)
+    address_rw              int(3)
+    village_id              int
+    zip_code                int(5)
+    is_archived             bool [Default: false]
+    created_at              timestamp
+    updated_at              timestamp
 }
 
 Table House {
@@ -97,14 +97,56 @@ Table House {
     domicile_rt     int(3)
     domicile_rw     int(3)
     zip_code        int(5)
-    is_archived     bool
+    is_archived     bool [Default: false]
     created_at      timestamp
     updated_at      timestamp
 }
 
 Table HouseGroup {
-    id int [pk, increment]
-    is_archived     bool
+    id              int [pk, increment]
+    is_archived     bool [Default: false]
+    created_at      timestamp
+    updated_at      timestamp
+}
+
+Enum gender {
+    Laki_laki
+    Perempuan
+}
+
+Enum blood_type {
+    A
+    B
+    AB
+    O
+}
+
+Enum citizenship {
+    WNI
+    WNA
+}
+
+Ref: Family.id < Resident.family_id
+
+Ref: House.id < Family.house_id
+
+Ref: House.house_group_id > HouseGroup.id 
+
+Ref: Family.village_id > Village.id
+
+//* Resident Information Data
+TableGroup ResidentData {
+    Religion
+    IncomeRange
+    EducationalLevel
+    FamilyMemberStatus
+    MaritalStatus
+}
+
+Table Religion {
+    id              int [pk, increment]
+    religion_name   religion
+    is_archived     bool [Default: false]
     created_at      timestamp
     updated_at      timestamp
 }
@@ -113,14 +155,33 @@ Table IncomeRange {
     id          int [pk, increment]
     lowerbound  int
     upperbound  int
-    is_archived bool
+    is_archived bool [Default: false]
     created_at  timestamp
     updated_at  timestamp
 }
 
-Enum gender {
-    L
-    P
+Table EducationalLevel {
+    id                      int [pk, increment]
+    education_level_name    education_level
+    is_archived             bool [Default: false]
+    created_at              timestamp
+    updated_at              timestamp
+}
+
+Table FamilyMemberStatus {
+    id          int [pk, increment]
+    status_name fm_status
+    is_archived bool [Default: false]
+    created_at  timestamp
+    updated_at  timestamp
+}
+
+Table MaritalStatus {
+    id          int [pk, increment]
+    status_name marital_status
+    is_archived bool [Default: false]
+    created_at  timestamp
+    updated_at  timestamp
 }
 
 Enum religion {
@@ -130,18 +191,6 @@ Enum religion {
     Hindu
     Budha
     Khonghucu
-} //TODO turn into Table
-
-Enum marital_status {
-    Belum_Kawin
-    Kawin
-    Duda_Janda
-    Cerai
-} //TODO turn into Table
-
-Enum citizenship {
-    WNI
-    WNA
 }
 
 Enum education_level {
@@ -155,78 +204,102 @@ Enum education_level {
     diploma_iv_strata_i
     strata_ii
     strata_iii
-} //TODO turn into Table
-
-Enum blood_type {
-    A
-    B
-    AB
-    O
 }
 
 Enum fm_status {
     Kepala_Keluarga
     Istri
     Anak
-} //TODO turn into Table
+}
 
-Ref: Residents.income_range_id - IncomeRange.id
+Enum marital_status {
+    Belum_Kawin
+    Kawin
+    Duda_Janda
+    Cerai
+}
 
-Ref: Family.id < Residents.family_id
+Ref: Resident.income_range_id - IncomeRange.id
 
-Ref: Family.village_id > Village.id
+Ref: Resident.religion_id - Religion.id
 
-Ref: House.id < Family.house_id
+Ref: Resident.education_level_id - EducationalLevel.id
 
-Ref: House.house_group_id > HouseGroup.id
+Ref: Resident.fm_status_id - FamilyMemberStatus.id
+
+Ref: Resident.marital_status_id - MaritalStatus.id
 
 //* Auth
 TableGroup Auth {
     User
     UserLevel
+    LevelPermission
+    Permission
 }
 
 Table User {
-    id                  int                 [pk, increment]
-    level_id            int                 [Not Null]
-    email               varchar(50)         [Not Null]
-    phone_number        int(13)             [Not Null]
-    resident_id         int                 [Null]
-    is_archived         bool
-    created_at          timestamp
-    updated_at          timestamp
+    id              int                 [pk, increment]
+    level_id        int                 [Not Null]
+    email           varchar(50)         [Not Null]
+    phone_number    int(13)             [Not Null]
+    resident_id     int                 [Null]
+    is_archived     bool
+    created_at      timestamp
+    updated_at      timestamp
 }
 
 Table UserLevel {
-    id          int [pk, increment]
+    id              int [pk, increment]
     level_name      level
-    created_at  timestamp
-    updated_at  timestamp
+    is_archived     bool
+    created_at      timestamp
+    updated_at      timestamp
+}
+
+Table LevelPermission {
+    id              int [pk, increment]
+    permission_id   int
+    user_level_id   int
+    is_archived     bool
+    created_at      timestamp
+    updated_at      timestamp
+}
+
+Table Permission {
+    id              int [pk, increment]
+    permission_name varchar(50)
+    is_archived     bool
+    created_at      timestamp
+    updated_at      timestamp
 }
 
 Enum level {
     Admin
     RW
     RT
-} // TODO Turn to Table
+}
 
-Ref: User.resident_id - Residents.id
+Ref: User.resident_id - Resident.id
 
 Ref: User.level_id - UserLevel.id
 
+Ref: Permission.id < LevelPermission.permission_id
+
+Ref: UserLevel.id < LevelPermission.user_level_id
+
 //* Contribution
 TableGroup Contribution {
-    Contributions
-    ContributionDetails
-    ContributionTypes
-    Payments
-    PaymentMethods
+    Contribution
+    ContributionDetail
+    ContributionType
+    Payment
+    PaymentMethod
     PaymentStatus
-    PaymentProves
+    PaymentProve
     GeneralLedger
 }
 
-Table Contributions {
+Table Contribution {
     id int [pk, increment]
     id_recipient int
     general_ledger_id int
@@ -236,7 +309,7 @@ Table Contributions {
     updated_at timestamp
 }
 
-Table ContributionDetails {
+Table ContributionDetail {
     id int [pk, increment]
     contribution_id int
     contribution_type_id int
@@ -246,7 +319,7 @@ Table ContributionDetails {
     updated_at timestamp
 }
 
-Table ContributionTypes {
+Table ContributionType {
     id int [pk, increment]
     contribution_name varchar(100)
     description text
@@ -255,7 +328,7 @@ Table ContributionTypes {
     updated_at timestamp
 }
 
-Table Payments {
+Table Payment {
     id int [pk, increment]
     contribution_id int
     payment_method_id int
@@ -267,7 +340,7 @@ Table Payments {
     updated_at timestamp
 }
 
-Table PaymentMethods {
+Table PaymentMethod {
     id int [pk, increment]
     method_name varchar(100)
     description text
@@ -285,7 +358,7 @@ Table PaymentStatus {
     updated_at timestamp
 }
 
-Table PaymentProves {
+Table PaymentProve {
     id int [pk, increment]
     payment_id int
     is_archived bool
@@ -306,23 +379,26 @@ Enum recipient_type {
     Family
     House
     HouseGroup
+    NeighborhoodAssociation
 }
 
-Ref: PaymentProves.payment_id > Payments.id
+Ref: PaymentProve.payment_id > Payment.id
 
-Ref: PaymentStatus.id < Payments.payment_status_id
+Ref: PaymentStatus.id < Payment.payment_status_id
 
-Ref: PaymentMethods.id < Payments.payment_method_id
+Ref: PaymentMethod.id < Payment.payment_method_id
 
-Ref: Payments.contribution_id < Contributions.id
+Ref: Payment.contribution_id < Contribution.id
 
-Ref: ContributionDetails.contribution_id < Contributions.id
+Ref: ContributionDetail.contribution_id < Contribution.id
 
-Ref: ContributionDetails.contribution_type_id > ContributionTypes.id
+Ref: ContributionDetail.contribution_type_id > ContributionType.id
 
-Ref: GeneralLedger.id > Contributions.general_ledger_id
+Ref: GeneralLedger.id > Contribution.general_ledger_id
 
 Ref: GeneralLedger.issuer_id > User.id
+
+Ref: Contribution.id_recipient > Resident.id
 
 //* Media
 TableGroup Media {

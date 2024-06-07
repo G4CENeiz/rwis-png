@@ -20,6 +20,10 @@ return new class extends Migration
             $table->text('description');
             $table->boolean('is_archived')->default(false);
             $table->timestamps();
+
+            $table->foreign('contribution_id')->references('contribution_id')->on('contributions');
+            $table->foreign('payment_method_id')->references('payment_method_id')->on('payment_methods');
+            $table->foreign('payment_status_id')->references('payment_status_id')->on('payment_statuses');
         });
     }
 

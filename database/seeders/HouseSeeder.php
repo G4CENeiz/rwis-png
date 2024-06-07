@@ -15,20 +15,31 @@ class HouseSeeder extends Seeder
     public function run(): void
     {
         $data = [];
-        for ($i=0; $i < 10; $i++) {
-            $data[] = [
-                'house_id'          => $i+1,
-                'house_group_id'    => 1,
-                'land_area'         => fake()->randomNumber(3, false),
-                'building_area'     => fake()->randomNumber(3, false),
-                'domicile_street'   => fake()->words(3, true),
-                'domicile_rt'       => 1,
-                'domicile_rw'       => 1,
-                'zip_code'          => 65100,
-                'created_at' => Carbon::now(),
-                'updated_at' => Carbon::now(),
-            ];
+        $rtLim = 10;
+        $hgLim = 5;
+        $rmhLim = 12;
+        $zipCode = fake('id_ID')->postcode();
+        for ($rt = 0; $rt < $rtLim; $rt++) {
+            for ($hg = 0; $hg < $hgLim; $hg++) {
+                $streetAddress = fake('id_ID')->streetPrefix();
+                $streetAddress .= ' ' . fake('id_ID')->street();
+                for ($rmh = 0; $rmh < $rmhLim; $rmh++) {
+                    $data[] = [
+                        'house_group_id'    => ($hg * 1) + ($rt * $hgLim) + 1,
+                        'land_area'         => fake()->biasedNumberBetween(70, 100, 'sqrt'),
+                        'building_area'     => fake()->biasedNumberBetween(54, 120, 'sqrt'),
+                        'domicile_street'   => $streetAddress . ' No. ' . fake('id_ID')->buildingNumber(),
+                        'domicile_rt'       => $rt + 1,
+                        'domicile_rw'       => 1,
+                        'zip_code'          => $zipCode,
+                        'created_at' => Carbon::now(),
+                        'updated_at' => Carbon::now(),
+                    ];
+                }
+            }
         }
-        DB::table('houses')->insert($data);
+        foreach (array_chunk($data, 1000) as $in) {
+            DB::table('houses')->insert($in);
+        }
     }
 }

@@ -27,8 +27,8 @@ Table UserLevel {
 
 Table LevelPermission {
     id              int [pk, increment]
-    user_level_id   int
     permission_id   int
+    user_level_id   int
     is_archived     bool
     created_at      timestamp
     updated_at      timestamp
@@ -46,17 +46,17 @@ Enum level {
     Admin
     RW
     RT
-} // TODO Turn to table
+}
 
-Ref: User.resident_id - Residents.id
+Ref: User.resident_id - Resident.id
 
 Ref: User.level_id - UserLevel.id
 
-Ref: LevelPermission.permission_id > Permission.id
+Ref: Permission.id < LevelPermission.permission_id
 
 Ref: UserLevel.id < LevelPermission.user_level_id
 
-Table Residents {
+Table Resident {
     id                      int                 [pk, increment, Not Null]
     nik                     int(16)             [Not Null, unique]
     name                    varchar(100)        [Not Null]

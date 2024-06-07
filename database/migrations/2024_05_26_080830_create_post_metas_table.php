@@ -12,8 +12,15 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('post_metas', function (Blueprint $table) {
-            $table->id();
+            $table->id('post_meta_id');
+            $table->unsignedBigInteger('post_id')->index();
+            $table->string('key', 50);
+            $table->text('content');
+            $table->boolean('is_archived')->default(false);
             $table->timestamps();
+            $table->timestamp('published_at')->nullable();
+
+            $table->foreign('post_id')->references('post_id')->on('posts');
         });
     }
 

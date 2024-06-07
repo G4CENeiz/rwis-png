@@ -12,8 +12,15 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('post_tags', function (Blueprint $table) {
-            $table->id();
+            // $table->id();
+            $table->unsignedBigInteger('post_id')->index();
+            $table->unsignedBigInteger('tag_id')->index();
+            $table->boolean('is_archived')->default(false);
             $table->timestamps();
+            $table->timestamp('published_at')->nullable();
+
+            $table->foreign('post_id')->references('post_id')->on('posts');
+            $table->foreign('tag_id')->references('tag_id')->on('tags');
         });
     }
 

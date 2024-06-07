@@ -21,7 +21,7 @@ return new class extends Migration
             $table->boolean('is_archived')->default(false);
             $table->timestamps();
 
-            $table->foreign('issuer_id')->references('resident_id')->on('residents');
+            $table->foreign('issuer_id')->references('user_id')->on('users');
         });
     }
 
