@@ -123,7 +123,7 @@ class ResidentSeeder extends Seeder
                             'profession_id'             => fake()->numberBetween(1, 14),
                             'goverment_employees'       => fake()->boolean(),
                             'income_range_id'           => fake()->numberBetween(1, 11),
-                            'family_id'                 => ($hg*$rmhLim)+($rt*$rmhLim*$hgLim)+1+fake()->numberBetween(1, 12),
+                            'family_id'                 => ($hg*$rmhLim)+($rt*$rmhLim*$hgLim)+(fake()->numberBetween(1, 12)),
                             'family_member_status_id'   => 3,
                             'marital_status_id'         => 1,
                             'marriage_date'             => null,
