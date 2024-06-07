@@ -11,7 +11,7 @@
     <li>
         <a href="javascript: void(0);">
             <i data-feather="inbox"></i>
-            <span> Administrator </span>
+            <span> Administrasi </span>
             <span class="menu-arrow"></span>
         </a>
 
@@ -28,9 +28,9 @@
         </ul> --}}
     </li>
     <li>
-        <a href="javascript: void(0);">
+        <a href="{{route('resident.information.index')}}">
             <i class='uil uil-books'></i>
-            <span> Residential Information </span>
+            <span> Informasi Warga </span>
             <span class="menu-arrow"></span>
         </a>
     </li>
@@ -51,7 +51,7 @@
     <li>
         <a href=" {{route('media.index')}} ">
             <i data-feather="grid"></i>
-            <span> Publication </span>
+            <span> Publikasi </span>
             {{-- <span class="menu-arrow"></span>
             <ul class="nav-second-level" aria-expanded="false">
                 <li>

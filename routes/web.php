@@ -51,22 +51,22 @@ use App\Http\Controllers\VillageController;
 Route::get('/', [HomeController::class, 'index'])->name('home');
 
 Route::resource('media', MediaController::class);
-Route::prefix('media')->name('media')->controller(MediaController::class)->group(function () {
+Route::prefix('media')->name('media.')->controller(MediaController::class)->group(function () {
     Route::get('/extraRoute', 'extraFun')->name('extraName');
 });
 
 Route::resource('umkm', UMKMController::class);
-Route::prefix('umkm')->name('umkm')->controller(UMKMController::class)->group(function () {
+Route::prefix('umkm')->name('umkm.')->controller(UMKMController::class)->group(function () {
     Route::get('/extraRoute', 'extraFun')->name('extraName');
 });
 
 Route::resource('bansos', BansosController::class);
-Route::prefix('bansos')->name('bansos')->controller(BansosController::class)->group(function () {
+Route::prefix('bansos')->name('bansos.')->controller(BansosController::class)->group(function () {
     Route::get('/extraRoute', 'extraFun')->name('extraName');
 });
 
 Route::resource('govassist', GovAidController::class);
-Route::prefix('govassist')->name('govassist')->controller(GovAidController::class)->group(function () {
+Route::prefix('govassist')->name('govassist.')->controller(GovAidController::class)->group(function () {
     Route::get('/extraRoute', 'extraFun')->name('extraName');
 });
 
@@ -98,164 +98,166 @@ Route::group(['middleware' => ['auth']], function () {
     });
 });
 
-Route::prefix('government')->name('government')->group(function () {
+Route::prefix('government')->name('government.')->group(function () {
     Route::resource('province', ProvinceController::class);
-    Route::prefix('province')->name('province')->controller(ProvinceController::class)->group(function () {
+    Route::prefix('province')->name('province.')->controller(ProvinceController::class)->group(function () {
         Route::get('/extraRoute', 'extraFun')->name('extraName');
     });
 
     Route::resource('city', CityController::class);
-    Route::prefix('city')->name('city')->controller(CityController::class)->group(function () {
+    Route::prefix('city')->name('city.')->controller(CityController::class)->group(function () {
         Route::get('/extraRoute', 'extraFun')->name('extraName');
     });
 
     Route::resource('district', DistrictController::class);
-    Route::prefix('district')->name('district')->controller(DistrictController::class)->group(function () {
+    Route::prefix('district')->name('district.')->controller(DistrictController::class)->group(function () {
         Route::get('/extraRoute', 'extraFun')->name('extraName');
     });
 
     Route::resource('village', VillageController::class);
-    Route::prefix('village')->name('village')->controller(VillageController::class)->group(function () {
+    Route::prefix('village')->name('village.')->controller(VillageController::class)->group(function () {
         Route::get('/extraRoute', 'extraFun')->name('extraName');
     });
 });
 
-Route::prefix('resident')->name('resident')->group(function () {
+Route::prefix('resident')->name('resident.')->group(function () {
     Route::resource('religion', ReligionController::class);
-    Route::prefix('religion')->name('religion')->controller(ReligionController::class)->group(function () {
+    Route::prefix('religion')->name('religion.')->controller(ReligionController::class)->group(function () {
         Route::get('/extraRoute', 'extraFun')->name('extraName');
     });
 
     Route::resource('income', IncomeRangeController::class);
-    Route::prefix('income')->name('income')->controller(IncomeRangeController::class)->group(function () {
+    Route::prefix('income')->name('income.')->controller(IncomeRangeController::class)->group(function () {
         Route::get('/extraRoute', 'extraFun')->name('extraName');
     });
 
     Route::resource('education', EducationLevelController::class);
-    Route::prefix('education')->name('education')->controller(EducationLevelController::class)->group(function () {
+    Route::prefix('education')->name('education.')->controller(EducationLevelController::class)->group(function () {
         Route::get('/extraRoute', 'extraFun')->name('extraName');
     });
 
     Route::resource('profession', ProfessionController::class);
-    Route::prefix('profession')->name('profession')->controller(ProfessionController::class)->group(function () {
+    Route::prefix('profession')->name('profession.')->controller(ProfessionController::class)->group(function () {
         Route::get('/extraRoute', 'extraFun')->name('extraName');
     });
 
     Route::resource('family', FamilyController::class);
-    Route::prefix('family')->name('family')->controller(FamilyController::class)->group(function () {
+    Route::prefix('family')->name('family.')->controller(FamilyController::class)->group(function () {
         Route::get('/extraRoute', 'extraFun')->name('extraName');
     });
 
-    Route::prefix('family')->name('family')->group(function () {
+    Route::prefix('family')->name('family.')->group(function () {
         Route::resource('member', FamilyMemberStatusController::class);
-        Route::prefix('member')->name('member')->controller(FamilyMemberStatusController::class)->group(function () {
+        Route::prefix('member')->name('member.')->controller(FamilyMemberStatusController::class)->group(function () {
             Route::get('/extraRoute', 'extraFun')->name('extraName');
         });
     });
 
     Route::resource('marriage', MaritalStatusController::class);
-    Route::prefix('marriage')->name('marriage')->controller(MaritalStatusController::class)->group(function () {
+    Route::prefix('marriage')->name('marriage.')->controller(MaritalStatusController::class)->group(function () {
         Route::get('/extraRoute', 'extraFun')->name('extraName');
     });
 
     Route::resource('house', HouseController::class);
-    Route::prefix('house')->name('house')->controller(HouseController::class)->group(function () {
+    Route::prefix('house')->name('house.')->controller(HouseController::class)->group(function () {
         Route::get('/extraRoute', 'extraFun')->name('extraName');
     });
 
-    Route::prefix('house')->name('house')->group(function () {
+    Route::prefix('house')->name('house.')->group(function () {
         Route::resource('group', HouseGroupController::class);
-        Route::prefix('group')->name('group')->controller(HouseGroupController::class)->group(function () {
+        Route::prefix('group')->name('group.')->controller(HouseGroupController::class)->group(function () {
             Route::get('/extraRoute', 'extraFun')->name('extraName');
         });
     });
 
     Route::resource('information', ResidentController::class);
-    Route::prefix('information')->name('information')->controller(ResidentController::class)->group(function () {
-        Route::get('/extraRoute', 'extraFun')->name('extraName');
+    Route::prefix('information')->name('information.')->controller(ResidentController::class)->group(function () {
+        //Nambah Function Disini ya MEK!1!1
+        Route::post('/list', 'list')->name('list');
+        Route::get('/{id}', 'show')->name('show');
     });
 });
 
-Route::prefix('administration')->name('administration')->group(function () {
+Route::prefix('administration')->name('administration.')->group(function () {
     Route::resource('ledger', GeneralLedgerController::class);
-    Route::prefix('ledger')->name('ledger')->controller(GeneralLedgerController::class)->group(function () {
+    Route::prefix('ledger')->name('ledger.')->controller(GeneralLedgerController::class)->group(function () {
         Route::get('/extraRoute', 'extraFun')->name('extraName');
     });
 
     Route::resource('payement', PaymentController::class);
-    Route::prefix('payement')->name('payement')->controller(PaymentController::class)->group(function () {
+    Route::prefix('payement')->name('payement.')->controller(PaymentController::class)->group(function () {
         Route::get('/extraRoute', 'extraFun')->name('extraName');
     });
 
-    Route::prefix('payement')->name('payement')->group(function () {
+    Route::prefix('payement')->name('payement.')->group(function () {
         Route::resource('method', PaymentMethodController::class);
-        Route::prefix('method')->name('method')->controller(PaymentMethodController::class)->group(function () {
+        Route::prefix('method')->name('method.')->controller(PaymentMethodController::class)->group(function () {
             Route::get('/extraRoute', 'extraFun')->name('extraName');
         });
 
         Route::resource('status', PaymentStatusController::class);
-        Route::prefix('status')->name('status')->controller(PaymentStatusController::class)->group(function () {
+        Route::prefix('status')->name('status.')->controller(PaymentStatusController::class)->group(function () {
             Route::get('/extraRoute', 'extraFun')->name('extraName');
         });
 
         Route::resource('prove', PaymentProveController::class);
-        Route::prefix('prove')->name('prove')->controller(PaymentProveController::class)->group(function () {
+        Route::prefix('prove')->name('prove.')->controller(PaymentProveController::class)->group(function () {
             Route::get('/extraRoute', 'extraFun')->name('extraName');
         });
     });
 
     Route::resource('contribution', ContributionController::class);
-    Route::prefix('contribution')->name('contribution')->controller(ContributionController::class)->group(function () {
+    Route::prefix('contribution')->name('contribution.')->controller(ContributionController::class)->group(function () {
         Route::get('/extraRoute', 'extraFun')->name('extraName');
     });
 
-    Route::prefix('contribution')->name('contribution')->group(function () {
+    Route::prefix('contribution')->name('contribution.')->group(function () {
         Route::resource('type', ContributionTypeController::class);
-        Route::prefix('type')->name('type')->controller(ContributionTypeController::class)->group(function () {
+        Route::prefix('type')->name('type.')->controller(ContributionTypeController::class)->group(function () {
             Route::get('/extraRoute', 'extraFun')->name('extraName');
         });
 
         Route::resource('detail', ContributionDetailController::class);
-        Route::prefix('detail')->name('detail')->controller(ContributionDetailController::class)->group(function () {
+        Route::prefix('detail')->name('detail.')->controller(ContributionDetailController::class)->group(function () {
             Route::get('/extraRoute', 'extraFun')->name('extraName');
         });
     });
 });
 
-Route::prefix('media')->name('media')->group(function () {
+Route::prefix('media')->name('media.')->group(function () {
     Route::resource('category', CategoryController::class);
-    Route::prefix('category')->name('category')->controller(CategoryController::class)->group(function () {
+    Route::prefix('category')->name('category.')->controller(CategoryController::class)->group(function () {
         Route::get('/extraRoute', 'extraFun')->name('extraName');
     });
 
     Route::resource('tag', TagController::class);
-    Route::prefix('tag')->name('tag')->controller(TagController::class)->group(function () {
+    Route::prefix('tag')->name('tag.')->controller(TagController::class)->group(function () {
         Route::get('/extraRoute', 'extraFun')->name('extraName');
     });
 
     Route::resource('post', PostController::class);
-    Route::prefix('post')->name('post')->controller(PostController::class)->group(function () {
+    Route::prefix('post')->name('post.')->controller(PostController::class)->group(function () {
         Route::get('/extraRoute', 'extraFun')->name('extraName');
     });
 
-    Route::prefix('post')->name('post')->group(function () {
+    Route::prefix('post')->name('post.')->group(function () {
         Route::resource('comment', PostCommentController::class);
-        Route::prefix('comment')->name('comment')->controller(PostCommentController::class)->group(function () {
+        Route::prefix('comment')->name('comment.')->controller(PostCommentController::class)->group(function () {
             Route::get('/extraRoute', 'extraFun')->name('extraName');
         });
 
         Route::resource('meta', PostMetaController::class);
-        Route::prefix('meta')->name('meta')->controller(PostMetaController::class)->group(function () {
+        Route::prefix('meta')->name('meta.')->controller(PostMetaController::class)->group(function () {
             Route::get('/extraRoute', 'extraFun')->name('extraName');
         });
 
         Route::resource('category', PostCategoryController::class);
-        Route::prefix('category')->name('category')->controller(PostCategoryController::class)->group(function () {
+        Route::prefix('category')->name('category.')->controller(PostCategoryController::class)->group(function () {
             Route::get('/extraRoute', 'extraFun')->name('extraName');
         });
 
         Route::resource('tag', PostTagController::class);
-        Route::prefix('tag')->name('tag')->controller(PostTagController::class)->group(function () {
+        Route::prefix('tag')->name('tag.')->controller(PostTagController::class)->group(function () {
             Route::get('/extraRoute', 'extraFun')->name('extraName');
         });
     });
