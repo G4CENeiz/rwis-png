@@ -18,6 +18,7 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\HouseController;
 use App\Http\Controllers\HouseGroupController;
 use App\Http\Controllers\IncomeRangeController;
+use App\Http\Controllers\LandingPageController;
 use App\Http\Controllers\MaritalStatusController;
 use App\Http\Controllers\PaymentController;
 use App\Http\Controllers\PaymentMethodController;
@@ -49,6 +50,8 @@ use App\Http\Controllers\VillageController;
 */
 
 Route::get('/', [HomeController::class, 'index'])->name('home');
+
+Route::get('/landing', [LandingPageController::class, 'index']);
 
 Route::resource('media', MediaController::class);
 Route::prefix('media')->name('media.')->controller(MediaController::class)->group(function () {
