@@ -66,7 +66,25 @@
                             <textarea required class="form-control"></textarea>
                         </div>
                     </div>
-
+                    <div class="form-group">
+                        <label>Tag</label>
+                            <div class="flex flex-wrap h-fit gap-2.5">
+                                <input type="checkbox" name="kegiatan" id="kegiatan" class="hidden">
+                                <label for="kegiatan" id="tags-label" class="text-neutral-950 text-sm bg-gray-200 px-[10px] py-[10px] rounded-full cursor-pointer">Kegiatan</label>
+                                
+                                <input type="checkbox" name="kegiatan" id="informasi" class="hidden">
+                                <label for="informasi" id="tags-label2" class="text-neutral-950 text-sm bg-gray-200 px-[10px] py-[10px] rounded-full cursor-pointer">Informasi</label>
+                                
+                                <input type="checkbox" name="kegiatan" id="edukasi" class="hidden">
+                                <label for="edukasi" id="tags-label3" class="text-neutral-950 text-sm bg-gray-200 px-[10px] py-[10px] rounded-full cursor-pointer">Edukasi</label>
+                                
+                                <input type="checkbox" name="kegiatan" id="bansos" class="hidden">
+                                <label for="balita" id="tags-label4" class="text-neutral-950 text-sm bg-gray-200 px-[10px] py-[10px] rounded-full cursor-pointer">Balita</label>
+                                
+                                <input type="checkbox" name="kegiatan" id="umkm" class="hidden">
+                                <label for="ibuMenyusui" id="tags-label5" class="text-neutral-950 text-sm bg-gray-200 px-[10px] py-[10px] rounded-full cursor-pointer">Ibu Menyusui</label>
+                            </div>
+                    </div>
                     <div class="form-group">
                         <label>Upload foto</label>
                         <form action="/" method="post" class="dropzone" id="myAwesomeDropzone">
@@ -81,10 +99,10 @@
                     <div class="form-group mb-0">
                         <div>
                             <button type="submit" class="btn btn-success mr-1">
-                                Submit
+                                <a href="{{ URL('/media')}}">Masukkan</a>
                             </button>
                             <button type="reset" class="btn btn-secondary">
-                                Cancel
+                                Batalkan
                             </button>
                         </div>
                     </div>

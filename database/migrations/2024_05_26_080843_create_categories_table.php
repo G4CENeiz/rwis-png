@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id('category_id');
             $table->unsignedBigInteger('parent_id')->index()->nullable();
             $table->string('title', 75);
-            $table->string('meta_title', 100);
+            $table->string('meta_title')->nullable();
             $table->string('slug', 100);
             $table->text('content');
             $table->boolean('is_archived')->default(false);

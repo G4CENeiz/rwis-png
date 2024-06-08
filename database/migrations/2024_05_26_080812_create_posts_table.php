@@ -17,9 +17,9 @@ return new class extends Migration
             $table->unsignedBigInteger('author_id')->index();
             $table->unsignedBigInteger('parent_id')->index()->nullable();
             $table->string('title', 75);
-            $table->string('meta_title', 100);
+            $table->string('meta_title')->nullable();
             $table->string('slug', 100);
-            $table->tinyText('summary');
+            $table->tinyText('summary')->nullable();
             $table->text('content');
             $table->boolean('is_archived')->default(false);
             $table->timestamps();
