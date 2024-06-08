@@ -175,6 +175,10 @@ Route::prefix('resident')->name('resident.')->group(function () {
         //Nambah Function Disini ya MEK!1!1
         Route::post('/list', 'list')->name('list');
         Route::get('/{id}', 'show')->name('show');
+        Route::get('/create', 'create')->name('create');
+        Route::post('/store', 'store')->name('store');
+        Route::get('/{id}/edit', 'edit')->name('edit');
+        Route::put('/{id}', 'update')->name('update');
     });
 });
 
