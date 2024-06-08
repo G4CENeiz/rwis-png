@@ -13,7 +13,8 @@ class PostController extends Controller
      */
     public function index()
     {
-        //
+        $posts = Post::all(); // retrieve all posts from the database
+        return view('media.post.post.index', compact('posts')); // pass the posts data to the view
     }
 
     /**

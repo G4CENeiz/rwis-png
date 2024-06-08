@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Media;
+use App\Models\Post;
 use Illuminate\Http\Request;
 
 
@@ -12,7 +14,8 @@ class MediaController extends Controller
      */
     public function index()
     {
-        return view('media.index');
+        $posts = Post::all();
+        return view('media.index', compact('posts'));
     }
 
     /**
