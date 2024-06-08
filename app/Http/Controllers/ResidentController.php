@@ -13,7 +13,8 @@ class ResidentController extends Controller
      */
     public function index()
     {
-        //
+        $residents = Resident::all();
+        return view('residential-information.index', compact('residents'));
     }
 
     /**
@@ -37,7 +38,7 @@ class ResidentController extends Controller
      */
     public function show(Resident $resident)
     {
-        //
+        
     }
 
     /**
