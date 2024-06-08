@@ -10,7 +10,7 @@ class Resident extends Model
     use HasFactory;
 
     protected $table = 'residents';
-    
+
     protected $primaryKey = 'resident_id';
 
     protected $fillable = [

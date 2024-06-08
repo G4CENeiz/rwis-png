@@ -22,7 +22,7 @@ class ResidentController extends Controller
      */
     public function create()
     {
-        //
+        return view('residential-information.create');
     }
 
     /**
@@ -30,7 +30,8 @@ class ResidentController extends Controller
      */
     public function store(StoreResidentRequest $request)
     {
-        //
+        $resident = Resident::create($request->all());
+        return redirect()->route('residential-information.index');
     }
 
     /**
