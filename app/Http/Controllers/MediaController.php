@@ -14,8 +14,8 @@ class MediaController extends Controller
      */
     public function index()
     {
-        $posts = Post::all();
-        return view('media.index', compact('posts'));
+        $media = Media::all();
+        return view('media.index', compact('media'));
     }
 
     /**
