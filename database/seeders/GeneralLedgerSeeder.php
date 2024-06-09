@@ -12,6 +12,11 @@ class GeneralLedgerSeeder extends Seeder
      */
     public function run(): void
     {
-        //
+        $data = [];
+        $data[] = [
+            'general_ledger_id' => 1,
+            'issuer_id'         => 1,
+            'issuer_type'       => '',
+        ];
     }
 }
