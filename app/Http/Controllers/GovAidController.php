@@ -7,12 +7,12 @@ use Illuminate\Http\Request;
 
 class GovAidController extends Controller
 {
-    private function pullResidentData() {
-        // 
-    }
-
+    private $residentData;
+    
     private function filterResident() {
-        // 
+        // pull resident data
+        $residentData = Resident::all()
+        ->where('income_range_id', '<=', 2);
     }
 
     public function processDSS() {
