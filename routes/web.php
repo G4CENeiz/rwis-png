@@ -206,10 +206,10 @@ Route::prefix('administration')->name('administration.')->group(function () {
         });
     });
 
-    Route::resource('contribution', ContributionController::class);
     Route::prefix('contribution')->name('contribution.')->controller(ContributionController::class)->group(function () {
-        Route::get('/extraRoute', 'extraFun')->name('extraName');
+        Route::get('/list', 'list')->name('list');
     });
+    Route::resource('contribution', ContributionController::class);
 
     Route::prefix('contribution')->name('contribution.')->group(function () {
         Route::resource('type', ContributionTypeController::class);

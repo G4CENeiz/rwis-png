@@ -5,7 +5,10 @@ namespace App\Http\Controllers;
 use App\Models\Contribution;
 use App\Http\Requests\StoreContributionRequest;
 use App\Http\Requests\UpdateContributionRequest;
+use App\Models\Family;
+use App\Models\GeneralLedger;
 use Illuminate\Http\Request;
+use Yajra\DataTables\DataTables;
 
 class ContributionController extends Controller
 {
@@ -34,31 +37,42 @@ class ContributionController extends Controller
         $page = [
             'title' => 'Daftar Iuran'
         ];
+        $generalLedger = GeneralLedger::all();
+        $family = Family::all();
         return view(
             'administration.contribution.contribution.index',
             [
                 'breadcrumb' => $breadcrumb,
                 'card' => $card,
                 'page' => $page,
+                'generalLedger' => $generalLedger,
+                'family' => $family,
             ]
         );
     }
 
     public function list(Request $request) {
-        $contributions = Contribution::all()->with('level')->get();
-        if ($request->level_id) {
-            $contributions = $contributions->where('level_id', $request->level_id);
+        $contributions = Contribution::select('recipient_id', 'general_ledger_id', 'recipient_type')->get();
+            // ->join();
+            // ->with('generalLedger')
+            // ->with('family')
+        if ($request->general_ledger_id) {
+            $contributions = $contributions->where('general_ledger_id', $request->general_ledger_id);
         }
-        // return DataTables::of($contributions)->addIndexColumn()->addColumn('action', function ($user) {
-        //         $btn = '<a href="'.url('/user/' . $user->user_id).'" class="btn btn-info btn-sm">Detail</a> ';
-        //         $btn .= '<a href="'.url('/user/' . $user->user_id . '/edit').'" class="btn btn-warning btn-sm">Edit</a> ';
-        //         $btn .= '<form class="d-inline-block" method="POST" action="' . url('/user/'.$user->user_id) . '">'
-        //         . csrf_field()
-        //         . method_field('DELETE')
-        //         . '<button type="submit" class="btn btn-danger btn-sm" onclick="return confirm(\'Are you sure to delete this data?\');">Delete</button>' 
-        //         . '</form>';
-        //         return $btn;
-        //     })->rawColumns(['action'])->make(true);
+        if ($request->recipient_id) {
+            $contributions = $contributions->where('recipient_id', $request->family_id);
+        }
+        return DataTables::of($contributions)->addIndexColumn()->addColumn('action', function ($contribution) {
+                $btn = '<a href="'.url('/administration/contribution/' . $contribution->contribution_id).'" class="btn btn-info btn-sm">Detail</a> ';
+                $btn .= '<a href="'.url('/administration/contribution/' . $contribution->contribution_id . '/edit').'" class="btn btn-warning btn-sm">Edit</a> ';
+                $btn .= '<form class="d-inline-block" method="POST" action="' . url('/administration/contribution/'.$contribution->contribution_id) . '">'
+                . csrf_field()
+                . method_field('DELETE')
+                . '<button type="submit" class="btn btn-danger btn-sm" onclick="return confirm(\'Are you sure to delete this data?\');">Delete</button>' 
+                . '</form>';
+                return $btn;
+            })->rawColumns(['action'])->make(true);
+        // return 'hello';
     }
 
     /**
