@@ -23,9 +23,9 @@ class ResidentSeeder extends Seeder
         }
 
         $data = [];
-        $rtLim = 10;
-        $hgLim = 5;
-        $rmhLim = 12;
+        $rtLim = 3;
+        $hgLim = 3;
+        $rmhLim = 8;
         for ($rt = 0; $rt < $rtLim; $rt++) {
             for ($hg = 0; $hg < $hgLim; $hg++) {
                 for ($rmh = 0; $rmh < $rmhLim; $rmh++) {
@@ -123,7 +123,7 @@ class ResidentSeeder extends Seeder
                             'profession_id'             => fake()->numberBetween(1, 14),
                             'goverment_employees'       => fake()->boolean(),
                             'income_range_id'           => fake()->numberBetween(1, 11),
-                            'family_id'                 => ($hg*$rmhLim)+($rt*$rmhLim*$hgLim)+(fake()->numberBetween(1, 12)),
+                            'family_id'                 => ($hg*$rmhLim)+($rt*$rmhLim*$hgLim)+(fake()->numberBetween(1, 8)),
                             'family_member_status_id'   => 3,
                             'marital_status_id'         => 1,
                             'marriage_date'             => null,

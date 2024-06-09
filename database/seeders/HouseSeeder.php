@@ -15,9 +15,9 @@ class HouseSeeder extends Seeder
     public function run(): void
     {
         $data = [];
-        $rtLim = 10;
-        $hgLim = 5;
-        $rmhLim = 12;
+        $rtLim = 3;
+        $hgLim = 3;
+        $rmhLim = 8;
         $zipCode = fake('id_ID')->postcode();
         for ($rt = 0; $rt < $rtLim; $rt++) {
             for ($hg = 0; $hg < $hgLim; $hg++) {
