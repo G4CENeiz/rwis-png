@@ -16,10 +16,10 @@ return new class extends Migration
             $table->unsignedBigInteger('recipient_id')->index();
             $table->unsignedBigInteger('general_ledger_id')->index();
             $table->enum('recipient_type', [
-                'Family',
-                'House',
-                'HouseGroup',
-                'NeighborhoodAssociation',
+                'Keluarga',
+                'Rumah',
+                'Dasawisma',
+                'RT',
             ]);
             $table->boolean('is_archived')->default(false);
             $table->timestamps();
