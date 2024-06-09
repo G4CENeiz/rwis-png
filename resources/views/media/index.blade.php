@@ -10,12 +10,12 @@
     <div class="col-md-12">
         <nav aria-label="breadcrumb" class="float-right mt-1">
             <ol class="breadcrumb">
-                <li class="breadcrumb-item"><a href="/">Publication</a></li>
+                <li class="breadcrumb-item"><a href="/">Publikasi</a></li>
                 {{-- <li class="breadcrumb-item"><a href="">Article</a></li> --}}
                 {{-- <li class="breadcrumb-item active" aria-current="page">Advanced</li> --}}
             </ol>
         </nav>
-        <h4 class="mb-1 mt-0">Publication</h4>
+        <h4 class="mb-1 mt-0">Publikasi</h4>
     </div>
 </div>
 @endsection
@@ -45,24 +45,31 @@
                         <button type="button" class="btn btn-white btn-sm"><i
                                 class="uil uil-align-left-justify"></i></button>
                     </div>
+                    <a class="btn btn-info mr-4 mb-3  mb-sm-0" href="{{ url('media.post.category.index') }}"><i class="uil-list-ul mr-1"></i>Kategori</a>
                 </div>
             </div>
         </div>
-        <div class="row">
-            <div class="col-lg-6 col-xl-3">
-                <!-- Simple card -->
-                <div class="card mb-4 mb-xl-0">
-                    <img class="card-img-top img-fluid" src="{{ URL::asset('assets/images/dog.png')}}" alt="Card image cap">
-                    <div class="card-body">
-                        <h5 class="card-title font-size-20">Kerja Bakti Warga 01</h5>
-                        <p class="card-text text-muted">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Quisquam tenetur voluptas eum porro nesciunt iure, velit nisi, reprehenderit nostrum eligendi officia cumque impedit vel ipsum sunt aut mollitia id quam.</p>
-                        <a class="btn btn-primary font-size-14 mr-2" href="{{ url('/media/show') }}">Detail</a>
-                        <a class="btn btn-warning font-size-14 mr-2" href="{{ url('/media/edit') }}">Edit</a>
-                        <a class="btn btn-danger font-size-14 mr-2" href="{{ url('/media/delete') }}">Delete</a>
-                    </div>
+        <div class="d-flex flex-row flex-wrap">
+            @foreach($media as $medias)
+                <div class="m-3 col-12 col-md-6 col-lg-4">
+                    <div class="card mb-4 mb-xl-0">
+                        <img class="card-img-top img-fluid" src="{{ asset('assets/images/dog.png') }}" alt="Card image cap">
+                        <div class="card-body">
+                            <h5 class="card-title font-size-20 text-truncate">{{ $medias->title }}</h5>
+                            <p class="card-text text-muted text-truncate">{{ $medias->content }}</p>
+                            <div class="d-flex justify-content-end">
+                                <a class="btn btn-primary font-size-14 mr-2" href="{{ url('media/show', $medias->id) }}">Detail</a>
+                                <a class="btn btn-warning font-size-14 mr-2" href="{{ url('media/edit', $medias->id) }}">Edit</a>
+                                <form action="{{ url('media/delete', $medias->id) }}" method="POST" style="display: inline-block;">
+                                    @csrf
+                                    @method('DELETE')
+                                    <button type="submit" class="btn btn-danger font-size-14 mr-2">Delete</button>
+                                </form>
+                            </div>
+                        </div>
                     </div>
                 </div>
-            </div><!-- end col -->  
+            @endforeach
         </div>
         <!-- end row -->
         <div class="row mb-3 mt-2">
@@ -74,7 +81,7 @@
                     </a>
                 </div>
             </div> <!-- end col-->
-    </div> <!-- container-fluid -->
+        </div> <!-- container-fluid -->
 
 </div> <!-- content -->
 

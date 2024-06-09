@@ -14,6 +14,33 @@ class UserLevelController extends Controller
     public function index()
     {
         //
+        $breadcrumb = (object) [
+            'title' => 'Daftar pengguna',
+            'list' => [
+                [
+                    'item'  => 'Sistem',
+                    'route' => 'administration.ledger.index'
+                ],
+                [
+                    'item'  => 'otoritasi',
+                    'route' => 'administration.contribution.index'
+                ],
+            ],
+        ];
+        $card = (object) [
+            'title' => 'Daftar Iuran yang ditagihkan'
+        ];
+        $page = [
+            'title' => 'Daftar Iuran'
+        ];
+        return view(
+            'administration.contribution.contribution.index',
+            [
+                'breadcrumb' => $breadcrumb,
+                'card' => $card,
+                'page' => $page,
+            ]
+        );
     }
 
     /**
