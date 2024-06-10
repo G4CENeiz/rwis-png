@@ -40,6 +40,8 @@
     </div>
 
     @include('layouts.shared.footer')
+
+    @include('layouts.shared.footer-script')
 </div>    
 
 </body>
