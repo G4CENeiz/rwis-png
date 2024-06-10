@@ -57,20 +57,20 @@ Route::get('/', [HomeController::class, 'index'])->name('home');
 
 Route::get('/landing', [LandingPageController::class, 'index']);
 
-// Route::prefix('media')->name('media.')->controller(MediaController::class)->group(function () {
-//     Route::get('/placeholder', 'placeholder')->name('placeholder');
-// });
-// Route::resource('media', MediaController::class);
+Route::prefix('media')->name('media.')->controller(MediaController::class)->group(function () {
+    Route::get('/placeholder', 'placeholder')->name('placeholder');
+});
+Route::resource('media', MediaController::class);
 
-// Route::prefix('umkm')->name('umkm.')->controller(UMKMController::class)->group(function () {
-//     Route::get('/placeholder', 'placeholder')->name('placeholder');
-// });
-// Route::resource('umkm', UMKMController::class);
+Route::prefix('umkm')->name('umkm.')->controller(UMKMController::class)->group(function () {
+    Route::get('/placeholder', 'placeholder')->name('placeholder');
+});
+Route::resource('umkm', UMKMController::class);
 
-// Route::prefix('bansos')->name('bansos.')->controller(BansosController::class)->group(function () {
-//     Route::get('/placeholder', 'placeholder')->name('placeholder');
-// });
-// Route::resource('bansos', BansosController::class);
+Route::prefix('bansos')->name('bansos.')->controller(BansosController::class)->group(function () {
+    Route::get('/placeholder', 'placeholder')->name('placeholder');
+});
+Route::resource('bansos', BansosController::class);
 
 Route::prefix('govassist')->name('govassist.')->controller(GovAidController::class)->group(function () {
     Route::get('/placeholder', 'placeholder')->name('placeholder');

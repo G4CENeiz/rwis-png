@@ -15,17 +15,14 @@
             <span class="menu-arrow"></span>
         </a>
 
-        {{-- <ul class="nav-second-level" aria-expanded="false">
+        <ul class="nav-second-level" aria-expanded="false">
             <li>
-                <a href="/apps/email/inbox">Inbox</a>
+                <a href="{{ route('administration.ledger.index') }}"> Buku Kas</a>
             </li>
             <li>
-                <a href="/apps/email/read">Read</a>
+                <a href="{{ route('administration.contribution.index') }}"> Iuran </a>
             </li>
-            <li>
-                <a href="/apps/email/compose">Compose</a>
-            </li>
-        </ul> --}}
+        </ul>
     </li>
     <li>
         <a href="{{route('resident.information.index')}}">
