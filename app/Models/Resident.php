@@ -33,4 +33,17 @@ class Resident extends Model
         'marriage_date',
         'is_archived',
     ];
+
+    public function religion()
+    {
+        return $this->belongsTo(Religion::class,'religion_id','religion_id');
+    }
+    public function maritalStatus()
+    {
+        return $this->belongsTo(MaritalStatus::class, 'marital_status_id');
+    }
+    public function profession()
+    {
+        return $this->belongsTo(Profession::class, 'profession_id');
+    }
 }

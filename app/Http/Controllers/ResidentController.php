@@ -13,7 +13,7 @@ class ResidentController extends Controller
      */
     public function index()
     {
-        $residents = Resident::all();
+        $residents = Resident::with('religion', 'maritalStatus', 'profession')->get();
         return view('residential-information.index', compact('residents'));
     }
 
