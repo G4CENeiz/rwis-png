@@ -23,7 +23,7 @@
     <div class="col-md-6 col-xl-6">
         <div>
             <div style="font-size: 0,5rem; padding-top: 3%">
-                <button type="button" class="btn btn-outline-secondary" data-toggle="tooltip" data-placement="bottom" title="" data-original-title="Login">
+                <button type="button" class="btn btn-outline-secondary" data-toggle="tooltip" data-placement="bottom" title="" data-original-title="Versi Website">
                     Version 1.0 is here
                 </button>
             </div>
@@ -106,24 +106,46 @@
 
                         <div class="tab-pane" id="adm1">
                             <div>
-                                
+                                <div class="row no-gutters align-items-center" style="width: 70%; display: block; margin-left: auto; margin-right: auto; filter: drop-shadow(4px 4px 8px rgba(0, 0, 0, 0.5)); padding-top:1.5%;">
+                                    <img src="{{ URL::asset('assets/images/Administrasi-kas.png') }}" class="card-img" alt="pc-rwis">
+                                </div>
                             </div>
                             <p style="padding-top: 1.5%">Mudahkan urusan administratif dan akses data penting di RW Anda. Lorem ipsum, dolor sit amet consectetur adipisicing elit. Dolor quidem vel deleniti. Culpa incidunt eveniet doloribus. Pariatur laborum dolores cum, voluptatibus voluptate sequi veritatis labore cumque in unde, repellendus eveniet.</p>
                         </div>
 
                         <div class="tab-pane" id="info1">
+                            <div>
+                                <div class="row no-gutters align-items-center" style="width: 70%; display: block; margin-left: auto; margin-right: auto; filter: drop-shadow(4px 4px 8px rgba(0, 0, 0, 0.5)); padding-top:1.5%;">
+                                    <img src="{{ URL::asset('assets/images/info-warga.png') }}" class="card-img" alt="pc-rwis">
+                                </div>
+                            </div>
                             <p style="padding-top: 1.5%">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eos animi veritatis, nesciunt suscipit sapiente molestiae maiores, aut, fugit laborum consequatur deserunt laboriosam laudantium tempore sunt reiciendis. Quo hic laborum quod optio cum voluptas atque eius ratione deleniti perspiciatis iusto ipsum facere doloremque facilis, debitis saepe, vitae architecto nulla aliquam iure!</p>
                         </div>
 
                         <div class="tab-pane" id="bansos1">
+                            <div>
+                                <div class="row no-gutters align-items-center" style="width: 70%; display: block; margin-left: auto; margin-right: auto; filter: drop-shadow(4px 4px 8px rgba(0, 0, 0, 0.5)); padding-top:1.5%;">
+                                    <img src="{{ URL::asset('assets/images/bansos.png') }}" class="card-img" alt="pc-rwis">
+                                </div>
+                            </div>
                             <p style="padding-top: 1.5%">Lorem ipsum dolor sit amet consectetur adipisicing elit. Alias laudantium perspiciatis fuga, voluptas suscipit est ea quae. Officiis totam nobis iusto earum, fuga vero? Ipsa ex deleniti nostrum vel eaque, cumque quia earum mollitia vitae beatae eligendi molestiae quam, repellendus voluptas accusamus itaque perferendis necessitatibus. Reprehenderit, sed laborum aliquam facilis ex numquam sint, quasi delectus reiciendis iure voluptate aperiam exercitationem quas explicabo dolor molestiae quos sequi quisquam tenetur eligendi et sit cupiditate illum! Sed molestiae ex, possimus nisi obcaecati dolor quisquam error ratione, corrupti nihil exercitationem molestias voluptas itaque omnis eaque temporibus adipisci. Ratione deserunt aspernatur ullam facilis repellat enim, nulla, blanditiis ut perspiciatis dolores provident ea unde natus sint cupiditate fugiat tenetur.</p>
                         </div>
 
                         <div class="tab-pane" id="umkm1">
+                            <div>
+                                <div class="row no-gutters align-items-center" style="width: 70%; display: block; margin-left: auto; margin-right: auto; filter: drop-shadow(4px 4px 8px rgba(0, 0, 0, 0.5)); padding-top:1.5%;">
+                                    <img src="{{ URL::asset('assets/images/umkm.png') }}" class="card-img" alt="pc-rwis">
+                                </div>
+                            </div>
                             <p style="padding-top: 1.5%">Donec pede justo, fringilla vel, aliquet nec, vulputate eget, arcu. In enim justo, rhoncus ut, imperdiet a, venenatis vitae, justo. Nullam dictum felis eu pede mollis pretium. Integer tincidunt.Cras dapibus. Vivamus elementum semper nisi. Aenean vulputate eleifend tellus. Aenean leo ligula, porttitor eu, consequat vitae, eleifend ac, enim.</p>
                         </div>
 
                         <div class="tab-pane" id="artikel1">
+                            <div>
+                                <div class="row no-gutters align-items-center" style="width: 70%; display: block; margin-left: auto; margin-right: auto; filter: drop-shadow(4px 4px 8px rgba(0, 0, 0, 0.5)); padding-top:1.5%;">
+                                    <img src="{{ URL::asset('assets/images/artikel.png') }}" class="card-img" alt="pc-rwis">
+                                </div>
+                            </div>
                             <p style="padding-top: 1.5%">Lorem ipsum dolor, sit amet consectetur adipisicing elit. Minima voluptatum maxime id cupiditate velit sit ratione eligendi quia mollitia soluta est ab distinctio veniam totam molestias officiis fugiat facilis nobis, expedita eum tempore harum perspiciatis sint fuga. Ab soluta quam corporis! Quibusdam fugiat, temporibus nulla eos voluptatem illo nostrum ratione necessitatibus sit, ipsa distinctio tenetur. Necessitatibus eos facere commodi, amet ipsum doloribus adipisci eum, placeat asperiores labore harum totam exercitationem in. Sint voluptas magni dolor dolorum labore vel voluptatibus sunt dignissimos saepe veniam quod vitae aut, debitis voluptates ipsa similique ratione quam repudiandae reiciendis nisi asperiores nobis. Autem exercitationem ab vitae quidem incidunt est quibusdam quisquam nemo impedit harum distinctio nesciunt, eligendi doloribus in explicabo mollitia natus nam accusamus quae ea eius quis necessitatibus odit ut! Blanditiis consectetur similique nesciunt maxime qui voluptas quae perspiciatis culpa nisi vero mollitia quod repellat accusantium reprehenderit amet adipisci dolore porro possimus, hic debitis.</p>
                         </div>
                     </div>
