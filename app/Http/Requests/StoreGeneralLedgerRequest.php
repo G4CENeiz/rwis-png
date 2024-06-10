@@ -22,7 +22,8 @@ class StoreGeneralLedgerRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            'issuer_id' => 'required',
+            'issuer_type' => 'required|string',
         ];
     }
 }
