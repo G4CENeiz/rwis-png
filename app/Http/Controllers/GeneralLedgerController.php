@@ -102,14 +102,13 @@ class GeneralLedgerController extends Controller
             'issuer_type' => $validated['issuer_type'],
         ]);
 
-
         return redirect('/administration/ledger');
     }
 
     /**
      * Display the specified resource.
      */
-    public function show(GeneralLedger $generalLedger)
+    public function show(string $id)
     {
         //
     }

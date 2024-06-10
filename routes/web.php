@@ -73,7 +73,8 @@ Route::prefix('bansos')->name('bansos.')->controller(BansosController::class)->g
 Route::resource('bansos', BansosController::class);
 
 Route::prefix('govassist')->name('govassist.')->controller(GovAidController::class)->group(function () {
-    Route::get('/placeholder', 'placeholder')->name('placeholder');
+    Route::get('/dss/list/{rt_id}', 'processDSS')->name('dss');
+    Route::get('/dss/list/', 'processDSS')->name('dss');
 });
 Route::resource('govassist', GovAidController::class);
 
@@ -218,34 +219,29 @@ Route::prefix('administration')->name('administration.')->group(function () {
         Route::get('/placeholder', 'placeholder')->name('placeholder');
     });
     Route::resource('ledger', GeneralLedgerController::class);
+    
+        Route::prefix('payement')->name('payement.')->group(function () {
+            Route::prefix('method')->name('method.')->controller(PaymentMethodController::class)->group(function () {
+                Route::get('/placeholder', 'placeholder')->name('placeholder');
+            });
+            Route::resource('method', PaymentMethodController::class);
+    
+            Route::prefix('status')->name('status.')->controller(PaymentStatusController::class)->group(function () {
+                Route::get('/placeholder', 'placeholder')->name('placeholder');
+            });
+            Route::resource('status', PaymentStatusController::class);
+    
+            Route::prefix('prove')->name('prove.')->controller(PaymentProveController::class)->group(function () {
+                Route::get('/placeholder', 'placeholder')->name('placeholder');
+            });
+            Route::resource('prove', PaymentProveController::class);
+        });
 
     Route::prefix('payement')->name('payement.')->controller(PaymentController::class)->group(function () {
         Route::get('/placeholder', 'placeholder')->name('placeholder');
     });
     Route::resource('payement', PaymentController::class);
-
-    Route::prefix('payement')->name('payement.')->group(function () {
-        Route::prefix('method')->name('method.')->controller(PaymentMethodController::class)->group(function () {
-            Route::get('/placeholder', 'placeholder')->name('placeholder');
-        });
-        Route::resource('method', PaymentMethodController::class);
-
-        Route::prefix('status')->name('status.')->controller(PaymentStatusController::class)->group(function () {
-            Route::get('/placeholder', 'placeholder')->name('placeholder');
-        });
-        Route::resource('status', PaymentStatusController::class);
-
-        Route::prefix('prove')->name('prove.')->controller(PaymentProveController::class)->group(function () {
-            Route::get('/placeholder', 'placeholder')->name('placeholder');
-        });
-        Route::resource('prove', PaymentProveController::class);
-    });
-
-    Route::prefix('contribution')->name('contribution.')->controller(ContributionController::class)->group(function () {
-        Route::get('/list', 'list')->name('list');
-    });
-    Route::resource('contribution', ContributionController::class);
-
+    
     Route::prefix('contribution')->name('contribution.')->group(function () {
         Route::prefix('type')->name('type.')->controller(ContributionTypeController::class)->group(function () {
             Route::get('/placeholder', 'placeholder')->name('placeholder');
@@ -257,6 +253,11 @@ Route::prefix('administration')->name('administration.')->group(function () {
         });
         Route::resource('detail', ContributionDetailController::class);
     });
+    Route::prefix('contribution')->name('contribution.')->controller(ContributionController::class)->group(function () {
+        Route::get('/list', 'list')->name('list');
+    });
+    Route::resource('contribution', ContributionController::class);
+
 });
 
 Route::prefix('media')->name('media.')->group(function () {

@@ -2,7 +2,7 @@
     {{-- <li class="menu-title">Navigation</li> --}}
 
     <li>
-        <a href="/">
+        <a href="{{ url('/') }}">
             <i data-feather="home"></i>
             {{-- <span class="badge badge-success float-right">1</span> --}}
             <span> Dashboard </span>
@@ -22,6 +22,24 @@
             <li>
                 <a href="{{ route('administration.contribution.index') }}"> Iuran </a>
             </li>
+            <li>
+                <a href="{{ route('administration.contribution.detail.index') }}"> Detail Iuran </a>
+            </li>
+            <li>
+                <a href="{{ route('administration.contribution.type.index') }}"> Tipe Iuran </a>
+            </li>
+            <li>
+                <a href="{{ route('administration.payement.index') }}"> Pembayaran </a>
+            </li>
+            <li>
+                <a href="{{ route('administration.payement.method.index') }}"> Metode Pembayaran </a>
+            </li>
+            <li>
+                <a href="{{ route('administration.payement.status.index') }}"> Status Pembayaran </a>
+            </li>
+            <li>
+                <a href="{{ route('administration.payement.prove.index') }}"> Bukti Pembayaran </a>
+            </li>
         </ul>
     </li>
     <li>
@@ -32,7 +50,7 @@
         </a>
     </li>
     <li>
-        <a href=" {{route('bansos.index')}} ">
+        <a href=" {{ url('/govassist') }} ">
             <i class='uil uil-globe'></i> 
             <span> Bantuan Sosial </span>
             <span class="menu-arrow"></span>
