@@ -64,9 +64,9 @@
                                 <td>{{ $resident->birth_date }}</td>
                                 <td>{{ $resident->gender }}</td>
                                 <td>{{ $resident->blood_type }}</td>
-                                <td>{{ $resident->religion_id }}</td>
-                                <td>{{ $resident->marital_status_id }}</td>
-                                <td>{{ $resident->profession_id }}</td>
+                                <td>{{ $resident->religion->religion_name }}</td>
+                                <td>{{ $resident->maritalStatus->marital_status }}</td>
+                                <td>{{ $resident->profession->profession_name }}</td>
                                 <td>{{ $resident->citizenship }}</td>
                                 <td>
                                     <a href="#" class="badge badge-primary badge-pill py-2 px-3" role="button" style="font-size: 12px;">
