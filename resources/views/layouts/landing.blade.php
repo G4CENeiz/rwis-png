@@ -1,6 +1,10 @@
 <!DOCTYPE html>
 <html lang="en">
 
+@section('css')
+<link href="{{ URL::asset('assets/libs/flatpickr/flatpickr.min.css') }}" rel="stylesheet" type="text/css" />
+@endsection
+
 <head>
     <meta charset="utf-8" />
 
@@ -31,16 +35,11 @@
 <div id="wrapper">
     @include('layouts.shared.header-landing')
 
-    <div class="content-page">
-        <div class="content">
-            <!-- Start Content-->
-            <div class="container-fluid">
-                @yield('content')
-            </div>
-        </div>
-
-        @include('layouts.shared.footer')
+    <div class="content">
+        @yield('content')
     </div>
+
+    @include('layouts.shared.footer')
 </div>    
 
 </body>
