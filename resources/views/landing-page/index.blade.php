@@ -46,10 +46,10 @@
 </div>
 <div class="row align-items-center col-md-12 col-xl-12">
     <div class="row" style="padding-top: 1%; padding-left: 5%; padding-right: 5%; text-align: center">
-        <div style="text-align:center"><h1>Our Features</h1></div>
         <div class="col-xl-12">
             <div class="card">
                 <div class="card-body">
+                    <div style="text-align:center"><h1>Our Features</h1></div>
                     <ul class="nav nav-pills navtab-bg nav-justified">
                         <li class="nav-item">
                             <a href="#home1" data-toggle="tab" aria-expanded="true"
