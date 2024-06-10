@@ -14,6 +14,33 @@ class PaymentProveController extends Controller
     public function index()
     {
         //
+        $breadcrumb = (object) [
+            'title' => 'Daftar Iuran',
+            'list' => [
+                [
+                    'item'  => 'Administrasi',
+                    'route' => 'administration.ledger.index'
+                ],
+                [
+                    'item'  => 'Daftar Iuran',
+                    'route' => 'administration.contribution.index'
+                ],
+            ],
+        ];
+        $card = (object) [
+            'title' => 'Daftar Iuran yang ditagihkan'
+        ];
+        $page = [
+            'title' => 'Daftar Iuran'
+        ];
+        return view(
+            'administration.contribution.payment-prove.index',
+            [
+                'breadcrumb' => $breadcrumb,
+                'card' => $card,
+                'page' => $page,
+            ]
+        );
     }
 
     /**
@@ -22,6 +49,38 @@ class PaymentProveController extends Controller
     public function create()
     {
         //
+        $breadcrumb = (object) [
+            'title' => 'Tambah Buku Kas',
+            'list' => [
+                [
+                    'item'  => 'Administrasi',
+                    'route' => 'administration.ledger.index'
+                ],
+                [
+                    'item'  => 'Buku Kas',
+                    'route' => 'administration.ledger.index'
+                ],
+                [
+                    'item'  => 'Tambah Buku Kas',
+                    'route' => 'administration.ledger.create'
+                ],
+            ],
+        ];
+        $card = (object) [
+            'title' => 'Tambah Buku Kas'
+        ];
+        $page = [
+            'title' => 'Tambah Buku Kas'
+        ];
+
+        return view(
+            'administration.contribution.general-ledger.create', 
+            [
+                'breadcrumb' => $breadcrumb,
+                'card' => $card,
+                'page' => $page,
+            ]
+        );
     }
 
     /**
@@ -30,12 +89,23 @@ class PaymentProveController extends Controller
     public function store(StorePaymentProveRequest $request)
     {
         //
+        $validated = $request->validated();
+
+        $validated = $request->safe()->only(['issuer_type','issuer_id']);
+        $validated = $request->safe()->except(['issuer_type','issuer_id']);
+
+        PaymentProve::create([
+            'issuer_id' => $validated['issuer_id'],
+            'issuer_type' => $validated['issuer_type'],
+        ]);
+
+        return redirect('/administration/payement/prove');
     }
 
     /**
      * Display the specified resource.
      */
-    public function show(PaymentProve $paymentProve)
+    public function show(string $id)
     {
         //
     }
@@ -43,24 +113,80 @@ class PaymentProveController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(PaymentProve $paymentProve)
+    public function edit(string $id)
     {
         //
+        $generalLedger = PaymentProve::find($id);
+        $breadcrumb = (object) [
+            'title' => 'Ubah Buku Kas',
+            'list' => [
+                [
+                    'item'  => 'Administrasi',
+                    'route' => 'administration.ledger.index'
+                ],
+                [
+                    'item'  => 'Buku Kas',
+                    'route' => 'administration.ledger.index'
+                ],
+                [
+                    'item'  => 'Ubah Buku Kas',
+                    'route' => 'administration.ledger.create'
+                ],
+            ],
+        ];
+        $card = (object) [
+            'title' => 'Ubah Buku Kas'
+        ];
+        $page = [
+            'title' => 'Ubah Buku Kas'
+        ];
+
+        return view(
+            'administration.payement.prove.edit', 
+            [
+                'breadcrumb' => $breadcrumb,
+                'card' => $card,
+                'page' => $page,
+                'generalLedger' => $generalLedger,
+            ]
+        );
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdatePaymentProveRequest $request, PaymentProve $paymentProve)
+    public function update(UpdatePaymentProveRequest $request, string $id)
     {
         //
+        $validated = $request->validated();
+
+        $validated = $request->safe()->only(['issuer_type','issuer_id']);
+        $validated = $request->safe()->except(['issuer_type','issuer_id']);
+
+        PaymentProve::find($id)->update([
+            'issuer_id' => $validated['issuer_id'],
+            'issuer_type' => $validated['issuer_type'],
+        ]);
+
+
+        return redirect('/administration/payement/prove');
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(PaymentProve $paymentProve)
+    public function destroy(string $id)
     {
         //
+        $check = PaymentProve::find($id);
+        if (!$check) {
+            return redirect('/administration/payement/prove')->with('error', 'Data Buku Kas tidak ditemukan');
+        }
+        try {
+            PaymentProve::find($id)->update(['is_archived' => true]);
+            return redirect('/administration/payement/prove')->with('success', 'Data Buku Kas berhasil dihapus');
+        } catch (\Illuminate\Database\QueryException $e) {
+            return redirect('/administration/payement/prove')->with('error', 'Data Buku Kas gagal dihapus karena masih terdapat label lain yang terkait dengan data ini');
+        }
     }
 }

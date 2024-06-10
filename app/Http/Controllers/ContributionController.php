@@ -81,6 +81,38 @@ class ContributionController extends Controller
     public function create()
     {
         //
+        $breadcrumb = (object) [
+            'title' => 'Tambah Buku Kas',
+            'list' => [
+                [
+                    'item'  => 'Administrasi',
+                    'route' => 'administration.ledger.index'
+                ],
+                [
+                    'item'  => 'Buku Kas',
+                    'route' => 'administration.ledger.index'
+                ],
+                [
+                    'item'  => 'Tambah Buku Kas',
+                    'route' => 'administration.ledger.create'
+                ],
+            ],
+        ];
+        $card = (object) [
+            'title' => 'Tambah Buku Kas'
+        ];
+        $page = [
+            'title' => 'Tambah Buku Kas'
+        ];
+
+        return view(
+            'administration.contribution.general-ledger.create', 
+            [
+                'breadcrumb' => $breadcrumb,
+                'card' => $card,
+                'page' => $page,
+            ]
+        );
     }
 
     /**
@@ -89,12 +121,23 @@ class ContributionController extends Controller
     public function store(StoreContributionRequest $request)
     {
         //
+        $validated = $request->validated();
+
+        $validated = $request->safe()->only(['issuer_type','issuer_id']);
+        $validated = $request->safe()->except(['issuer_type','issuer_id']);
+
+        Contribution::create([
+            'issuer_id' => $validated['issuer_id'],
+            'issuer_type' => $validated['issuer_type'],
+        ]);
+
+        return redirect('/administration/ledger');
     }
 
     /**
      * Display the specified resource.
      */
-    public function show(Contribution $contribution)
+    public function show(string $id)
     {
         //
     }
@@ -102,24 +145,80 @@ class ContributionController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Contribution $contribution)
+    public function edit(string $id)
     {
         //
+        $generalLedger = Contribution::find($id);
+        $breadcrumb = (object) [
+            'title' => 'Ubah Buku Kas',
+            'list' => [
+                [
+                    'item'  => 'Administrasi',
+                    'route' => 'administration.ledger.index'
+                ],
+                [
+                    'item'  => 'Buku Kas',
+                    'route' => 'administration.ledger.index'
+                ],
+                [
+                    'item'  => 'Ubah Buku Kas',
+                    'route' => 'administration.ledger.create'
+                ],
+            ],
+        ];
+        $card = (object) [
+            'title' => 'Ubah Buku Kas'
+        ];
+        $page = [
+            'title' => 'Ubah Buku Kas'
+        ];
+
+        return view(
+            'administration.contribution.general-ledger.edit', 
+            [
+                'breadcrumb' => $breadcrumb,
+                'card' => $card,
+                'page' => $page,
+                'generalLedger' => $generalLedger,
+            ]
+        );
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdateContributionRequest $request, Contribution $contribution)
+    public function update(UpdateContributionRequest $request, string $id)
     {
         //
+        $validated = $request->validated();
+
+        $validated = $request->safe()->only(['issuer_type','issuer_id']);
+        $validated = $request->safe()->except(['issuer_type','issuer_id']);
+
+        Contribution::find($id)->update([
+            'issuer_id' => $validated['issuer_id'],
+            'issuer_type' => $validated['issuer_type'],
+        ]);
+
+
+        return redirect('/administration/ledger');
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Contribution $contribution)
+    public function destroy(string $id)
     {
         //
+        $check = Contribution::find($id);
+        if (!$check) {
+            return redirect('/administration/ledger')->with('error', 'Data Buku Kas tidak ditemukan');
+        }
+        try {
+            Contribution::find($id)->update(['is_archived' => true]);
+            return redirect('/administration/ledger')->with('success', 'Data Buku Kas berhasil dihapus');
+        } catch (\Illuminate\Database\QueryException $e) {
+            return redirect('/administration/ledger')->with('error', 'Data Buku Kas gagal dihapus karena masih terdapat label lain yang terkait dengan data ini');
+        }
     }
 }

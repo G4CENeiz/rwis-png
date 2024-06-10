@@ -14,6 +14,37 @@ class ContributionTypeController extends Controller
     public function index()
     {
         //
+        $breadcrumb = (object) [
+            'title' => 'Daftar Tipe Iuran',
+            'list' => [
+                [
+                    'item'  => 'Administrasi',
+                    'route' => 'administration.ledger.index'
+                ],
+                [
+                    'item'  => 'Iuran',
+                    'route' => 'administration.contribution.index'
+                ],
+                [
+                    'item'  => 'Daftar Tipe Iuran',
+                    'route' => 'administration.contribution.type.index'
+                ],
+            ],
+        ];
+        $card = (object) [
+            'title' => 'Daftar Tipe Iuran yang ditagihkan'
+        ];
+        $page = [
+            'title' => 'Daftar Tipe Iuran'
+        ];
+        return view(
+            'administration.contribution.contribution-type.index',
+            [
+                'breadcrumb' => $breadcrumb,
+                'card' => $card,
+                'page' => $page,
+            ]
+        );
     }
 
     /**
@@ -22,6 +53,42 @@ class ContributionTypeController extends Controller
     public function create()
     {
         //
+        $breadcrumb = (object) [
+            'title' => 'Tambah Tipe Iuran',
+            'list' => [
+                [
+                    'item'  => 'Administrasi',
+                    'route' => 'administration.ledger.index'
+                ],
+                [
+                    'item'  => 'Iuran',
+                    'route' => 'administration.contribution.index'
+                ],
+                [
+                    'item'  => 'Tipe Iuran',
+                    'route' => 'administration.contribution.type.index'
+                ],
+                [
+                    'item'  => 'Tambah Tipe Iuran',
+                    'route' => 'administration.contribution.type.create'
+                ],
+            ],
+        ];
+        $card = (object) [
+            'title' => 'Tambah Tipe Iuran'
+        ];
+        $page = [
+            'title' => 'Tambah Tipe Iuran'
+        ];
+
+        return view(
+            'administration.contribution.contribution-type.create', 
+            [
+                'breadcrumb' => $breadcrumb,
+                'card' => $card,
+                'page' => $page,
+            ]
+        );
     }
 
     /**
@@ -30,12 +97,23 @@ class ContributionTypeController extends Controller
     public function store(StoreContributionTypeRequest $request)
     {
         //
+        $validated = $request->validated();
+
+        $validated = $request->safe()->only(['issuer_type','issuer_id']);
+        $validated = $request->safe()->except(['issuer_type','issuer_id']);
+
+        ContributionType::create([
+            'issuer_id' => $validated['issuer_id'],
+            'issuer_type' => $validated['issuer_type'],
+        ]);
+
+        return redirect('/administration/contribution/type/');
     }
 
     /**
      * Display the specified resource.
      */
-    public function show(ContributionType $contributionType)
+    public function show(string $id)
     {
         //
     }
@@ -43,24 +121,80 @@ class ContributionTypeController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(ContributionType $contributionType)
+    public function edit(string $id)
     {
         //
+        $generalLedger = ContributionType::find($id);
+        $breadcrumb = (object) [
+            'title' => 'Ubah Tipe Iuran',
+            'list' => [
+                [
+                    'item'  => 'Administrasi',
+                    'route' => 'administration.ledger.index'
+                ],
+                [
+                    'item'  => 'Tipe Iuran',
+                    'route' => 'administration.ledger.index'
+                ],
+                [
+                    'item'  => 'Ubah Tipe Iuran',
+                    'route' => 'administration.ledger.create'
+                ],
+            ],
+        ];
+        $card = (object) [
+            'title' => 'Ubah Tipe Iuran'
+        ];
+        $page = [
+            'title' => 'Ubah Tipe Iuran'
+        ];
+
+        return view(
+            'administration.contribution.contribution-type.edit', 
+            [
+                'breadcrumb' => $breadcrumb,
+                'card' => $card,
+                'page' => $page,
+                'generalLedger' => $generalLedger,
+            ]
+        );
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdateContributionTypeRequest $request, ContributionType $contributionType)
+    public function update(UpdateContributionTypeRequest $request, string $id)
     {
         //
+        $validated = $request->validated();
+
+        $validated = $request->safe()->only(['issuer_type','issuer_id']);
+        $validated = $request->safe()->except(['issuer_type','issuer_id']);
+
+        ContributionType::find($id)->update([
+            'issuer_id' => $validated['issuer_id'],
+            'issuer_type' => $validated['issuer_type'],
+        ]);
+
+
+        return redirect('/administration/contribution/type/');
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(ContributionType $contributionType)
+    public function destroy(string $id)
     {
         //
+        $check = ContributionType::find($id);
+        if (!$check) {
+            return redirect('/administration/contribution/type/')->with('error', 'Data Tipe Iuran tidak ditemukan');
+        }
+        try {
+            ContributionType::find($id)->update(['is_archived' => true]);
+            return redirect('/administration/contribution/type/')->with('success', 'Data Tipe Iuran berhasil dihapus');
+        } catch (\Illuminate\Database\QueryException $e) {
+            return redirect('/administration/contribution/type/')->with('error', 'Data Tipe Iuran gagal dihapus karena masih terdapat label lain yang terkait dengan data ini');
+        }
     }
 }
