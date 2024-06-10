@@ -21,19 +21,19 @@
 
             {{-- ADMINISTRASI --}}
             <div class="btn-group col-cl-3">
-                <div type="button" class="btn btn-outline-dark dropdown-toggle width-md"
+                <button type="button" class="btn btn-outline-dark dropdown-toggle width-md"
                     data-toggle="dropdown" aria-haspopup="true"
-                    aria-expanded="false">Administrasi<i class="icon"><span data-feather="chevron-down"></span></i></div>
+                    aria-expanded="false">Administrasi<i class="icon"><span data-feather="chevron-down"></span></i></button>
                 <div class="dropdown-menu">
-                    <a class="dropdown-item" href="#">Buku Kas</a>
-                    <a class="dropdown-item" href="#">Iuran</a>
-                    <a class="dropdown-item" href="#">Detail Iuran</a>
-                    <a class="dropdown-item" href="#">Tipe Iuran</a>
+                    <a class="dropdown-item" href="{{route('administration.ledger.index')}}">Buku Kas</a>
+                    <a class="dropdown-item" href="{{route('administration.contribution.index')}}">Iuran</a>
+                    <a class="dropdown-item" href="{{route('administration.contribution.detail.index')}}">Detail Iuran</a>
+                    <a class="dropdown-item" href="{{route('administration.contribution.type.index')}}">Tipe Iuran</a>
                     <div class="dropdown-divider"></div>
-                    <a class="dropdown-item" href="#">Pembayaran</a>
-                    <a class="dropdown-item" href="#">Metode Pembayaran</a>
-                    <a class="dropdown-item" href="#">Status Pembayaran</a>
-                    <a class="dropdown-item" href="#">Bukti Pembayaran</a>
+                    <a class="dropdown-item" href="{{route('administration.payement.index')}}">Pembayaran</a>
+                    <a class="dropdown-item" href="{{route('administration.payement.method.index')}}">Metode Pembayaran</a>
+                    <a class="dropdown-item" href="{{route('administration.payement.status.index')}}">Status Pembayaran</a>
+                    <a class="dropdown-item" href="{{route('administration.payement.prove.index')}}">Bukti Pembayaran</a>
                 </div>
             </div><!-- /btn-group -->
 
