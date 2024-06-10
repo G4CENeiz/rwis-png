@@ -15,7 +15,7 @@
                 <span data-toggle="tooltip" data-original-title="Halaman Utama">Dashboard</span>
             </a>
             {{-- ADMINISTRASI --}}
-            <a href="" class="col-xl-3">
+            <a href="{{route('administration.ledger.index')}}" class="col-xl-3">
                 <span data-toggle="tooltip" data-original-title="Bantuan Sosial">Administrasi</span>
             </a>
             {{-- INFORMASI WARGA --}}
@@ -32,12 +32,14 @@
             </a>
             {{-- MEDIA --}}
             <a href="{{route('media.index')}}" class="success col-xl-3">
-                <span data-toggle="tooltip" data-original-title="Media">Media</span>
+                <span data-toggle="tooltip" data-original-title="Artikel">Artikel</span>
             </a>
-            <button type="button" class="btn btn-success" data-toggle="tooltip"
+            <a href="{{route('auth.login')}}" class="success col-xl-3">
+                <button type="button" class="btn btn-success" data-toggle="tooltip"
                 data-placement="bottom" title="" data-original-title="Login">
                 Masuk
-            </button>
+                </button>
+            </a>
         </div>           
     </div>
 </div>
