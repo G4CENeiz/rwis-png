@@ -22,6 +22,24 @@
             <li>
                 <a href="{{ route('administration.contribution.index') }}"> Iuran </a>
             </li>
+            <li>
+                <a href="{{ route('administration.contribution.detail.index') }}"> Detail Iuran </a>
+            </li>
+            <li>
+                <a href="{{ route('administration.contribution.type.index') }}"> Tipe Iuran </a>
+            </li>
+            <li>
+                <a href="{{ route('administration.payement.index') }}"> Pembayaran </a>
+            </li>
+            <li>
+                <a href="{{ route('administration.payement.method.index') }}"> Metode Pembayaran </a>
+            </li>
+            <li>
+                <a href="{{ route('administration.payement.status.index') }}"> Status Pembayaran </a>
+            </li>
+            <li>
+                <a href="{{ route('administration.payement.prove.index') }}"> Bukti Pembayaran </a>
+            </li>
         </ul>
     </li>
     <li>
