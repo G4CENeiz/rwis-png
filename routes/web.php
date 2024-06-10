@@ -73,7 +73,8 @@ Route::prefix('bansos')->name('bansos.')->controller(BansosController::class)->g
 Route::resource('bansos', BansosController::class);
 
 Route::prefix('govassist')->name('govassist.')->controller(GovAidController::class)->group(function () {
-    Route::get('/placeholder', 'placeholder')->name('placeholder');
+    Route::get('/dss/list/{rt_id}', 'processDSS')->name('dss');
+    Route::get('/dss/list/', 'processDSS')->name('dss');
 });
 Route::resource('govassist', GovAidController::class);
 

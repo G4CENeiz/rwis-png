@@ -2,7 +2,7 @@
     {{-- <li class="menu-title">Navigation</li> --}}
 
     <li>
-        <a href="/">
+        <a href="{{ url('/') }}">
             <i data-feather="home"></i>
             {{-- <span class="badge badge-success float-right">1</span> --}}
             <span> Dashboard </span>
@@ -32,7 +32,7 @@
         </a>
     </li>
     <li>
-        <a href=" {{route('bansos.index')}} ">
+        <a href=" {{ url('/govassist') }} ">
             <i class='uil uil-globe'></i> 
             <span> Bantuan Sosial </span>
             <span class="menu-arrow"></span>
