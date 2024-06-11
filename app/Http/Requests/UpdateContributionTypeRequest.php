@@ -23,6 +23,8 @@ class UpdateContributionTypeRequest extends FormRequest
     {
         return [
             //
+            'contribution_name' => 'required',
+            'description' => 'required',
         ];
     }
 }

@@ -216,48 +216,48 @@ Route::prefix('resident')->name('resident.')->group(function () {
 
 Route::prefix('administration')->name('administration.')->group(function () {
     Route::prefix('ledger')->name('ledger.')->controller(GeneralLedgerController::class)->group(function () {
-        Route::get('/placeholder', 'placeholder')->name('placeholder');
+        Route::get('/list', 'list')->name('list');
     });
     Route::resource('ledger', GeneralLedgerController::class);
     
         Route::prefix('payement')->name('payement.')->group(function () {
             Route::prefix('method')->name('method.')->controller(PaymentMethodController::class)->group(function () {
-                Route::get('/placeholder', 'placeholder')->name('placeholder');
+                Route::get('/list', 'list')->name('list');
             });
             Route::resource('method', PaymentMethodController::class);
     
             Route::prefix('status')->name('status.')->controller(PaymentStatusController::class)->group(function () {
-                Route::get('/placeholder', 'placeholder')->name('placeholder');
+                Route::get('/list', 'list')->name('list');
             });
             Route::resource('status', PaymentStatusController::class);
     
             Route::prefix('prove')->name('prove.')->controller(PaymentProveController::class)->group(function () {
-                Route::get('/placeholder', 'placeholder')->name('placeholder');
+                Route::get('/list', 'list')->name('list');
             });
             Route::resource('prove', PaymentProveController::class);
         });
 
     Route::prefix('payement')->name('payement.')->controller(PaymentController::class)->group(function () {
-        Route::get('/placeholder', 'placeholder')->name('placeholder');
+        Route::get('/list', 'list')->name('list');
     });
     Route::resource('payement', PaymentController::class);
     
     Route::prefix('contribution')->name('contribution.')->group(function () {
         Route::prefix('type')->name('type.')->controller(ContributionTypeController::class)->group(function () {
-            Route::get('/placeholder', 'placeholder')->name('placeholder');
+            Route::get('/list', 'list')->name('list');
         });
         Route::resource('type', ContributionTypeController::class);
 
         Route::prefix('detail')->name('detail.')->controller(ContributionDetailController::class)->group(function () {
-            Route::get('/placeholder', 'placeholder')->name('placeholder');
+            Route::get('/list', 'list')->name('list');
         });
         Route::resource('detail', ContributionDetailController::class);
     });
+    
     Route::prefix('contribution')->name('contribution.')->controller(ContributionController::class)->group(function () {
         Route::get('/list', 'list')->name('list');
     });
     Route::resource('contribution', ContributionController::class);
-
 });
 
 Route::prefix('media')->name('media.')->group(function () {
