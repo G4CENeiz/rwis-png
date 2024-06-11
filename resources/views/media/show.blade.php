@@ -21,7 +21,7 @@
 @endsection
 
 @section('content')
-{{-- <style>
+<style>
     .header-title {
         font-size: 2.5em; /* Ukuran font besar */
         font-weight: bold; /* Membuat teks tebal */
@@ -40,17 +40,13 @@
                     <ol class="carousel-indicators">
                         <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
                         <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
-                        <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
                     </ol>
                     <div class="carousel-inner">
                         <div class="carousel-item active">
-                            <img src="{{URL::asset('assets/images/dog.png')}}" class="d-block w-100" alt="Gambar 1">
+                            <img src="{{URL::asset('assets/images/kerjabakti.jpeg')}}" class="d-block w-100" alt="Gambar 1">
                         </div>
                         <div class="carousel-item">
-                            <img src="{{URL::asset('assets/images/meng.png')}}" class="d-block w-100" alt="Gambar 2">
-                        </div>
-                        <div class="carousel-item">
-                            <img src="{{URL::asset('assets/images/bear.jpg')}}" class="d-block w-100" alt="Gambar 3">
+                            <img src="{{URL::asset('assets/images/Kerjabakti2.jpeg')}}" class="d-block w-100" alt="Gambar 2">
                         </div>
                     </div>
                     <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
@@ -78,82 +74,20 @@
         </div>
         <!-- end card -->
     </div>
-    <div class="col-xl-3">
-        <div class="card">
-            <div class="card-body pb-0">
-                <h5 class="card-title">Tag</h5>
-                <div class="card-body">
-                    <a class="badge badge-info badge-pill mr-2" href="">Kerja Bakti</a>
-                    <a class="badge badge-info badge-pill mr-2" href="">Bersih</a>
-                    <a class="badge badge-info badge-pill mr-2" href="">Desa</a>
-                    <a class="badge badge-info badge-pill mr-2" href="">Warga</a>
-                    <a class="badge badge-info badge-pill mr-2" href="">RT01</a>
-                </div>
-            </div>
-        </div>
-    </div>
-</div> --}}
-<style>
-    .header-title {
-        font-size: 2.5em; /* Ukuran font besar */
-        font-weight: bold; /* Membuat teks tebal */
-        margin-top: 0;
-        margin-bottom: 20px;
-        text-align: center;
-    }
-</style>
-
-<div class="row">
-    <div class="col-md-9">
-        <div class="card">
-            <div class="card-body">
-                <h1 class="mt-0 header-title">Kerja Bakti Warga</h1>
-
-                {{-- <div id="carouselExampleIndicators" class="carousel slide mt-3" data-ride="carousel">
-                    <ol class="carousel-indicators">
-                        <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
-                        <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
-                        <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
-                    </ol>
-                    <div class="carousel-inner">
-                        @foreach($posts as $key => $post)
-                        <div class="carousel-item {{ $key == 0 ? 'active' : '' }}">
-                            <img src="{{ asset('storage/' . $post->image) }}" class="d-block w-100" alt="{{ $post->title }}">
+                <div class="col-xl-3">
+                    <div class="card">
+                        <div class="card-body pb-0">
+                            <h5 class="card-title">Tag</h5>
+                            <div class="card-body">
+                                <a class="badge badge-info badge-pill mr-2" href="">Kerja Bakti</a>
+                                <a class="badge badge-info badge-pill mr-2" href="">Bersih</a>
+                                <a class="badge badge-info badge-pill mr-2" href="">Desa</a>
+                                <a class="badge badge-info badge-pill mr-2" href="">Warga</a>
+                                <a class="badge badge-info badge-pill mr-2" href="">RT01</a>
+                            </div>
                         </div>
-                        @endforeach
                     </div>
-                    <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
-                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                        <span class="sr-only">Previous</span>
-                    </a>
-                    <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
-                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                        <span class="sr-only">Next</span>
-                    </a>
-                </div> --}}
-
-                <div class="text-muted mt-3">
-                    @foreach($posts as $post)
-                    <p>{{ $post->content }}</p>
-                    @endforeach
                 </div>
-
-            </div>
-        </div>
-        <!-- end card -->
-    </div>
-    <div class="col-xl-3">
-        <div class="card">
-            <div class="card-body pb-0">
-                <h5 class="card-title">Tag</h5>
-                <div class="card-body">
-                    @foreach($posts_categories as $tag)
-                    <a class="badge badge-info badge-pill mr-2" href="">{{ $tag->name }}</a>
-                    @endforeach
-                </div>
-            </div>
-        </div>
-    </div>
 </div>
 @endsection
 
