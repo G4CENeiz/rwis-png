@@ -244,7 +244,7 @@ Route::prefix('administration')->name('administration.')->group(function () {
     
     Route::prefix('contribution')->name('contribution.')->group(function () {
         Route::prefix('type')->name('type.')->controller(ContributionTypeController::class)->group(function () {
-            Route::get('/placeholder', 'placeholder')->name('placeholder');
+            Route::get('/list', 'list')->name('list');
         });
         Route::resource('type', ContributionTypeController::class);
 
@@ -253,11 +253,11 @@ Route::prefix('administration')->name('administration.')->group(function () {
         });
         Route::resource('detail', ContributionDetailController::class);
     });
+    
     Route::prefix('contribution')->name('contribution.')->controller(ContributionController::class)->group(function () {
         Route::get('/list', 'list')->name('list');
     });
     Route::resource('contribution', ContributionController::class);
-
 });
 
 Route::prefix('media')->name('media.')->group(function () {

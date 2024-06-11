@@ -13,5 +13,14 @@ class VerifyCsrfToken extends Middleware
      */
     protected $except = [
         //
+        '/administration/contribution',
+        '/administration/contribution/type',
+        '/administration/contribution/detail',
+        '/administration/ledger/',
+        '/administration/payement/method',
+        '/administration/payement/prove',
+        '/administration/payement/status',
+        '/administration/payement',
+        '/administration',
     ];
 }

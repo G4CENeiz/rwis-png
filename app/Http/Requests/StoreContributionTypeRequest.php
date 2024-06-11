@@ -23,6 +23,8 @@ class StoreContributionTypeRequest extends FormRequest
     {
         return [
             //
+            'contribution_name' => 'required',
+            'description' => 'required',
         ];
     }
 }

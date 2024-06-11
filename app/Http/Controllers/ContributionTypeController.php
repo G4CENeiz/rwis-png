@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\ContributionType;
 use App\Http\Requests\StoreContributionTypeRequest;
 use App\Http\Requests\UpdateContributionTypeRequest;
+use Yajra\DataTables\DataTables;
 
 class ContributionTypeController extends Controller
 {
@@ -45,6 +46,21 @@ class ContributionTypeController extends Controller
                 'page' => $page,
             ]
         );
+    }
+
+    public function list() {
+        $contributionTypes = ContributionType::select('contribution_type_id', 'contribution_name', 'description')
+        ->where('is_archived', false)->get();
+        return DataTables::of($contributionTypes)->addIndexColumn()->addColumn('action', function ($contributionType) {
+            $btn = '<a href="'.url('/administration/contribution/type/' . $contributionType->contribution_type_id).'" class="btn btn-info btn-sm">Detail</a> ';
+            $btn .= '<a href="'.url('/administration/contribution/type/' . $contributionType->contribution_type_id . '/edit').'" class="btn btn-warning btn-sm">Edit</a> ';
+            $btn .= '<form class="d-inline-block" method="POST" action="' . url('/administration/contribution/type/'.$contributionType->contribution_type_id) . '">'
+            . csrf_field()
+            . method_field('DELETE')
+            . '<button type="submit" class="btn btn-danger btn-sm" onclick="return confirm(\'Are you sure to delete this data?\');">Delete</button>' 
+            . '</form>';
+            return $btn;
+        })->rawColumns(['action'])->make(true);
     }
 
     /**
@@ -99,12 +115,12 @@ class ContributionTypeController extends Controller
         //
         $validated = $request->validated();
 
-        $validated = $request->safe()->only(['issuer_type','issuer_id']);
-        $validated = $request->safe()->except(['issuer_type','issuer_id']);
+        $validated = $request->safe()->only(['contribution_name','description']);
+        $validated = $request->safe()->except(['contribution_name','description']);
 
         ContributionType::create([
-            'issuer_id' => $validated['issuer_id'],
-            'issuer_type' => $validated['issuer_type'],
+            'contribution_name' => $validated['contribution_name'],
+            'description' => $validated['description'],
         ]);
 
         return redirect('/administration/contribution/type/');
@@ -124,7 +140,7 @@ class ContributionTypeController extends Controller
     public function edit(string $id)
     {
         //
-        $generalLedger = ContributionType::find($id);
+        $contributionTypes = ContributionType::find($id);
         $breadcrumb = (object) [
             'title' => 'Ubah Tipe Iuran',
             'list' => [
@@ -155,7 +171,7 @@ class ContributionTypeController extends Controller
                 'breadcrumb' => $breadcrumb,
                 'card' => $card,
                 'page' => $page,
-                'generalLedger' => $generalLedger,
+                'contributionTypes' => $contributionTypes,
             ]
         );
     }

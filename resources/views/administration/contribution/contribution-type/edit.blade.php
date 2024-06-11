@@ -13,45 +13,39 @@
         </div>
     </div>
     <div class="list-group-item">
-        @empty($user)
+        @empty($contributionTypes)
             <div class="alert alert-danger alert-dismissible">
                 <h5><i class="icon fas fa-ban"></i> Kesalahan!</H5>
                 The data you are looking for was not found.
             </div>
-            <a href="{{ url('user') }}" class="btn btn-sm btn-default mt-2">Kembali</a>
+            <a href="{{ url('administration/contribution/type') }}" class="btn btn-sm btn-default mt-2">Kembali</a>
         @else
-        <form method="POST" action="{{ url('administration/contribution/type/' . $ledger->general_ledger_id) }}" class="form-horizontal">
+        <form method="POST" action="{{ url('administration/contribution/type/' . $contributionTypes->contribution_type_id) }}" class="form-horizontal">
             @csrf
             {!! method_field('PUT') !!}
+            
             <div class="form-group row">
-                <label class="col-1 control-label col-form-label">Kepemilikan Buku Kas</label>
-                <div class="col-11">
-                    <select class="form-control" id="issuer_id" name="issuer_id" required>
-                        <option value="">- Pilih Level -</option>
-                        @foreach ($user as $item)
-                            <option value="{{ $item->user_id }}" @if ($item->user_id == $user->user_id) selected @endif>>{{ $item->name }}</option>
-                        @endforeach
-                    </select>
-                    @error('issuer_id')
+                <label class="col-lg-2 col-form-label" for="contribution_name">Nama Iuran</label>
+                <div class="col-lg-10">
+                    <input type="text" class="form-control" id="contribution_name" name="contribution_name" value="{{ old('contribution_name', $contributionTypes->contribution_name) }}">
+                    @error('contribution_name')
                         <small class="form-text text-danger">{{ $message }}</small>
                     @enderror
                 </div>
             </div>
+
             <div class="form-group row">
-                <label class="col-1 control-label col-form-label">Tipe Buku Kas</label>
-                <div class="col-11">
-                    <select class="form-control" id="issuer_type" name="issuer_type" required>
-                        <option value="">- Pilih Level -</option>
-                        <option value="RT">RT</option>
-                        <option value="RW">RW</option>
-                    </select>
-                    @error('issuer_type')
+                <label class="col-lg-2 col-form-label" for="description">Deskripsi</label>
+                <div class="col-lg-10">
+                    <input type="text" class="form-control" id="description" name="description" value="{{ old('description', $contributionTypes->description) }}">
+                    @error('description')
                         <small class="form-text text-danger">{{ $message }}</small>
                     @enderror
                 </div>
             </div>
+
             <div class="form-group row">
-                <label class="col-1 control-label col-form-label"></label>
+                <label class="col-lg-2 col-form-label"></label>
                 <div class="col-11">
                     <button type="submit" class="btn btn-primary btn-sm">Simpan</button>
                 </div>
