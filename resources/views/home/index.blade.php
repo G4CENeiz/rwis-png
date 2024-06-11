@@ -49,7 +49,7 @@
                 <div class="media p-3">
                     <div class="media-body">
                         <span class="text-muted text-uppercase font-size-18 font-weight-bold">Jumlah Warga</span>
-                        <h2 class="mb-0">200</h2>
+                        <h2 class="mb-0">2000</h2>
                     </div>
                     {{-- <div class="align-self-center">
                         <div id="today-revenue-chart" class="apex-charts"></div>
@@ -67,7 +67,7 @@
                 <div class="media p-3">
                     <div class="media-body">
                         <span class="text-muted text-uppercase font-size-18 font-weight-bold">Jumlah Rumah</span>
-                        <h2 class="mb-0">360</h2>
+                        <h2 class="mb-0">500</h2>
                     </div>
                     {{-- <div class="align-self-center">
                         <div id="today-revenue-chart" class="apex-charts"></div>
@@ -85,7 +85,7 @@
                 <div class="media p-3">
                     <div class="media-body">
                         <span class="text-muted text-uppercase font-size-18 font-weight-bold">Jumlah KK</span>
-                        <h2 class="mb-0">300</h2>
+                        <h2 class="mb-0">3000</h2>
                     </div>
                     {{-- <div class="align-self-center">
                         <div id="today-revenue-chart" class="apex-charts"></div>
@@ -209,57 +209,61 @@
                 </a> --}}
                 <h5 class="card-title mt-0 mb-0 header-title">Informasi Kartu Keluarga</h5>
 
-                <div class="table-responsive mt-4">
-                    <table class="table table-hover table-nowrap mb-0">
-                        <thead>
-                            <tr>
-                                <th scope="col">No</th>
-                                <th scope="col">Nama Kepala Keluarga</th>
-                                <th scope="col">Jumlah anggota keluarga</th>
-                                <th scope="col">Alamat</th>
-                                <th scope="col">Detail</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            {{-- href="route halaman detail" --}}
-                            <tr>
-                                <td>#98754</td>
-                                <td>ASOS Ridley High</td>
-                                <td>Otto B</td>
-                                <td>$79.49</td>
-                                <td><a href="#" class="badge badge-primary badge-pill py-2 px-3" role="button" style="font-size: 12px;">Detail</a></td>
-                            </tr>
-                            <tr>
-                                <td>#98753</td>
-                                <td>Marco Lightweight Shirt</td>
-                                <td>Mark P</td>
-                                <td>$125.49</td>
-                                <td><a href="#" class="badge badge-primary badge-pill py-2 px-3" role="button" style="font-size: 12px;">Detail</a></td>
-                            </tr>
-                            <tr>
-                                <td>#98752</td>
-                                <td>Half Sleeve Shirt</td>
-                                <td>Dave B</td>
-                                <td>$35.49</td>
-                                <td><a href="#" class="badge badge-primary badge-pill py-2 px-3" role="button" style="font-size: 12px;">Detail</a></td>
-                            </tr>
-                            <tr>
-                                <td>#98751</td>
-                                <td>Lightweight Jacket</td>
-                                <td>Shreyu N</td>
-                                <td>$49.49</td>
-                                <td><a href="#" class="badge badge-primary badge-pill py-2 px-3" role="button" style="font-size: 12px;">Detail</a></td>
-                            </tr>
-                            <tr>
-                                <td>#98750</td>
-                                <td>Marco Shoes</td>
-                                <td>Rik N</td>
-                                <td>$69.49</td>
-                                <td><a href="#" class="badge badge-primary badge-pill py-2 px-3" role="button" style="font-size: 12px;">Detail</a></td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div> <!-- end table-responsive-->
+                <table id="basic-datatable" class="table dt-responsive nowrap">
+                    <thead>
+                        <tr>
+                            <th>No</th>
+                            <th>NIK</th>
+                            <th>Nama Lengkap</th>
+                            <th>Tempat Lahir</th>
+                            <th>Tanggal Lahir</th>
+                            <th>Jenis Kelamin</th>
+                            <th>Golongan Darah</th>
+                            <th>Agama</th>
+                            <th>Status Perkawinan</th>
+                            <th>Pekerjaan</th>
+                            <th>Kewarganegaraan</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                
+                
+                    <tbody>
+                        @foreach ($residents as $index => $resident)
+                        <tr>
+                            <td>{{ $index + 1 }}</td>
+                            <td>{{ $resident->nik }}</td>
+                            <td>{{ $resident->name }}</td>
+                            <td>{{ $resident->birth_place }}</td>
+                            <td>{{ $resident->birth_date }}</td>
+                            <td>{{ $resident->gender }}</td>
+                            <td>{{ $resident->blood_type }}</td>
+                            <td>{{ $resident->religion->religion_name }}</td>
+                            <td>{{ $resident->maritalStatus->marital_status }}</td>
+                            <td>{{ $resident->profession->profession_name }}</td>
+                            <td>{{ $resident->citizenship }}</td>
+                            <td>
+                                <a href="#" class="badge badge-primary badge-pill py-2 px-3" role="button" style="font-size: 12px;">
+                                    Detail
+                                </a>
+                            </td>
+                        </tr>
+                        @endforeach
+                    </tbody>
+                </table>
+                <div class="d-flex justify-content-center">
+                    @if ($residents->onFirstPage())
+                        <button class="btn btn-secondary" disabled>Previous</button>
+                    @else
+                        <a href="{{ $residents->previousPageUrl() }}" class="btn btn-primary">Previous</a>
+                    @endif
+                
+                    @if ($residents->hasMorePages())
+                        <a href="{{ $residents->nextPageUrl() }}" class="btn btn-primary ml-2">Next</a>
+                    @else
+                        <button class="btn btn-secondary ml-2" disabled>Next</button>
+                    @endif
+                </div>
             </div> <!-- end card-body-->
         </div> <!-- end card-->
     </div> <!-- end col-->
