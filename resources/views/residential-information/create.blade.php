@@ -32,11 +32,11 @@
 @endsection
 
 @section('content')
-<div class="row">
+<div class="card card-outline card-primary card-body">
     <div class="col-lg-12">
-        <div class="card">
+        <div class="list-group-item d-flex justify-content-between">
             <div class="card-body">
-                <h4 class="header-title mt-0 mb-3">Artikel</h4>
+                <h4 class="header-title mt-0 mb-3">Tambah Data</h4>
 
                 <h1>Tambah Data Warga</h1>
 
