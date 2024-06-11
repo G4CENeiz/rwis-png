@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\House;
 use App\Models\Resident;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -12,8 +13,6 @@ use function PHPUnit\Framework\countOf;
 class GovAidController extends Controller
 {
     private static function filterResidentById($rt_id) {
-        // pull resident data
-        // $residentData = Resident::all();
         return Resident::select([
             'residents.resident_id',
             'families.family_id',
@@ -53,13 +52,10 @@ class GovAidController extends Controller
         })
         ->where('residents.family_member_status_id', 1)
         ->where('houses.domicile_rt', $rt_id)
-        // ->orderBy('goverment_employee', 'ASC')
         ->get();
     }
     
     private static function filterResident() {
-        // pull resident data
-        // $residentData = Resident::all();
         return Resident::select([
             'residents.resident_id',
             'families.family_id',
@@ -98,8 +94,6 @@ class GovAidController extends Controller
             $join->on('residents.family_id', '=', 'fam.family_id');
         })
         ->where('residents.family_member_status_id', 1)
-        // ->where('houses.domicile_rt', $rt_id)
-        // ->orderBy('goverment_employee', 'ASC')
         ->get();
     }
 
@@ -124,6 +118,7 @@ class GovAidController extends Controller
                 'name'          => $resident->name,
                 'resident_id'   => $resident->resident_id,
                 'family_id'     => $resident->family_id,
+                'score'         => null,
             ];
             $decisionMatrix[] = [
                 'age' => $resident->age,
@@ -191,57 +186,70 @@ class GovAidController extends Controller
         }
         
         for ($i=0; $i < count($alternatives); $i++) {
-            array_push($alternatives[$i], reset($result[$i]));
+            $alternatives[$i]['score'] = reset($result[$i]);
         }
         
         usort($alternatives, function ($a, $b) {
-            if ($a[0] == $b[0]) {
+            if ($a['resident_id'] == $b['resident_id']) {
                 return 0;
             }
-            return ($a[0] > $b[0]) ? -1 : 1;
+            return ($a['resident_id'] > $b['resident_id']) ? -1 : 1;
         });
         
         // dd($alternatives);
-        // return $alternatives;
 
-        return DataTables::of($alternatives)->addIndexColumn()->addColumn('action', function ($alternative) {
-            $btn = '<a href="'.url('/administration/contribution/' . $alternative->contribution_id).'" class="btn btn-info btn-sm">Detail</a> ';
-            $btn .= '<a href="'.url('/administration/contribution/' . $alternative->contribution_id . '/edit').'" class="btn btn-warning btn-sm">Edit</a> ';
-            $btn .= '<form class="d-inline-block" method="POST" action="' . url('/administration/contribution/'.$alternative->contribution_id) . '">'
-            . csrf_field()
-            . method_field('DELETE')
-            . '<button type="submit" class="btn btn-danger btn-sm" onclick="return confirm(\'Are you sure to delete this data?\');">Delete</button>' 
-            . '</form>';
-            return $btn;
-        })->rawColumns(['action'])->make(true);
+        $residentsResult = Resident::select([
+            'residents.resident_id',
+            'families.family_id',
+            'houses.house_id',
+            'residents.name',
+        ])
+        ->join('families', 'residents.family_id', '=', 'families.family_id')
+        ->join('houses', 'families.house_id', '=', 'houses.house_id')
+        ->whereIn('resident_id', array_column($alternatives, 'resident_id'))->get();
+
+        // dd($residentsResult);
+
+        return DataTables::of($residentsResult)->addIndexColumn()
+        ->addColumn('score', function ($test) use ($alternatives) {
+            foreach ($alternatives as $item) {
+                if ($item['resident_id'] == $test->resident_id) {
+                    return $item['score'];
+                }
+            }
+        })
+        ->rawColumns(['score'])
+        ->make(true);
     }
 
     public function index() {
         $breadcrumb = (object) [
-            'title' => 'Daftar Iuran',
+            'title' => 'Daftar Urutan Penerima Bansos',
             'list' => [
                 [
-                    'item'  => 'Administrasi',
-                    'route' => 'administration.ledger.index'
+                    'item'  => 'Bansos',
+                    'route' => 'govassist.index'
                 ],
                 [
-                    'item'  => 'Daftar Iuran',
-                    'route' => 'administration.contribution.index'
+                    'item'  => 'Daftar Penerima Bansos',
+                    'route' => 'govassist.index'
                 ],
             ],
         ];
         $card = (object) [
-            'title' => 'Daftar Iuran yang ditagihkan'
+            'title' => 'Daftar Urutan Penerima Bansos'
         ];
         $page = [
-            'title' => 'Daftar Iuran'
+            'title' => 'Daftar Urutan Penerima Bansos'
         ];
+        $rt = House::distinct()->pluck('domicile_rt');
         return view(
             'bansos.index',
             [
                 'breadcrumb' => $breadcrumb,
                 'card' => $card,
                 'page' => $page,
+                'rt' => $rt,
             ]
         );
     }

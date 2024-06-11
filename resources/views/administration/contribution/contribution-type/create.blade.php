@@ -13,47 +13,42 @@
         </div>
     </div>
     <div class="list-group-item">
-        @if (session('success'))
+        {{-- @if (session('success'))
             <div class="alert alert-success">{{ session('success') }}</div>
         @endif
         @if (session('error'))
             <div class="alert alert-danger">{{ session('error') }}</div>
-        @endif
+        @endif --}}
         <form method="POST" action="{{ url('administration/contribution/type') }}" class="form-horizontal">
             @csrf
+            
             <div class="form-group row">
-                <label class="col-1 control-label col-form-label">Kepemilikan Buku Kas</label>
-                <div class="col-11">
-                    <select class="form-control" id="issuer_id" name="issuer_id" required>
-                        <option value="">- Pilih Level -</option>
-                        @foreach ($user as $item)
-                            <option value="{{ $item->user_id }}">{{ $item->name }}</option>
-                        @endforeach
-                    </select>
-                    @error('issuer_id')
+                <label class="col-lg-2 col-form-label" for="contribution_name">Nama Iuran</label>
+                <div class="col-lg-10">
+                    <input type="text" class="form-control" id="contribution_name" name="contribution_name" value="{{ old('contribution_name') }}" required>
+                    @error('contribution_name')
                         <small class="form-text text-danger">{{ $message }}</small>
                     @enderror
                 </div>
             </div>
+
             <div class="form-group row">
-                <label class="col-1 control-label col-form-label">Tipe Buku Kas</label>
-                <div class="col-11">
-                    <select class="form-control" id="issuer_type" name="issuer_type" required>
-                        <option value="">- Pilih Level -</option>
-                        <option value="RT">RT</option>
-                        <option value="RW">RW</option>
-                    </select>
-                    @error('issuer_type')
+                <label class="col-lg-2 col-form-label" for="description">Deskripsi</label>
+                <div class="col-lg-10">
+                    <input type="text" class="form-control" id="description" name="description" value="{{ old('description') }}" required>
+                    @error('description')
                         <small class="form-text text-danger">{{ $message }}</small>
                     @enderror
                 </div>
             </div>
+
             <div class="form-group row">
-                <label class="col-1 control-label col-form-label"></label>
-                <div class="col-11">
+                <label class="col-lg-2 col-form-label"></label>
+                <div class="col-lg-10">
                     <button type="submit" class="btn btn-primary btn-sm">Simpan</button>
                 </div>
             </div>
+
         </form>
     </div>
 </div>

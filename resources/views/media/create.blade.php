@@ -99,10 +99,10 @@
                     <div class="form-group mb-0">
                         <div>
                             <button type="submit" class="btn btn-success mr-1">
-                                <a href="{{ URL('/media')}}">Masukkan</a>
+                                <a href="/media">Masukkan</a>
                             </button>
                             <button type="reset" class="btn btn-secondary">
-                                Batalkan
+                                <a href="/media">Batalkan</a>
                             </button>
                         </div>
                     </div>

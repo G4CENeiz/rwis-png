@@ -7,6 +7,7 @@ use App\Http\Requests\StoreContributionRequest;
 use App\Http\Requests\UpdateContributionRequest;
 use App\Models\Family;
 use App\Models\GeneralLedger;
+use App\Models\Resident;
 use Illuminate\Http\Request;
 use Yajra\DataTables\DataTables;
 
@@ -82,35 +83,37 @@ class ContributionController extends Controller
     {
         //
         $breadcrumb = (object) [
-            'title' => 'Tambah Buku Kas',
+            'title' => 'Tambah Iuran',
             'list' => [
                 [
                     'item'  => 'Administrasi',
                     'route' => 'administration.ledger.index'
                 ],
                 [
-                    'item'  => 'Buku Kas',
-                    'route' => 'administration.ledger.index'
+                    'item'  => 'Iuran',
+                    'route' => 'administration.contribution.index'
                 ],
                 [
-                    'item'  => 'Tambah Buku Kas',
-                    'route' => 'administration.ledger.create'
+                    'item'  => 'Tambah Iuran',
+                    'route' => 'administration.contribution.create'
                 ],
             ],
         ];
         $card = (object) [
-            'title' => 'Tambah Buku Kas'
+            'title' => 'Tambah Iuran'
         ];
         $page = [
-            'title' => 'Tambah Buku Kas'
+            'title' => 'Tambah Iuran'
         ];
+        $residents = Resident::all()->where('is_archived', false);
 
         return view(
-            'administration.contribution.general-ledger.create', 
+            'administration.contribution.contribution.create', 
             [
                 'breadcrumb' => $breadcrumb,
                 'card' => $card,
                 'page' => $page,
+                'residents' => $residents,
             ]
         );
     }
@@ -150,27 +153,27 @@ class ContributionController extends Controller
         //
         $generalLedger = Contribution::find($id);
         $breadcrumb = (object) [
-            'title' => 'Ubah Buku Kas',
+            'title' => 'Ubah Iuran',
             'list' => [
                 [
                     'item'  => 'Administrasi',
                     'route' => 'administration.ledger.index'
                 ],
                 [
-                    'item'  => 'Buku Kas',
+                    'item'  => 'Iuran',
                     'route' => 'administration.ledger.index'
                 ],
                 [
-                    'item'  => 'Ubah Buku Kas',
+                    'item'  => 'Ubah Iuran',
                     'route' => 'administration.ledger.create'
                 ],
             ],
         ];
         $card = (object) [
-            'title' => 'Ubah Buku Kas'
+            'title' => 'Ubah Iuran'
         ];
         $page = [
-            'title' => 'Ubah Buku Kas'
+            'title' => 'Ubah Iuran'
         ];
 
         return view(
@@ -212,13 +215,13 @@ class ContributionController extends Controller
         //
         $check = Contribution::find($id);
         if (!$check) {
-            return redirect('/administration/ledger')->with('error', 'Data Buku Kas tidak ditemukan');
+            return redirect('/administration/ledger')->with('error', 'Data Iuran tidak ditemukan');
         }
         try {
             Contribution::find($id)->update(['is_archived' => true]);
-            return redirect('/administration/ledger')->with('success', 'Data Buku Kas berhasil dihapus');
+            return redirect('/administration/ledger')->with('success', 'Data Iuran berhasil dihapus');
         } catch (\Illuminate\Database\QueryException $e) {
-            return redirect('/administration/ledger')->with('error', 'Data Buku Kas gagal dihapus karena masih terdapat label lain yang terkait dengan data ini');
+            return redirect('/administration/ledger')->with('error', 'Data Iuran gagal dihapus karena masih terdapat label lain yang terkait dengan data ini');
         }
     }
 }

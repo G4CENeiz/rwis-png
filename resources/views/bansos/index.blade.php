@@ -29,11 +29,11 @@
                 <div class="form-group row">
                     <label class="col-1 control-label col-form-label">Filter:</label>
                     <div class="col-3">
-                        <select name="level_id" id="level_id" class="form-control" required>
+                        <select name="rt_id" id="rt_id" class="form-control" required>
                             <option value="">- Semua -</option>
-                            {{-- @foreach ($level as $item)
-                                <option value="{{ $item->level_id }}">{{ $item->level_nama }}</option>
-                            @endforeach --}}
+                            @foreach ($rt as $item)
+                                <option value="{{ $item }}">{{ $item }}</option>
+                            @endforeach
                         </select>
                         <small class="form-text text-muted">RT</small>
                     </div>
@@ -43,11 +43,9 @@
         <table class="table table-bordered table-striped table-hover table-sm" id="table_dss">
             <thead>
                 <tr>
-                    <th>ID</th>
-                    <th>Tertagih</th>
-                    <th>Buku Kas</th>
-                    <th>Jenis Golongan Tertagih</th>
-                    <th>Aksi</th>
+                    <th>No</th>
+                    <th>Nama</th>
+                    <th>Score</th>
                 </tr>
             </thead>
         </table>
@@ -81,15 +79,15 @@
             var dss = $('#table_dss').DataTable({
                 serverSide: true,
                 ajax: {
-                    "url": "{{ url('govassist/list') }}",
+                    "url": "{{ url('govassist/dss/list') }}",
                     "dataType": "json",
                     "type": "GET",
                     // "data": function (d) {
-                    //     d.level_id = $('#level_id').val();
+                    //     d.rt_id = $('#rt_id').val();
                     // }
                 },
                 columns: [{
-                    data: "0 ",
+                    data: "DT_RowIndex",
                     ClassName: "text-center",
                     orderable: true,
                     searchable: true
@@ -99,26 +97,27 @@
                     orderable: true,
                     searchable: true
                 }, {
-                    data: "resident_id",
+                    data: "score",
                     ClassName: "",
                     orderable: true,
                     searchable: true
-                }, {
-                    data: "family_id",
-                    ClassName: "",
-                    orderable: false,
-                    searchable: false
-                }, {
-                    data: "action",
-                    ClassName: "",
-                    orderable: false,
-                    searchable: false
                 }]
             });
 
-            // $('#level_id').on('change', function () {
+            // $('#rt_id').on('change', function () {
             //     dataUser.ajax.reload();
             // });
+            $('#rt_id').on('change', function () {
+                var rtId = $('#rt_id').val();
+                if (rtId === null || rtId === "") {
+                    // If rt_id is null, set the default URL
+                    dss.ajax.url("{{ url('govassist/dss/list') }}");
+                } else {
+                    // If rt_id is not null, append it to the URL
+                    dss.ajax.url("{{ url('govassist/dss/list') }}" + '/' + rtId);
+                }
+                dss.ajax.reload(); // Reload the table data
+            });
         });
     </script>
 @endsection

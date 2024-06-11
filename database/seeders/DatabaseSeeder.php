@@ -3,6 +3,8 @@
 namespace Database\Seeders;
 
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+
+use App\Models\ContributionType;
 use Illuminate\Database\Seeder;
 
 
@@ -40,6 +42,7 @@ class DatabaseSeeder extends Seeder
             HouseSeeder::class,
             FamilySeeder::class,
             ResidentSeeder::class,
+            ContributionTypeSeeder::class,
         ]);
     }
 }

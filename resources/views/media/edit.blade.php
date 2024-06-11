@@ -28,34 +28,35 @@
                 <div class="card-body">
                     <h4 class="header-title mt-0 mb-3">Edit Artikel</h4>
                     <form action="/edit" method="post" class="parsley-examples">
+                        @csrf
                         <div class="form-group">
                             <label>Judul</label>
-                            <input type="text" class="form-control" name="title" required value="Judul Artikel"/>
+                            <input type="text" class="form-control" name="title" required value="{{ $media->title }}"/>
                         </div>
                         <div class="form-group">
                             <label>Penulis</label>
                             <div>
-                                <input type="text" class="form-control" name="author" required value="Nama Penulis"/>
+                                <input type="text" class="form-control" name="author" required value="{{ $media->author }}"/>
                             </div>
                         </div>
                         <div class="form-group row">
                             <label for="Date"></label>
                             <label class="col-lg-2 col-form-label" for="example-date">Tanggal</label>
                             <div class="col-lg-12">
-                                <input class="form-control" id="example-date" type="date" name="date" value="2024-06-01">
+                                <input class="form-control" id="example-date" type="date" name="date" value="{{ $media->date }}">
                             </div>
                         </div>
                         <div class="form-group">
                             <label>Deskripsi</label>
                             <div>
-                                <textarea required class="form-control" name="description">Deskripsi artikel...</textarea>
+                                <textarea required class="form-control" name="description">{{ $media->description }}</textarea>
                             </div>
                         </div>
                         <div class="form-group">
                             <label>Upload foto</label>
                             <form action="/" method="post" class="dropzone" id="myAwesomeDropzone">
                                 <div class="fallback">
-                                    <input name="file" type="file" multiple />
+                                    <input name="file" type="file" value="{{ $media->file }}" multiple />
                                 </div>
                             </form>
                         </div>

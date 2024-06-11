@@ -53,7 +53,7 @@
             @foreach($media as $medias)
                 <div class="m-3 col-12 col-md-6 col-lg-4">
                     <div class="card mb-4 mb-xl-0">
-                        <img class="card-img-top img-fluid" src="{{ asset('assets/images/dog.png') }}" alt="Card image cap">
+                        <img class="card-img-top img-fluid" src="{{ asset('assets/images/kerjabakti.jpeg') }}" alt="Card image cap">
                         <div class="card-body">
                             <h5 class="card-title font-size-20 text-truncate">{{ $medias->title }}</h5>
                             <p class="card-text text-muted text-truncate">{{ $medias->content }}</p>

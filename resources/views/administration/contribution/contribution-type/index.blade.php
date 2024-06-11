@@ -14,7 +14,7 @@
     <div class="list-group-item d-flex justify-content-between">
         <h3 class="card-title">{{ $card->title }}</h3>
         <div class="card-tools">
-            <a class="btn btn-sm btn-primary mt-1" href="{{ route('administration.contribution.create') }}">Tambah</a>
+            <a class="btn btn-sm btn-primary mt-1" href="{{ route('administration.contribution.type.create') }}">Tambah</a>
         </div>
     </div>
     <div class="list-group-item">
@@ -28,9 +28,8 @@
             <thead>
                 <tr>
                     <th>ID</th>
-                    <th>Tertagih</th>
-                    <th>Buku Kas</th>
-                    <th>Jenis Golongan Tertagih</th>
+                    <th>Nama Iuran</th>
+                    <th>Deskripsi</th>
                     <th>Aksi</th>
                 </tr>
             </thead>
@@ -65,7 +64,7 @@
             var dataUser = $('#table_contribution').DataTable({
                 serverSide: true,
                 ajax: {
-                    "url": "{{ url('administration/contribution/list') }}",
+                    "url": "{{ url('administration/contribution/type/list') }}",
                     "dataType": "json",
                     "type": "GET",
                     // "data": function (d) {
@@ -78,20 +77,15 @@
                     orderable: false,
                     searchable: false
                 }, {
-                    data: "recipient_id",
+                    data: "contribution_name",
                     ClassName: "",
                     orderable: true,
                     searchable: true
                 }, {
-                    data: "general_ledger_id",
+                    data: "description",
                     ClassName: "",
                     orderable: true,
                     searchable: true
-                }, {
-                    data: "recipient_type",
-                    ClassName: "",
-                    orderable: false,
-                    searchable: false
                 }, {
                     data: "action",
                     ClassName: "",
