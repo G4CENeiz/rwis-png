@@ -69,8 +69,8 @@
                                 <td>{{ $resident->profession->profession_name }}</td>
                                 <td>{{ $resident->citizenship }}</td>
                                 <td>
-                                    <a href="#" class="badge badge-primary badge-pill py-2 px-3" role="button" style="font-size: 12px;">
-                                        Detail
+                                    <a href="{{ url('/resident/information/edit') }}" class="badge badge-primary badge-pill py-2 px-3" role="button" style="font-size: 12px;">
+                                        Edit
                                     </a>
                                 </td>
                             </tr>
